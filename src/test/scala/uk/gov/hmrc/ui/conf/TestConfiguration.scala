@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.conf
+package uk.gov.hmrc.test.ui.conf
 
 import com.typesafe.config.{Config, ConfigFactory}
 
-object TestConfiguration:
+object TestConfiguration {
+  val config: Config    = ConfigFactory.load()
+  val env: String       = Option(System.getProperty("environment")).getOrElse("local")
+  private val envConfig = ConfigFactory.load("application.conf").getConfig(s"environments.$env")
 
-  val config: Config        = ConfigFactory.load()
-  val env: String           = config.getString("environment")
-  val defaultConfig: Config = config.getConfig("local")
-  val envConfig: Config     = config.getConfig(env).withFallback(defaultConfig)
-
-  def url(service: String): String =
-    val host = env match
-      case "local" => s"$environmentHost:${servicePort(service)}"
-      case _       => s"${envConfig.getString(s"services.host")}"
-    s"$host${serviceRoute(service)}"
+  def url(url: String): String =
+    if (env == "local") {
+      s"$environmentHost:${servicePort(url)}${serviceRoute(url)}"
+    } else {
+      s"$environmentHost${serviceRoute(url)}"
+    }
 
   def environmentHost: String = envConfig.getString("services.host")
 
   def servicePort(serviceName: String): String = envConfig.getString(s"services.$serviceName.port")
 
   def serviceRoute(serviceName: String): String = envConfig.getString(s"services.$serviceName.productionRoute")
+}
