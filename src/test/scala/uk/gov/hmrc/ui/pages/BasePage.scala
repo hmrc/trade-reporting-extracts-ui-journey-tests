@@ -15,7 +15,7 @@
  */
 
 package uk.gov.hmrc.ui.pages
+import org.scalatest.matchers.should.Matchers
+import uk.gov.hmrc.ui.driver.BrowserDriver
 
-import uk.gov.hmrc.selenium.component.PageObject
-
-trait BasePage extends PageObject {}
+trait BasePage extends BrowserDriver with Matchers {}
