@@ -17,5 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import uk.gov.hmrc.selenium.component.PageObject
+import uk.gov.hmrc.ui.conf.TestConfiguration
 
 trait BasePage extends PageObject {}
+val host: String = TestConfiguration.url("trade-reporting-extracts-frontend")
