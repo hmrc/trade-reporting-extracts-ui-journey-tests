@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.conf
 
 import com.typesafe.config.{Config, ConfigFactory}
-
 object TestConfiguration {
   val config: Config    = ConfigFactory.load()
   val env: String       = Option(System.getProperty("environment")).getOrElse("local")
