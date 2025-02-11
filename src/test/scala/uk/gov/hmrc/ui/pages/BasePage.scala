@@ -16,6 +16,42 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.selenium.component.PageObject
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.{ExpectedCondition, WebDriverWait}
+import org.scalatest.matchers.should.Matchers
+import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.driver.BrowserDriver
 
-trait BasePage extends PageObject {}
+import java.time.Duration
+import scala.util.Random
+
+trait BasePage(relativeUrl: String) extends BrowserDriver with Matchers {
+
+  protected def url: String = baseUrl + relativeUrl
+
+  val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
+
+  val continueButton = "continue-button"
+
+  val random = new Random
+
+  def findByID(id: String) = driver.findElement(By.id(id))
+
+  def waitFor[T](condition: ExpectedCondition[T]): T = {
+    val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
+    wait.until(condition)
+  }
+
+  def findByClassName(className: String) = driver.findElements(By.className(className))
+
+  def submitPage(): Unit =
+    findByID(continueButton).click()
+
+  def onPage(pageTitle: String): Unit =
+    if (driver.getTitle != pageTitle + "trade-reporting-extracts-frontend")
+      throw PageNotFoundException(
+        s"Expected '$pageTitle' page, but found '${driver.getTitle}' page."
+      )
+}
+
+case class PageNotFoundException(s: String) extends Exception(s)
