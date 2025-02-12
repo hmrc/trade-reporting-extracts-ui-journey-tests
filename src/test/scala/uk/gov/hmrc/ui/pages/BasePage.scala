@@ -48,7 +48,7 @@ trait BasePage(relativeUrl: String) extends BrowserDriver with Matchers {
     findByID(continueButton).click()
 
   def onPage(pageTitle: String): Unit =
-    if (driver.getTitle != pageTitle + "trade-reporting-extracts-frontend")
+    if (driver.getTitle != pageTitle + "Authority Wizard")
       throw PageNotFoundException(
         s"Expected '$pageTitle' page, but found '${driver.getTitle}' page."
       )
