@@ -17,41 +17,31 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.{ExpectedCondition, WebDriverWait}
-import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.driver.BrowserDriver
+import uk.gov.hmrc.selenium.component.PageObject
 
-import java.time.Duration
-import scala.util.Random
+abstract class BasePage(relativeUrl: String) extends PageObject {
 
-trait BasePage(relativeUrl: String) extends BrowserDriver with Matchers {
+  protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
+  protected def url: String     = baseUrl + relativeUrl
 
-  protected def url: String = baseUrl + relativeUrl
-
-  val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-
-  val continueButton = "continue-button"
-
-  val random = new Random
-
-  def findByID(id: String) = driver.findElement(By.id(id))
-
-  def waitFor[T](condition: ExpectedCondition[T]): T = {
-    val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
-    wait.until(condition)
+  def continue(): Unit = {
+    assertUrl(url)
+    click(By.cssSelector("button.govuk-button"))
   }
 
-  def findByClassName(className: String) = driver.findElements(By.className(className))
+  protected def selectOption(index: Int): Unit =
+    click(By.cssSelector(s"#value_$index"))
 
-  def submitPage(): Unit =
-    findByID(continueButton).click()
+  protected def selectRadioOption(index: Int): BasePage = {
+    assertUrl(url)
+    selectOption(index)
+    this
+  }
 
-  def onPage(pageTitle: String): Unit =
-    if (driver.getTitle != pageTitle + "Authority Wizard")
-      throw PageNotFoundException(
-        s"Expected '$pageTitle' page, but found '${driver.getTitle}' page."
-      )
+  protected def selectYesNoOption(value: Boolean): Unit =
+    if (value) click(By.cssSelector("#value")) else click(By.cssSelector("#value-no"))
+
+  protected def assertUrl(url: String): Unit =
+    assert(getCurrentUrl == url, s"Url was: $getCurrentUrl, but expected is $url")
 }
-
-case class PageNotFoundException(s: String) extends Exception(s)

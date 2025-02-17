@@ -20,10 +20,12 @@ import uk.gov.hmrc.ui.pages.AuthLoginStubPage
 
 class TreSpec extends BaseSpec {
 
-  Feature("Navigation to Auth stub") {
-    Scenario("User is navigating to Auth Stub") {
-      Given("I navigated to Auth stub")
-      AuthLoginStubPage.loadPage()
+  private val loginPage = AuthLoginStubPage
+
+  Feature("Navigation to Auth stub Page") {
+    Scenario("User is navigating to Auth stub page") {
+      Given("I navigated to Auth stub page")
+      loginPage.show()
 
     }
   }

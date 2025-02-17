@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 class AuthLoginStubPage
+import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 
 object AuthLoginStubPage extends BasePage("") {
@@ -27,9 +28,17 @@ object AuthLoginStubPage extends BasePage("") {
 
   override val url: String = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  def loadPage: this.type = {
-    driver.navigate().to(url)
-    onPage(title)
-    this
+  private val submitSelector      = By.cssSelector("#submit-top")
+  private val redirectUrlSelector = By.cssSelector("#redirectionUrl")
+
+  def show(): Unit = {
+    get(url)
+    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
+
+  }
+
+  def loginAs(continueUrl: String = redirectionUrl): Unit = {
+    sendKeys(redirectUrlSelector, continueUrl)
+    click(submitSelector)
   }
 }
