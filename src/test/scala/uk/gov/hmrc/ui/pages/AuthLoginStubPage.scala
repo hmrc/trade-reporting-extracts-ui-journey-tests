@@ -24,7 +24,7 @@ object AuthLoginStubPage extends BasePage("") {
 
   val title: String = "Authority Wizard"
 
-  val redirectionUrl = s"$baseUrl/trade-reporting-extracts-frontend"
+  val redirectionUrl = s"$baseUrl/request-customs-declaration-data"
 
   override val url: String = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 

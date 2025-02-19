@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage}
+import org.openqa.selenium.By
 
-class TreSpec extends BaseSpec {
+class GuidancePage
 
-  private val loginPage    = AuthLoginStubPage
-  private val guidancePage = GuidancePage
+object GuidancePage extends BasePage(" ") {
 
-  Feature("Navigation to Auth stub Page") {
-    Scenario("User is navigating to Auth stub page") {
-      Given("I navigated to Auth stub page")
-      guidancePage.continue()
-      loginPage.show()
-      loginPage.loginAs()
+  override val url = s"$baseUrl"
 
-    }
+  override def continue(): Unit = {
+    get(url)
+    assertUrl(url)
+    click(By.cssSelector("a.govuk-button"))
   }
 }
