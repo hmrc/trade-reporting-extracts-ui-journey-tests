@@ -16,17 +16,16 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
+class ContactDetailsPage
 
-class DashboardPage
+object ContactDetailsPage extends BasePage(" ") {
 
-object DashboardPage extends BasePage(" ") {
+  override val url = s"$baseUrl/contactDetails"
 
-  override val url = s"$baseUrl/dashboard"
+  val title: String = "contactDetails - Trade Reporting Extracts - GOV.UK"
 
-  override def continue(): Unit = {
+  def show(): Unit = {
     get(url)
-    assertUrl(url)
-    click(By.linkText("Your Details"))
+    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
   }
 }
