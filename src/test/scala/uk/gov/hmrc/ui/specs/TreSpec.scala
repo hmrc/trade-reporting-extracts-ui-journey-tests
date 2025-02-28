@@ -16,13 +16,14 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, DashboardPage, GuidancePage}
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ContactDetailsPage, DashboardPage, GuidancePage}
 
 class TreSpec extends BaseSpec {
 
-  private val loginPage     = AuthLoginStubPage
-  private val guidancePage  = GuidancePage
-  private val dashboardPage = DashboardPage
+  private val loginPage          = AuthLoginStubPage
+  private val guidancePage       = GuidancePage
+  private val dashboardPage      = DashboardPage
+  private val contactdetailspage = ContactDetailsPage
 
   Feature("User can see Details") {
     Scenario("User is Authenticated and can see All details") {
@@ -31,6 +32,7 @@ class TreSpec extends BaseSpec {
       loginPage.show()
       loginPage.loginAs()
       dashboardPage.continue()
+      contactdetailspage.show()
 
     }
   }
