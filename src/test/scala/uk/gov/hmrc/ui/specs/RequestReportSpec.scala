@@ -26,15 +26,14 @@ class RequestReportSpec extends BaseSpec {
   private val dashboardPage     = DashboardPage
   private val requestReportPage = RequestReportPage
 
-  Feature("User can see Details") {
-    Scenario("User is Authenticated and can see All details") {
-      Given("I navigated to your details page")
+  Feature("User can request a report") {
+    Scenario("User is Authenticated and request a report") {
+      Given("I navigated to request report page")
       guidancePage.continue()
       loginPage.show()
       loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
       requestReportPage.show()
       requestReportPage.continue()
-
 
     }
   }

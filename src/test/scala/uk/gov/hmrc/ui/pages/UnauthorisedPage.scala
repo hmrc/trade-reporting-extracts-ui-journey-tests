@@ -16,24 +16,16 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
+class UnauthorisedPage
 
-class RequestReportPage
+object UnauthorisedPage extends BasePage(" ") {
 
-object RequestReportPage extends BasePage(" ") {
+  override val url = s"$baseUrl/problem/unauthorised"
 
-  override val url = s"$baseUrl/request-cds-report"
-
-  val title: String = "Request a report - Trade Reporting Extracts - GOV.UK"
+  val title: String = "You can’t access this service with this account - Trade Reporting Extracts - GOV.UK"
 
   def show(): Unit = {
     get(url)
     assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
-  }
-
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.cssSelector("a.govuk-button"))
   }
 }

@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.specs
 
-import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage, UnauthorisedPage}
 
-class RequestReportPage
+class UnauthorisedSpec extends BaseSpec {
 
-object RequestReportPage extends BasePage(" ") {
+  private val guidancePage = GuidancePage
 
-  override val url = s"$baseUrl/request-cds-report"
+  private val loginPage = AuthLoginStubPage
 
-  val title: String = "Request a report - Trade Reporting Extracts - GOV.UK"
+  private val unauthorisedPage = UnauthorisedPage
 
-  def show(): Unit = {
-    get(url)
-    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
-  }
-
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.cssSelector("a.govuk-button"))
+  Feature("User can see unauthorised page") {
+    Scenario("User is not Authenticated ") {
+      Given("I navigated to unauthorized age")
+      guidancePage.continue()
+      loginPage.show()
+      loginPage.continue()
+      unauthorisedPage.show()
+    }
   }
 }

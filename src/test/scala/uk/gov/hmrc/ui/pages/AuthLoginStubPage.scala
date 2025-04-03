@@ -41,6 +41,12 @@ object AuthLoginStubPage extends BasePage("") {
 
   }
 
+  override def continue(): Unit = {
+    get(url)
+    assertUrl(url)
+    click(By.cssSelector("#submit-top"))
+  }
+
   def loginAs(userCredentials: UserCredentials, continueUrl: String = redirectionUrl): Unit = {
     sendKeys(redirectUrlSelector, continueUrl)
     userCredentials.enrolmentsData.foreach { data =>
