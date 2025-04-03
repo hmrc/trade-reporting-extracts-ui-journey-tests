@@ -16,23 +16,25 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ContactDetailsPage, DashboardPage, GuidancePage}
+import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, DashboardPage, GuidancePage, RequestReportPage}
 
-class TreSpec extends BaseSpec {
+class RequestReportSpec extends BaseSpec {
 
-  private val loginPage          = AuthLoginStubPage
-  private val guidancePage       = GuidancePage
-  private val dashboardPage      = DashboardPage
-  private val contactdetailspage = ContactDetailsPage
+  private val loginPage         = AuthLoginStubPage
+  private val guidancePage      = GuidancePage
+  private val dashboardPage     = DashboardPage
+  private val requestReportPage = RequestReportPage
 
   Feature("User can see Details") {
     Scenario("User is Authenticated and can see All details") {
-      Given("I navigated to dashboard page")
+      Given("I navigated to your details page")
       guidancePage.continue()
       loginPage.show()
-      loginPage.loginAs()
-      dashboardPage.continue()
-      contactdetailspage.show()
+      loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
+      requestReportPage.show()
+      requestReportPage.continue()
+
 
     }
   }
