@@ -17,13 +17,14 @@
 package uk.gov.hmrc.ui.specs
 
 import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage, RequestReportPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage, ReportTypePage, RequestReportPage}
 
 class RequestReportSpec extends BaseSpec {
 
   private val loginPage         = AuthLoginStubPage
   private val guidancePage      = GuidancePage
   private val requestReportPage = RequestReportPage
+  private val reportTypePage    = ReportTypePage
 
   Feature("User can request a report") {
     Scenario("User is Authenticated and request a report") {
@@ -33,6 +34,7 @@ class RequestReportSpec extends BaseSpec {
       loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
       requestReportPage.show()
       requestReportPage.continue()
+      reportTypePage.continue()
 
     }
   }
