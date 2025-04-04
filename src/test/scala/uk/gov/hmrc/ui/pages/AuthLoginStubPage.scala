@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.pages
 class AuthLoginStubPage
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.models.UserCredentials
 
 object AuthLoginStubPage extends BasePage("") {
 
@@ -28,8 +29,11 @@ object AuthLoginStubPage extends BasePage("") {
 
   override val url: String = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  private val submitSelector      = By.cssSelector("#submit-top")
-  private val redirectUrlSelector = By.cssSelector("#redirectionUrl")
+  private val submitSelector          = By.cssSelector("#submit-top")
+  private val redirectUrlSelector     = By.cssSelector("#redirectionUrl")
+  private val enrolmentKeySelector    = By.cssSelector("#enrolment\\[0\\]\\.name")
+  private val identifierNameSelector  = By.cssSelector("#input-0-0-name")
+  private val identifierValueSelector = By.cssSelector("#input-0-0-value")
 
   def show(): Unit = {
     get(url)
@@ -37,8 +41,19 @@ object AuthLoginStubPage extends BasePage("") {
 
   }
 
-  def loginAs(continueUrl: String = redirectionUrl): Unit = {
+  override def continue(): Unit = {
+    get(url)
+    assertUrl(url)
+    click(By.cssSelector("#submit-top"))
+  }
+
+  def loginAs(userCredentials: UserCredentials, continueUrl: String = redirectionUrl): Unit = {
     sendKeys(redirectUrlSelector, continueUrl)
+    userCredentials.enrolmentsData.foreach { data =>
+      sendKeys(enrolmentKeySelector, data.enrolmentKey)
+      sendKeys(identifierNameSelector, data.identifierName)
+      sendKeys(identifierValueSelector, data.identifierValue)
+    }
     click(submitSelector)
   }
 }
