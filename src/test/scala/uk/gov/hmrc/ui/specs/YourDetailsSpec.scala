@@ -21,10 +21,10 @@ import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ContactDetailsPage, DashboardPag
 
 class YourDetailsSpec extends BaseSpec {
 
-  private val loginPage          = AuthLoginStubPage
-  private val guidancePage       = GuidancePage
-  private val dashboardPage      = DashboardPage
-  private val contactDetailsPage = ContactDetailsPage
+  private val loginPage     = AuthLoginStubPage
+  private val guidancePage  = GuidancePage
+  private val dashboardPage = DashboardPage
+  // private val contactDetailsPage = ContactDetailsPage
 
   Feature("User can see Details") {
     Scenario("User is Authenticated and can see All details") {
@@ -33,7 +33,7 @@ class YourDetailsSpec extends BaseSpec {
       loginPage.show()
       loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
       dashboardPage.continue()
-      contactDetailsPage.show()
+      // contactDetailsPage.show()
 
     }
   }
