@@ -17,25 +17,35 @@
 package uk.gov.hmrc.ui.specs
 
 import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage, ReportTypePage, RequestReportPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ReportTypePage, RequestReportPage, WhichEORIPage}
 
 class RequestReportSpec extends BaseSpec {
 
   private val loginPage         = AuthLoginStubPage
-  private val guidancePage      = GuidancePage
   private val requestReportPage = RequestReportPage
   private val reportTypePage    = ReportTypePage
+  private val whichEORIPage     = WhichEORIPage
 
-  Feature("User can request a report") {
-    Scenario("User is Authenticated and request a report") {
-      Given("I navigated to request report page")
-      guidancePage.continue()
+  Feature("User requests a new report") {
+    Scenario("The user requests a new report with 'import' type of data.") {
+      Given("the user is authenticated")
       loginPage.show()
       loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
+
+      When("the user clicks to request a new report")
       requestReportPage.show()
       requestReportPage.continue()
+
+      When("the user can select 'import' as the type of data")
+      reportTypePage.selectOption(0)
       reportTypePage.continue()
 
+      When("the user can select to use their own EORI number.")
+      whichEORIPage.assertPageTitle()
+      whichEORIPage.selectOption(0)
+      whichEORIPage.continue()
+
+      When("the user can selects both the 'Declarant' and 'Exporter' roles.")
     }
   }
 }

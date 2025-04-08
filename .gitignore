@@ -25,3 +25,4 @@ yarn-error.log
 .metals
 .vscode
 project/metals.sbt
+target/test-reports
