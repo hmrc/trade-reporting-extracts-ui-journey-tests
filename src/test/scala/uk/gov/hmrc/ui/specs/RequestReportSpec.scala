@@ -47,5 +47,7 @@ class RequestReportSpec extends BaseSpec {
 
       When("the user can selects both the 'Declarant' and 'Exporter' roles.")
     }
+
+    Scenario("The user requests a new report with 'export' type of data.")(pending)
   }
 }
