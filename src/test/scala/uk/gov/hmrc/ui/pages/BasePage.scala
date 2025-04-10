@@ -20,17 +20,18 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 
-abstract class BasePage(relativeUrl: String) extends PageObject {
+abstract class BasePage(relativeUrl: String, relativeTitle: String = "") extends PageObject {
 
-  protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-  protected def url: String     = baseUrl + relativeUrl
+  protected val baseUrl: String   = TestEnvironment.url("trade-reporting-extracts-frontend")
+  protected def url: String       = baseUrl + relativeUrl
+  protected def pageTitle: String = s"$relativeTitle - Trade Reporting Extracts - GOV.UK"
 
   def continue(): Unit = {
     assertUrl(url)
     click(By.cssSelector("button.govuk-button"))
   }
 
-  protected def selectOption(index: Int): Unit =
+  def selectOption(index: Int): Unit =
     click(By.cssSelector(s"#value_$index"))
 
   protected def selectRadioOption(index: Int): BasePage = {
@@ -41,6 +42,9 @@ abstract class BasePage(relativeUrl: String) extends PageObject {
 
   protected def selectYesNoOption(value: Boolean): Unit =
     if (value) click(By.cssSelector("#value")) else click(By.cssSelector("#value-no"))
+
+  def assertPageTitle(titleToCheck: String = pageTitle): Unit =
+    assert(getTitle == titleToCheck, s"Page title was '$getTitle', but expected: '$titleToCheck'")
 
   protected def assertUrl(url: String): Unit =
     assert(getCurrentUrl == url, s"Url was: $getCurrentUrl, but expected is $url")
