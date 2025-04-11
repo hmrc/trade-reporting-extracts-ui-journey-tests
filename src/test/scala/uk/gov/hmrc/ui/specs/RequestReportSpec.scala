@@ -17,14 +17,16 @@
 package uk.gov.hmrc.ui.specs
 
 import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ReportTypePage, RequestReportPage, WhichEORIPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ReportOwnerTypePage, ReportSubtypeSelectionPage, ReportTypePage, RequestReportPage, WhichEORIPage}
 
 class RequestReportSpec extends BaseSpec {
 
-  private val loginPage         = AuthLoginStubPage
-  private val requestReportPage = RequestReportPage
-  private val reportTypePage    = ReportTypePage
-  private val whichEORIPage     = WhichEORIPage
+  private val loginPage                  = AuthLoginStubPage
+  private val requestReportPage          = RequestReportPage
+  private val reportTypePage             = ReportTypePage
+  private val whichEORIPage              = WhichEORIPage
+  private val reportSubtypeSelectionPage = ReportSubtypeSelectionPage
+  private val reportOwnerTypePage        = ReportOwnerTypePage
 
   Feature("User requests a new report") {
     Scenario("The user requests a new report with 'import' type of data.") {
@@ -46,6 +48,14 @@ class RequestReportSpec extends BaseSpec {
       whichEORIPage.continue()
 
       When("the user can selects both the 'Declarant' and 'Exporter' roles.")
+      reportOwnerTypePage.assertPageTitle()
+      reportOwnerTypePage.selectOption(0)
+      reportOwnerTypePage.continue()
+
+      When("the user can select type of report.")
+      reportSubtypeSelectionPage.assertPageTitle()
+      reportSubtypeSelectionPage.selectOption(0)
+      reportSubtypeSelectionPage.continue()
     }
 
     Scenario("The user requests a new report with 'export' type of data.")(pending)
