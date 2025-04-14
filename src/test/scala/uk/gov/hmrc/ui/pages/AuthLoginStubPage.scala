@@ -21,39 +21,26 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.models.UserCredentials
 
-object AuthLoginStubPage extends BasePage("") {
+object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
 
-  val title: String = "Authority Wizard"
+  override val url = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  val redirectionUrl = s"$baseUrl/request-customs-declaration-data"
-
-  override val url: String = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
-
-  private val submitSelector          = By.cssSelector("#submit-top")
+  private val redirectionUrl          = DashboardPage.url
   private val redirectUrlSelector     = By.cssSelector("#redirectionUrl")
   private val enrolmentKeySelector    = By.cssSelector("#enrolment\\[0\\]\\.name")
   private val identifierNameSelector  = By.cssSelector("#input-0-0-name")
   private val identifierValueSelector = By.cssSelector("#input-0-0-value")
 
-  def show(): Unit = {
-    get(url)
-    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
+  override def continue(): Unit =
+    click(By.cssSelector("input.govuk-button"))
 
-  }
+  def enterRedirectionUrl(continueUrl: String = redirectionUrl): Unit =
+    sendKeys(redirectUrlSelector, redirectionUrl)
 
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.cssSelector("#submit-top"))
-  }
-
-  def loginAs(userCredentials: UserCredentials, continueUrl: String = redirectionUrl): Unit = {
-    sendKeys(redirectUrlSelector, continueUrl)
+  def enterEnrollment(userCredentials: UserCredentials): Unit =
     userCredentials.enrolmentsData.foreach { data =>
       sendKeys(enrolmentKeySelector, data.enrolmentKey)
       sendKeys(identifierNameSelector, data.identifierName)
       sendKeys(identifierValueSelector, data.identifierValue)
     }
-    click(submitSelector)
-  }
 }

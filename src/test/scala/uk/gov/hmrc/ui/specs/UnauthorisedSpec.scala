@@ -16,23 +16,23 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, GuidancePage, UnauthorisedPage}
+import uk.gov.hmrc.ui.pages._
 
 class UnauthorisedSpec extends BaseSpec {
 
-  private val guidancePage = GuidancePage
-
-  private val loginPage = AuthLoginStubPage
-
+  private val loginPage        = AuthLoginStubPage
   private val unauthorisedPage = UnauthorisedPage
 
-  Feature("User can see unauthorised page") {
-    Scenario("User is not Authenticated ") {
-      Given("I navigated to unauthorized age")
-      guidancePage.continue()
-      loginPage.show()
+  Feature("The user encounters the unauthorised page.") {
+    Scenario("User is not Authenticated.") {
+      Given("the user is not authenticated")
+      loginPage.navigateTo()
+      loginPage.enterRedirectionUrl()
       loginPage.continue()
-      unauthorisedPage.show()
+
+      Then("the user encounters the 'unauthorised' page")
+      unauthorisedPage.assertUrl()
+      unauthorisedPage.assertPageTitle()
     }
   }
 }

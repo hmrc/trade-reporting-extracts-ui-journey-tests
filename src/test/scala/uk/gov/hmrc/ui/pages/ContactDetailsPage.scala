@@ -16,16 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-class ContactDetailsPage
-
-object ContactDetailsPage extends BasePage(" ") {
-
-  override val url = s"$baseUrl/contactDetails"
-
-  val title: String = "contactDetails - Trade Reporting Extracts - GOV.UK"
-
-  def show(): Unit = {
-    get(url)
-    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
-  }
-}
+object ContactDetailsPage extends BasePage("/contactDetails", "contactDetails") {}

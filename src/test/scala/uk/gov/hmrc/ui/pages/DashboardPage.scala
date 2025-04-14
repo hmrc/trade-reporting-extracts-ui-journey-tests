@@ -18,15 +18,20 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-class DashboardPage
+object DashboardPage extends BasePage("/dashboard", "dashboard") {
 
-object DashboardPage extends BasePage(" ") {
-
-  override val url = s"$baseUrl/dashboard"
-
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.linkText("Your Details"))
+  def selectLink(linkToSelect: String): Unit = {
+    val clipLink = linkToSelect.replace(baseUrl, "")
+    click(By.cssSelector(s"a.govuk-link[href*='$clipLink']"))
   }
+
+  // "Reports"
+  val linkRequestNewReport = RequestReportPage.url
+  // val linkRequestedReports = x
+  // val linkAvailableDownloads = x
+
+  // "Your Account"
+  val linkYourDetails = ContactDetailsPage.url
+  // val linkMessages = x
+
 }

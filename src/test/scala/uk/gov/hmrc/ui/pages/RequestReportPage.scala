@@ -18,22 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-class RequestReportPage
-
-object RequestReportPage extends BasePage(" ") {
-
-  override val url = s"$baseUrl/request-cds-report"
-
-  val title: String = "Request a report - Trade Reporting Extracts - GOV.UK"
-
-  def show(): Unit = {
-    get(url)
-    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
-  }
-
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.cssSelector("a.govuk-button"))
-  }
+object RequestReportPage extends BasePage("/request-cds-report", "Request a report") {
+  override def continue(): Unit =
+    click(By.cssSelector("a[class='govuk-button']"))
 }
