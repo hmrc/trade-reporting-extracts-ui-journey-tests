@@ -21,9 +21,9 @@ import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolm
 
 class YourDetailsSpec extends BaseSpec {
 
-  private val loginPage     = AuthLoginStubPage
-  private val dashboardPage = DashboardPage
-  // private val contactDetailsPage = ContactDetailsPage
+  private val loginPage          = AuthLoginStubPage
+  private val dashboardPage      = DashboardPage
+  private val contactDetailsPage = ContactDetailsPage
 
   Feature("The user can view their account details.") {
     Scenario("The user is authenticated.") {
@@ -43,9 +43,8 @@ class YourDetailsSpec extends BaseSpec {
       dashboardPage.selectLink(DashboardPage.linkYourDetails)
 
       Then("the user is taken to the 'contact details' page")
-      pending
-      // contactDetailsPage.assertUrl()
-      // contactDetailsPage.assertPageTitle()
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
     }
   }
 }
