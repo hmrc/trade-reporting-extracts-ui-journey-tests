@@ -21,13 +21,14 @@ import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolm
 
 class RequestReportSpec extends BaseSpec {
 
-  private val loginPage           = AuthLoginStubPage
-  private val dashboardPage       = DashboardPage
-  private val requestReportPage   = RequestReportPage
-  private val reportTypePage      = ReportTypePage
-  private val whichEORIPage       = WhichEORIPage
-  private val reportOwnerTypePage = ReportOwnerTypePage
-  private val reportSubTypePage   = ReportSubtypeSelectionPage
+  private val loginPage                   = AuthLoginStubPage
+  private val dashboardPage               = DashboardPage
+  private val requestReportPage           = RequestReportPage
+  private val reportTypePage              = ReportTypePage
+  private val whichEORIPage               = WhichEORIPage
+  private val reportOwnerTypePage         = ReportOwnerTypePage
+  private val reportSubTypePage           = ReportSubtypeSelectionPage
+  private val reportDateRangeDecisionPage = ReportDateRangeDecisionPage
 
   Feature("The user can request a new report of 'import' type data.") {
 
@@ -101,7 +102,11 @@ class RequestReportSpec extends BaseSpec {
       reportSubTypePage.selectOption(0)
     }
 
-    Scenario("The user selects the date range of their report.")(pending)
+    Scenario("The user selects the date range of their report.")
+    Given("the user select the last 31 days option")
+    reportDateRangeDecisionPage.selectOption(0)
+
+    Then("the user is taken to the report name input page")
 
     Scenario("The user gives a custom date range for their report.")(pending)
 
