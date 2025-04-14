@@ -16,25 +16,36 @@
 
 package uk.gov.hmrc.ui.specs
 
+import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
-import uk.gov.hmrc.ui.pages.{AuthLoginStubPage, ContactDetailsPage, DashboardPage, GuidancePage}
 
 class YourDetailsSpec extends BaseSpec {
 
   private val loginPage     = AuthLoginStubPage
-  private val guidancePage  = GuidancePage
   private val dashboardPage = DashboardPage
   // private val contactDetailsPage = ContactDetailsPage
 
-  Feature("User can see Details") {
-    Scenario("User is Authenticated and can see All details") {
-      Given("I navigated to your details page")
-      guidancePage.continue()
-      loginPage.show()
-      loginPage.loginAs(anOrganisationUserWithKnownEnrolment)
-      dashboardPage.continue()
-      // contactDetailsPage.show()
+  Feature("The user can view their account details.") {
+    Scenario("The user is authenticated.") {
+      Given("the user logs in using an organisation with a known enrolment")
+      loginPage.navigateTo()
+      loginPage.enterRedirectionUrl()
+      loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
+      loginPage.continue()
 
+      Then("the user is taken to the dashboard.")
+      dashboardPage.assertUrl()
+      dashboardPage.assertPageTitle()
+    }
+
+    Scenario("The user starts the 'Your Details' journey.") {
+      Given("the user clicks the link on the dashboard")
+      dashboardPage.selectLink(DashboardPage.linkYourDetails)
+
+      Then("the user is taken to the 'contact details' page")
+      pending
+      // contactDetailsPage.assertUrl()
+      // contactDetailsPage.assertPageTitle()
     }
   }
 }

@@ -16,16 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-class UnauthorisedPage
-
-object UnauthorisedPage extends BasePage(" ") {
-
-  override val url = s"$baseUrl/problem/unauthorised"
-
-  val title: String = "You can’t access this service with this account - Trade Reporting Extracts - GOV.UK"
-
-  def show(): Unit = {
-    get(url)
-    assert(getTitle == title, s"Title was: $getTitle, but expected is $title")
-  }
-}
+object UnauthorisedPage extends BasePage("/problem/unauthorised", "You can’t access this service with this account") {}

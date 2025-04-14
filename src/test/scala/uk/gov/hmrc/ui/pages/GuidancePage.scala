@@ -16,17 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
-class GuidancePage
-
-object GuidancePage extends BasePage(" ") {
-
-  override val url = s"$baseUrl"
-
-  override def continue(): Unit = {
-    get(url)
-    assertUrl(url)
-    click(By.cssSelector("a.govuk-button"))
-  }
-}
+object GuidancePage extends BasePage("", "Request Customs Declaration Service data on imports and exports")
