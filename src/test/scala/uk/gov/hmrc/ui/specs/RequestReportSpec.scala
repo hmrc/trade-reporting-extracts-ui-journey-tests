@@ -33,7 +33,7 @@ class RequestReportSpec extends BaseSpec {
   Feature("The user can request a new report of 'import' type data.") {
 
     Scenario("The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
       loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
@@ -45,7 +45,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user starts the 'Request New Report' journey.") {
-      Given("the user clicks the link on the dashboard")
+      When("the user clicks the link on the dashboard")
       dashboardPage.selectLink(dashboardPage.linkRequestNewReport)
 
       Then("the user is taken to the information page")
@@ -54,7 +54,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the type of data.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       requestReportPage.continue()
 
       Then("the user is taken to the 'Data Download Type' page")
@@ -66,7 +66,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects to use their own EORI number.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       reportTypePage.continue()
 
       Then("the user is taken to the 'Which EORI' page")
@@ -78,7 +78,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the EORI role.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       whichEORIPage.continue()
 
       Then("the user is taken to the 'EORI Role' page")
@@ -91,7 +91,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the sub-type of their 'import' report.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       reportOwnerTypePage.continue()
 
       Then("the user is taken to the '(sub)type of report' page")
@@ -103,7 +103,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the date range of their report.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       reportSubTypePage.continue()
 
       Then("the user is taken to the 'report date range decision' page")
@@ -130,7 +130,7 @@ class RequestReportSpec extends BaseSpec {
 
   Feature("The user can request a new report of 'export' type data.") {
     Scenario("The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
       loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
@@ -142,7 +142,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user starts the 'Request New Report' journey.") {
-      Given("the user clicks the link on the dashboard")
+      When("the user clicks the link on the dashboard")
       dashboardPage.selectLink(dashboardPage.linkRequestNewReport)
 
       Then("the user should be taken to the information page")
@@ -151,7 +151,7 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the type of data.") {
-      Given("the user clicks to continue from the previous page")
+      When("the user clicks to continue from the previous page")
       requestReportPage.continue()
 
       Then("the user should be taken to the 'Data Download Type' page")
