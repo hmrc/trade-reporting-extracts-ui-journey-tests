@@ -103,10 +103,15 @@ class RequestReportSpec extends BaseSpec {
     }
 
     Scenario("The user selects the date range of their report.") {
-      Given("the user select the last 31 days option")
-      reportDateRangeDecisionPage.selectOption(0)
+      Given("the user clicks to continue from the previous page")
+      reportSubTypePage.continue()
 
-      Then("the user is taken to the report name input page")
+      Then("the user is taken to the 'report date range decision' page")
+      reportDateRangeDecisionPage.assertUrl()
+      reportDateRangeDecisionPage.assertPageTitle()
+
+      And("the user can select the 'last 31 days' date range.")
+      reportDateRangeDecisionPage.selectOption(0)
 
     }
 
