@@ -16,4 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ReportDateRangeDecisionPage extends BasePage("/date-rage", "What date range do you want the report to cover?") {}
+import org.openqa.selenium.By
+
+object REQ_0_RequestReportPage extends BasePage("/request-cds-report", "Request a report") {
+  override def continue(): Unit =
+    click(By.cssSelector("a[class='govuk-button']"))
+}

@@ -16,4 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object WhichEORIPage extends BasePage("/which-eori", "Which EORI number do you want to use?") {}
+import org.openqa.selenium.By
+
+object REQ_6_ReportNamePage extends BasePage("/report-name", "What name will you use to identify this report?") {
+  val inputReportName = By.cssSelector("input.govuk-input")
+}

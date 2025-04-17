@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages._
+import org.openqa.selenium.By
 
-class UnauthorisedSpec extends BaseSpec {
+object ACC_2_DashboardPage extends BasePage("/dashboard", "dashboard") {
 
-  private val loginPage        = AuthLoginStubPage
-  private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
-
-  Feature("The user encounters the unauthorised page.") {
-    Scenario("ACC-KO-1: User is not Authenticated.") {
-      Given("the user is not authenticated")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.continue()
-
-      Then("the user encounters the 'unauthorised' page")
-      unauthorisedPage.assertUrl()
-      unauthorisedPage.assertPageTitle()
-    }
+  def selectLink(linkToSelect: String): Unit = {
+    val clipLink = linkToSelect.replace(baseUrl, "")
+    click(By.cssSelector(s"a.govuk-link[href*='$clipLink']"))
   }
+
+  // "Reports"
+  val linkRequestNewReport = REQ_0_RequestReportPage.url
+  // val linkRequestedReports = x
+  // val linkAvailableDownloads = x
+
+  // "Your Account"
+  val linkYourDetails = DET_0_ContactDetailsPage.url
+  // val linkMessages = x
+
 }

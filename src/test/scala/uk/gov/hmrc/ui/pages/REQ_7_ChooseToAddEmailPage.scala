@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ReportSubtypeSelectionPage extends BasePage("/report-type", "Which type of report do you need?") {}
+object REQ_7_ChooseToAddEmailPage
+    extends BasePage("/choose-email-address", "Do you want to add another email for notifications?") {}

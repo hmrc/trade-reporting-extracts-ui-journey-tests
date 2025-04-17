@@ -16,9 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
-object RequestReportPage extends BasePage("/request-cds-report", "Request a report") {
-  override def continue(): Unit =
-    click(By.cssSelector("a[class='govuk-button']"))
-}
+object REQ_3_ReportOwnerTypePage
+    extends BasePage("/request-cds-report/eoriRole", "What is the owner of the EORI number’s role in the report?") {}

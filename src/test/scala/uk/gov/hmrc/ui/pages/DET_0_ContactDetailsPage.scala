@@ -16,5 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ReportOwnerTypePage
-    extends BasePage("/request-cds-report/eoriRole", "What is the owner of the EORI number’s role in the report?") {}
+object DET_0_ContactDetailsPage extends BasePage("/contactDetails", "contactDetails") {}
