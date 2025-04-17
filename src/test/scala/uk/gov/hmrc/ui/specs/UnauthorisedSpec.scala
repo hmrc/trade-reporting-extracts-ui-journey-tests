@@ -21,10 +21,10 @@ import uk.gov.hmrc.ui.pages._
 class UnauthorisedSpec extends BaseSpec {
 
   private val loginPage        = AuthLoginStubPage
-  private val unauthorisedPage = UnauthorisedPage
+  private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
 
   Feature("The user encounters the unauthorised page.") {
-    Scenario("User is not Authenticated.") {
+    Scenario("ACC-KO-1: User is not Authenticated.") {
       Given("the user is not authenticated")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()

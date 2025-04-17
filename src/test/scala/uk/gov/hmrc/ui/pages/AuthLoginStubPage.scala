@@ -25,7 +25,7 @@ object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
 
   override val url = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  private val redirectionUrl          = DashboardPage.url
+  private val redirectionUrl          = ACC_2_DashboardPage.url
   private val redirectUrlSelector     = By.cssSelector("#redirectionUrl")
   private val enrolmentKeySelector    = By.cssSelector("#enrolment\\[0\\]\\.name")
   private val identifierNameSelector  = By.cssSelector("#input-0-0-name")
