@@ -16,5 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_8_SelectEmailsPage extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {
-}
+object REQ_8_SelectEmailsPage
+    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {}

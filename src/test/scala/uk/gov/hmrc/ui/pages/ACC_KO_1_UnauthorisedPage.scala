@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ACC_KO_1_UnauthorisedPage extends BasePage("/problem/unauthorised", "You can’t access this service with this account") {}
+object ACC_KO_1_UnauthorisedPage
+    extends BasePage("/problem/unauthorised", "You can’t access this service with this account") {}
