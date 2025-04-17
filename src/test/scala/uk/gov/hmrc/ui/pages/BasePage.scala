@@ -33,9 +33,18 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   def continue(): Unit =
     click(By.cssSelector("button.govuk-button"))
 
-  // This can be used for both Radio buttons and Checkboxes.
+  def clearAndInputKeys(input: By, value: String): Unit =
+    sendKeys(input, value)
+
+  // NOTE: ONLY for a list of radio buttons and checkboxes, NOT FOR YES/NO PAGES.
   def selectOption(index: Int): Unit =
     click(By.cssSelector(s"#value_$index"))
+
+  // NOTE: ONLY for yes/no radio buttons.
+  def selectYesNo(index: Int): Unit = {
+    if (index == 0) click(By.cssSelector(s"#value"))
+    if (index == 1) click(By.cssSelector(s"#value-no"))
+  }
 
   // NOTE: This will only work if you return to the page. Selecting a checkbox/radio option doesn't update the HTML immediately.
   def assertOptionSelected(index: Int): Unit =
