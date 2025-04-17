@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object UnauthorisedPage extends BasePage("/problem/unauthorised", "You can’t access this service with this account") {}
+object REQ_1_ReportTypePage extends BasePage("/data-download", "What type of data do you want to download?") {}

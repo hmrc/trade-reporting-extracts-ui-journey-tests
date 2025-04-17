@@ -16,4 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ContactDetailsPage extends BasePage("/contactDetails", "contactDetails") {}
+import org.openqa.selenium.By
+
+object REQ_6_ReportNamePage extends BasePage("/report-name", "What name will you use to identify this report?") {
+    val inputReportName = By.cssSelector("input.govuk-input")
+}
