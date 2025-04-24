@@ -17,4 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 object REQ_11_ChooseToAddEmailPage
-    extends BasePage("/choose-email-address", "Do you want to add another email for notifications?") {}
+    extends BasePage(
+      "/choose-email-address",
+      "Do you want to add another email for notifications?"
+    ) {} // -- 24 April 2024: URL is incorrect. Correction is pending tech cleanup sweep (TRE-358).
