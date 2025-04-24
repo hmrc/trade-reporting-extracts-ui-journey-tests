@@ -16,5 +16,11 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_3_ReportOwnerTypePage
-    extends BasePage("/request-cds-report/eoriRole", "What is the owner of the EORI number’s role in the report?") {}
+import org.openqa.selenium.By
+
+object REQ_8_ReportCustomDateRangeStartPage
+    extends BasePage("/start-date", "Which date do you want your report to start?") {
+  val inputCustomDay: By   = By.cssSelector("input[name='value.day']")
+  val inputCustomMonth: By = By.cssSelector("input[name='value.month']")
+  val inputCustomYear: By  = By.cssSelector("input[name='value.year']")
+}

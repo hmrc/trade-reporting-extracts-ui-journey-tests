@@ -16,5 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_5_ReportDateRangeDecisionPage
-    extends BasePage("/date-rage", "What date range do you want the report to cover?") {}
+object REQ_5_ImportTypeSelectionPage
+    extends BasePage(
+      "/report-type",
+      "Which type of report do you need?"
+    ) {} // -- 24 April 2024: URL is incorrect. Correction is pending tech cleanup sweep (TRE-358).

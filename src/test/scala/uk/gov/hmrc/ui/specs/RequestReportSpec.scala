@@ -26,12 +26,14 @@ class RequestReportSpec extends BaseSpec {
   private val requestReportPage           = REQ_0_RequestReportPage
   private val reportTypePage              = REQ_1_ReportTypePage
   private val whichEORIPage               = REQ_2_WhichEORIPage
-  private val reportOwnerTypePage         = REQ_3_ReportOwnerTypePage
-  private val reportSubTypePage           = REQ_4_ReportSubtypeSelectionPage
-  private val reportDateRangeDecisionPage = REQ_5_ReportDateRangeDecisionPage
-  private val reportNamePage              = REQ_6_ReportNamePage
-  private val chooseEmailPage             = REQ_7_ChooseToAddEmailPage
-  private val selectEmailsPage            = REQ_8_SelectEmailsPage
+  private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
+  private val reportImportTypePage        = REQ_5_ImportTypeSelectionPage
+  private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
+  private val ReportCustomStartPage       = REQ_8_ReportCustomDateRangeStartPage
+  private val ReportCustomEndPage         = REQ_9_ReportCustomDateRangeEndPage
+  private val reportNamePage              = REQ_10_ReportNamePage
+  private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
+  private val selectEmailsPage            = REQ_12_SelectEmailsPage
 
   Feature("The user can request a new report of 'import' type data.") {
 
@@ -80,7 +82,7 @@ class RequestReportSpec extends BaseSpec {
       whichEORIPage.selectOption(0)
     }
 
-    Scenario("REQ-3: The user selects the EORI role.") {
+    Scenario("REQ-4: The user selects the EORI role.") {
       When("the user clicks to continue from the previous page")
       whichEORIPage.continue()
 
@@ -93,21 +95,21 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.selectOption(1)
     }
 
-    Scenario("REQ-4: The user selects the sub-type of their 'import' report.") {
+    Scenario("REQ-5: The user selects the sub-type of their 'import' report.") {
       When("the user clicks to continue from the previous page")
       reportOwnerTypePage.continue()
 
       Then("the user is taken to the '(sub)type of report' page")
-      reportSubTypePage.assertUrl()
-      reportSubTypePage.assertPageTitle()
+      reportImportTypePage.assertUrl()
+      reportImportTypePage.assertPageTitle()
 
       And("the user can select the 'import header' type.")
-      reportSubTypePage.selectOption(0)
+      reportImportTypePage.selectOption(0)
     }
 
-    Scenario("REQ-5: The user selects the date range of their report.") {
+    Scenario("REQ-7: The user selects the date range of their report.") {
       When("the user clicks to continue from the previous page")
-      reportSubTypePage.continue()
+      reportImportTypePage.continue()
 
       Then("the user is taken to the 'report date range decision' page")
       reportDateRangeDecisionPage.assertUrl()
@@ -117,21 +119,47 @@ class RequestReportSpec extends BaseSpec {
       reportDateRangeDecisionPage.selectOption(2)
     }
 
-    Scenario("REQ-12: The user gives a custom date range for their report.")(pending)
+    Scenario("REQ-8: The user gives a custom 'start' date range for their report.") {
+      When("the user clicks to continue from the previous page")
+      reportDateRangeDecisionPage.continue()
 
-    Scenario("REQ-6: The user enters a name for their report.") {
+      Then("the user is taken to the 'custom report range start' page")
+      ReportCustomStartPage.assertUrl()
+      ReportCustomStartPage.assertPageTitle()
+
+      And("the user can enter the value '1st April 2025'.")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomDay, "1")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
+    }
+
+    Scenario("REQ-9: The user gives a custom 'end' date range for their report.") {
+      When("the user clicks to continue from the previous page")
+      ReportCustomStartPage.continue()
+
+      Then("the user is taken to the 'custom report range end' page")
+      ReportCustomEndPage.assertUrl()
+      ReportCustomEndPage.assertPageTitle()
+
+      And("the user can enter the value '2nd April 2025'.")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "2")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "4")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
+    }
+
+    Scenario("REQ-10: The user enters a name for their report.") {
       When("the user clicks to continue from the previous page")
       reportDateRangeDecisionPage.continue()
 
       Then("the user is taken to the 'report name' page")
       reportNamePage.assertUrl()
-      // reportNamePage.assertPageTitle() -- 17 April 2024: Title is incorrect. Correction is pending tech cleanup sweep.
+      // reportNamePage.assertPageTitle() -- 24 April 2024: Title is incorrect. Correction is pending tech cleanup sweep (TRE-358).
 
       And("the user can enter text into the text box")
       reportNamePage.clearAndInputKeys(reportNamePage.inputReportName, "a")
     }
 
-    Scenario("REQ 7: The user selects whether to add another email for notifications.") {
+    Scenario("REQ 11: The user selects whether to add another email for notifications.") {
       When("the user clicks to continue from the previous page")
       reportNamePage.continue()
 
@@ -143,7 +171,7 @@ class RequestReportSpec extends BaseSpec {
       chooseEmailPage.selectYesNo(0)
     }
 
-    Scenario("REQ 8: The user selects what emails are to receive notifications.") {
+    Scenario("REQ 12: The user selects what emails are to receive notifications.") {
       When("the user clicks to continue from the previous page")
       chooseEmailPage.continue()
 
@@ -155,13 +183,15 @@ class RequestReportSpec extends BaseSpec {
       selectEmailsPage.selectOption(2)
     }
 
-    Scenario("The user adds a new email.")(pending)
+    Scenario("REQ-13: The user adds a new email.")(pending)
 
-    Scenario("The user reaches the confirmation screen.")(pending)
+    Scenario("REQ-14: The user reaches the confirmation screen.")(pending)
+
+    Scenario("REQ-15: The user successfully submits")(pending)
   }
 
-  Feature("ACC-1: The user can request a new report of 'export' type data.") {
-    Scenario("The user is authenticated.") {
+  Feature("The user can request a new report of 'export' type data.") {
+    Scenario("ACC-1: The user is authenticated.") {
       When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
