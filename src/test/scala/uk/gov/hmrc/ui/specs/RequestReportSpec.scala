@@ -34,6 +34,7 @@ class RequestReportSpec extends BaseSpec {
   private val reportNamePage              = REQ_10_ReportNamePage
   private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
   private val selectEmailsPage            = REQ_12_SelectEmailsPage
+  private val enterNewEmailPage           = REQ_13_EnterNewEmail
 
   Feature("The user can request a new report of 'import' type data.") {
 
@@ -183,7 +184,17 @@ class RequestReportSpec extends BaseSpec {
       selectEmailsPage.selectOption(2)
     }
 
-    Scenario("REQ-13: The user adds a new email.")(pending)
+    Scenario("REQ 13: The user adds a new email.") {
+      When("the user clicks to continue from the previous page")
+      selectEmailsPage.continue()
+
+      Then("the user is taken to the 'Enter new email address' page")
+      enterNewEmailPage.assertPageTitle()
+      enterNewEmailPage.assertUrl()
+
+      And("the user can enter the new email address in the text box")
+      enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
+    }
 
     Scenario("REQ-14: The user reaches the confirmation screen.")(pending)
 
