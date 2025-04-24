@@ -29,6 +29,8 @@ class RequestReportSpec extends BaseSpec {
   private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
   private val reportImportTypePage        = REQ_5_ImportTypeSelectionPage
   private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
+  private val ReportCustomStartPage       = REQ_8_ReportCustomDateRangeStartPage
+  private val ReportCustomEndPage         = REQ_9_ReportCustomDateRangeEndPage
   private val reportNamePage              = REQ_10_ReportNamePage
   private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
   private val selectEmailsPage            = REQ_12_SelectEmailsPage
@@ -117,9 +119,33 @@ class RequestReportSpec extends BaseSpec {
       reportDateRangeDecisionPage.selectOption(2)
     }
 
-    Scenario("REQ-8: The user gives a custom 'start' date range for their report.")(pending)
+    Scenario("REQ-8: The user gives a custom 'start' date range for their report.") {
+      When("the user clicks to continue from the previous page")
+      reportDateRangeDecisionPage.continue()
 
-    Scenario("REQ-9: The user gives a custom 'end' date range for their report.")(pending)
+      Then("the user is taken to the 'custom report range start' page")
+      ReportCustomStartPage.assertUrl()
+      ReportCustomStartPage.assertPageTitle()
+
+      And("the user can enter the value '1st April 2025'.")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomDay, "1")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
+      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
+    }
+
+    Scenario("REQ-9: The user gives a custom 'end' date range for their report.") {
+      When("the user clicks to continue from the previous page")
+      ReportCustomStartPage.continue()
+
+      Then("the user is taken to the 'custom report range end' page")
+      ReportCustomEndPage.assertUrl()
+      ReportCustomEndPage.assertPageTitle()
+
+      And("the user can enter the value '2nd April 2025'.")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "2")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "4")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
+    }
 
     Scenario("REQ-10: The user enters a name for their report.") {
       When("the user clicks to continue from the previous page")
@@ -127,7 +153,7 @@ class RequestReportSpec extends BaseSpec {
 
       Then("the user is taken to the 'report name' page")
       reportNamePage.assertUrl()
-      // reportNamePage.assertPageTitle() -- 17 April 2024: Title is incorrect. Correction is pending tech cleanup sweep.
+      // reportNamePage.assertPageTitle() -- 24 April 2024: Title is incorrect. Correction is pending tech cleanup sweep (TRE-358).
 
       And("the user can enter text into the text box")
       reportNamePage.clearAndInputKeys(reportNamePage.inputReportName, "a")
