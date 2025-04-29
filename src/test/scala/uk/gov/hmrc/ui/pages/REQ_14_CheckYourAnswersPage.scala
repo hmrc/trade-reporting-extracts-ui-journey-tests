@@ -17,5 +17,4 @@
 package uk.gov.hmrc.ui.pages
 
 object REQ_14_CheckYourAnswersPage
-    extends BasePage("/check-your-answers", "Check your answers before submitting your request") {
-}
+    extends BasePage("/check-your-answers", "Check your answers before submitting your request") {}
