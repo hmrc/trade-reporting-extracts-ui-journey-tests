@@ -35,6 +35,8 @@ class RequestReportSpec extends BaseSpec {
   private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
   private val selectEmailsPage            = REQ_12_SelectEmailsPage
   private val enterNewEmailPage           = REQ_13_EnterNewEmail
+  private val checkYourAnswersPage        = REQ_14_CheckYourAnswersPage
+  private val requestSubmittedPage        = REQ_15_ReportRequestSubmittedPage
 
   Feature("The user can request a new report of 'import' type data.") {
 
@@ -196,9 +198,32 @@ class RequestReportSpec extends BaseSpec {
       enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
     }
 
-    Scenario("REQ-14: The user reaches the confirmation screen.")(pending)
+    Scenario("REQ-14: The user reaches the confirmation screen.") {
+      When("the user clicks to continue from the previous page")
+      enterNewEmailPage.continue()
 
-    Scenario("REQ-15: The user successfully submits")(pending)
+      Then("the user is taken to the 'Confirm Details' page")
+      checkYourAnswersPage.assertPageTitle()
+      checkYourAnswersPage.assertUrl()
+    }
+
+    Scenario("REQ-15: The user successfully submits") {
+      When("the user clicks to continue from the previous page")
+      checkYourAnswersPage.continue()
+
+      Then("the user is taken to the 'Successful Submission' page")
+      requestSubmittedPage.assertPageTitle()
+      requestSubmittedPage.assertUrl()
+    }
+
+    Scenario("END: The user successfully returns to the Dashboard") {
+      When("the user clicks to return to the homepage")
+      requestSubmittedPage.ClickLinkHomepage()
+
+      Then("the user should be taken to the dashboard.")
+      dashboardPage.assertUrl()
+      dashboardPage.assertPageTitle()
+    }
   }
 
   Feature("The user can request a new report of 'export' type data.") {
@@ -235,11 +260,14 @@ class RequestReportSpec extends BaseSpec {
       reportTypePage.selectOption(0)
     }
 
-    Scenario("REQ-2: The user selects to use their own EORI number.")(pending)
+    Scenario("REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons.
 
-    Scenario("REQ-3: The user selects the EORI role.")(pending)
+    Scenario("REQ-3: The user selects the EORI number they have authority to use.")(pending)
 
-    Scenario("REQ-4: The user selects the sub-type of their 'export' report.")(pending)
+    Scenario("REQ-4: The user selects the EORI role.")(pending)
+
+    Scenario("REQ-6 (END): The user selects the sub-type of their 'export' report.")(pending)
 
     // End of this Feature spec -- the rest of journey from this point is covered by the first Feature spec.
   }
