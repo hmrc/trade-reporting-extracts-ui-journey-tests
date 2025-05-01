@@ -18,6 +18,6 @@ package uk.gov.hmrc.ui.pages
 
 object REQ_4_ReportOwnerTypePage
     extends BasePage(
-      "/request-cds-report/eoriRole",
-      "What is the owner of the EORI number’s role in the report?"
-    ) {} // -- 24 April 2024: URL is incorrect. Correction is pending tech cleanup sweep (TRE-358).
+      "/your-role",
+      "What is your role in the report?"
+    )
