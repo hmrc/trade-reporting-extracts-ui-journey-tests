@@ -93,7 +93,7 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.assertUrl()
       reportOwnerTypePage.assertPageTitle()
 
-      And("the user can select both the 'Declarant' and 'Exporter' roles.")
+      And("the user can select both the 'Declarant' and 'Importer' roles.")
       reportOwnerTypePage.selectOption(0)
       reportOwnerTypePage.selectOption(1)
     }
