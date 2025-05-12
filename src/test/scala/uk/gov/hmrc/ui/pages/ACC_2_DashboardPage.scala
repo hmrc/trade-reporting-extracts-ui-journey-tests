@@ -28,7 +28,7 @@ object ACC_2_DashboardPage extends BasePage("/dashboard", "dashboard") {
   // "Reports"
   val linkRequestNewReport   = REQ_0_RequestReportPage.url
   // val linkRequestedReports = x
-  val linkAvailableDownloads = AvailableReportsPage.url
+  val linkAvailableDownloads = AVR_0_AvailableReportsPage.url
 
   // "Your Account"linkAvialableDownloads
   val linkYourDetails = DET_0_ContactDetailsPage.url

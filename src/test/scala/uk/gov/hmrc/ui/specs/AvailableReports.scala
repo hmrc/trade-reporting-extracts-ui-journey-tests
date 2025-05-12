@@ -23,7 +23,7 @@ class AvailableReports extends BaseSpec {
 
   private val loginPage            = AuthLoginStubPage
   private val dashboardPage        = ACC_2_DashboardPage
-  private val availableReportsPage = AvailableReportsPage
+  private val availableReportsPage = AVR_0_AvailableReportsPage
 
   Feature("The user can view their available reports.") {
     Scenario("ACC-1: The user is authenticated.") {
