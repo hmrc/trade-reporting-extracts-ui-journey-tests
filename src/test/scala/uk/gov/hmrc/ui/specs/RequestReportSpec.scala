@@ -38,7 +38,7 @@ class RequestReportSpec extends BaseSpec {
   private val checkYourAnswersPage        = REQ_14_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_15_ReportRequestSubmittedPage
 
-  Feature("The user can request a new report of 'import' type data.") {
+  Feature("The user can request a new report of 'import'-type data and use their own EORI number to complete the journey.") {
 
     Scenario("ACC-1: The user is authenticated.") {
       When("the user logs in using an organisation with a known enrolment")
@@ -61,7 +61,7 @@ class RequestReportSpec extends BaseSpec {
       requestReportPage.assertPageTitle()
     }
 
-    Scenario("REQ-1: The user selects the type of data.") {
+    Scenario("REQ-1: The user selects 'import' as the type of data.") {
       When("the user clicks to continue from the previous page")
       requestReportPage.continue()
 
@@ -93,8 +93,8 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.assertUrl()
       reportOwnerTypePage.assertPageTitle()
 
-      And("the user can select both the 'Declarant' and 'Importer' roles.")
-      reportOwnerTypePage.selectOption(0)
+      And("the user can select the 'Importer' role.")
+      reportOwnerTypePage.assertOptionText(1, "Importer")
       reportOwnerTypePage.selectOption(1)
     }
 
@@ -114,7 +114,7 @@ class RequestReportSpec extends BaseSpec {
       When("the user clicks to continue from the previous page")
       reportImportTypePage.continue()
 
-      Then("the user is taken to the 'report date range decision' page")
+      Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
       reportDateRangeDecisionPage.assertPageTitle()
 
@@ -226,38 +226,48 @@ class RequestReportSpec extends BaseSpec {
     }
   }
 
-  Feature("The user can request a new report of 'export' type data.") {
-    Scenario("ACC-1: The user is authenticated.") {
-      When("the user logs in using an organisation with a known enrolment")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
-      loginPage.continue()
-
-      Then("the user should be taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
-
-    Scenario("REQ-0: The user starts the 'Request New Report' journey.") {
-      When("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkRequestNewReport)
-
-      Then("the user should be taken to the information page")
-      requestReportPage.assertUrl()
-      requestReportPage.assertPageTitle()
-    }
-
-    Scenario("REQ-1: The user selects the type of data.") {
-      When("the user clicks to continue from the previous page")
-      requestReportPage.continue()
-
-      Then("the user should be taken to the 'Data Download Type' page")
+  Feature("The user can request a new report of 'export'-type data and use their own EORI number to reach the 'date range' screen.") {
+    Scenario("REQ-1: The user selects 'export' as the type of data.") {
+      Given("the user is already on the 'Data Download Type' page")
+      reportTypePage.navigateTo()
       reportTypePage.assertUrl()
-      reportTypePage.assertPageTitle()
 
-      And("the user should be able to select 'export' as a type")
-      reportTypePage.selectOption(0)
+      Then("the user can select 'export' as a type")
+      reportTypePage.selectOption(1)
+    }
+
+    Scenario("REQ-2: The user selects to use their own EORI number.") {
+      When("the user clicks to continue from the previous page")
+      reportTypePage.continue()
+
+      Then("the user is taken to the 'Which EORI' page")
+      whichEORIPage.assertUrl()
+      whichEORIPage.assertPageTitle()
+
+      And("the user can select to use their own EORI number.")
+      whichEORIPage.selectOption(0)
+    }
+
+    Scenario("REQ-4: The user selects the EORI role.") {
+      When("the user clicks to continue from the previous page")
+      whichEORIPage.continue()
+
+      Then("the user is taken to the 'EORI Role' page")
+      reportOwnerTypePage.assertUrl()
+      reportOwnerTypePage.assertPageTitle()
+
+      And("the user can select the 'Exporter' role.")
+      reportOwnerTypePage.assertOptionText(1, "Exporter")
+      reportOwnerTypePage.selectOption(1)
+    }
+
+    Scenario("REQ-7: The user is skipped to the 'report date range' page.") {
+      When("the user clicks to continue from the previous page")
+      reportOwnerTypePage.continue()
+
+      Then("the user is taken to the 'report date range' page")
+      reportDateRangeDecisionPage.assertUrl()
+      reportDateRangeDecisionPage.assertPageTitle()
     }
 
     Scenario("REQ-2: The user selects to use an EORI number they have authority over.")(pending)
