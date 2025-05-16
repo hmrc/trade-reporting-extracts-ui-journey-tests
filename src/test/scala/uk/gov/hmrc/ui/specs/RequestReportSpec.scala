@@ -38,7 +38,9 @@ class RequestReportSpec extends BaseSpec {
   private val checkYourAnswersPage        = REQ_14_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_15_ReportRequestSubmittedPage
 
-  Feature("The user can request a new report of 'import'-type data and use their own EORI number to complete the journey.") {
+  Feature(
+    "The user can request a new report of 'import'-type data and use their own EORI number to complete the journey."
+  ) {
 
     Scenario("ACC-1: The user is authenticated.") {
       When("the user logs in using an organisation with a known enrolment")
@@ -226,7 +228,9 @@ class RequestReportSpec extends BaseSpec {
     }
   }
 
-  Feature("The user can request a new report of 'export'-type data and use their own EORI number to reach the 'date range' screen.") {
+  Feature(
+    "The user can request a new report of 'export'-type data and use their own EORI number to reach the 'date range' screen."
+  ) {
     Scenario("REQ-1: The user selects 'export' as the type of data.") {
       Given("the user is already on the 'Data Download Type' page")
       reportTypePage.navigateTo()
