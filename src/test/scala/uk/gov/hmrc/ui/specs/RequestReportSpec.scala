@@ -218,7 +218,7 @@ class RequestReportSpec extends BaseSpec {
       requestSubmittedPage.assertUrl()
     }
 
-    Scenario("[F1] END: The user successfully returns to the Dashboard") {
+    Scenario("[F1] (END) The user successfully returns to the Dashboard") {
       When("the user clicks to return to the homepage")
       requestSubmittedPage.ClickLinkHomepage()
 
@@ -229,7 +229,7 @@ class RequestReportSpec extends BaseSpec {
   }
 
   Feature(
-    "[F2] The user can request a new report of 'export'-type data and use their own EORI number to reach the 'date range' screen."
+    "[F2] The user can request a new report of 'export'-type data and use their own EORI number."
   ) {
     Scenario("[F2] REQ-1: The user selects 'export' as the type of data.") {
       Given("the user is already on the 'Data Download Type' page")
@@ -265,7 +265,7 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.selectOption(1)
     }
 
-    Scenario("[F2] REQ-7: The user is skipped to the 'report date range' page.") {
+    Scenario("[F2] (END) REQ-7: The user is skipped to the 'report date range' page.") {
       When("the user clicks to continue from the previous page")
       reportOwnerTypePage.continue()
 
@@ -273,16 +273,31 @@ class RequestReportSpec extends BaseSpec {
       reportDateRangeDecisionPage.assertUrl()
       reportDateRangeDecisionPage.assertPageTitle()
     }
+  }
 
-    Scenario("REQ-2: The user selects to use an EORI number they have authority over.")(pending)
-    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons.
+  Feature(
+    "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
+  ) {
+    Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
 
-    Scenario("REQ-3: The user selects the EORI number they have authority to use.")(pending)
+    Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
 
-    Scenario("REQ-4: The user selects the EORI role.")(pending)
+    Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
+    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
 
-    Scenario("REQ-6 (END): The user selects the sub-type of their 'export' report.")(pending)
+    Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
+  }
 
-    // End of this Feature spec -- the rest of journey from this point is covered by the first Feature spec.
+  Feature(
+    "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
+  ) {
+    Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
+
+    Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+
+    Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
+    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
+
+    Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
   }
 }
