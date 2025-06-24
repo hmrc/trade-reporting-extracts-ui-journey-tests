@@ -25,4 +25,10 @@ object EnrolmentsDataBuilder {
     identifierName = "EORINumber",
     identifierValue = "GB123456789020"
   )
+
+  val anInvalidEnrolmentsData: EnrolmentsData = EnrolmentsData(
+    enrolmentKey = "HMRC-CUS-ORG",
+    identifierName = "EORINumber",
+    identifierValue = "1"
+  )
 }

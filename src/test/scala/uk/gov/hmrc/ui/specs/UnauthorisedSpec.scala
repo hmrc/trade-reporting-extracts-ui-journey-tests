@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
+import support.builders.UserCredentialsBuilder.anOrganisationUserWithInvalidEnrolment
 
 class UnauthorisedSpec extends BaseSpec {
 
@@ -28,6 +29,7 @@ class UnauthorisedSpec extends BaseSpec {
       Given("the user is not authenticated")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
+      loginPage.enterEnrollment(anOrganisationUserWithInvalidEnrolment)
       loginPage.continue()
 
       Then("the user encounters the 'unauthorised' page")
