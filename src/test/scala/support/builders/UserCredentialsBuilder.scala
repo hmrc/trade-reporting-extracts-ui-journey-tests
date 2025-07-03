@@ -16,7 +16,7 @@
 
 package support.builders
 
-import support.builders.EnrolmentsDataBuilder.{anEnrolmentsData, anInvalidEnrolmentsData}
+import support.builders.EnrolmentsDataBuilder.anEnrolmentsData
 import uk.gov.hmrc.ui.models._
 
 object UserCredentialsBuilder {
@@ -40,6 +40,4 @@ object UserCredentialsBuilder {
   val anOrganisationUserWithKnownEnrolment: UserCredentials =
     aUserCredentials.copy(affinityGroup = Organisation, enrolmentsData = Some(anEnrolmentsData))
 
-  val anOrganisationUserWithInvalidEnrolment: UserCredentials =
-    aUserCredentials.copy(affinityGroup = Organisation, enrolmentsData = Some(anInvalidEnrolmentsData))
 }
