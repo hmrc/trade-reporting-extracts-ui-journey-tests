@@ -20,6 +20,7 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
+import scala.compiletime.ops.string
 
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
@@ -37,8 +38,11 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
     sendKeys(input, value)
 
   // NOTE: ONLY for a list of radio buttons and checkboxes, NOT FOR YES/NO PAGES.
-  def selectOption(index: Int): Unit =
+  def selectOptionByIndex(index: Int): Unit =
     click(By.cssSelector(s"#value_$index"))
+
+  def selectOptionByValue(value: String): Unit =
+    click(By.cssSelector(s"input[value='$value']"))
 
   // NOTE: ONLY for yes/no radio buttons.
   def selectYesNo(index: Int): Unit = {

@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "Which date do you want your report to end?") {
+object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your reports to end?") {
   val inputCustomDay: By   = By.cssSelector("input[name='value.day']")
   val inputCustomMonth: By = By.cssSelector("input[name='value.month']")
   val inputCustomYear: By  = By.cssSelector("input[name='value.year']")

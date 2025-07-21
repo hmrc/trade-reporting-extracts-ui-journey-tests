@@ -16,5 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+
 object REQ_12_SelectEmailsPage
-    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {}
+    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {
+  val inputAddNewEmail: String = "AddNewEmail"
+}
