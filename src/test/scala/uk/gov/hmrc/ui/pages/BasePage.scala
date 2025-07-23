@@ -20,7 +20,6 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
-import scala.compiletime.ops.string
 
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
