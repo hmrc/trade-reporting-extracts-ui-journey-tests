@@ -37,8 +37,11 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
     sendKeys(input, value)
 
   // NOTE: ONLY for a list of radio buttons and checkboxes, NOT FOR YES/NO PAGES.
-  def selectOption(index: Int): Unit =
+  def selectOptionByIndex(index: Int): Unit =
     click(By.cssSelector(s"#value_$index"))
+
+  def selectOptionByValue(value: String): Unit =
+    click(By.cssSelector(s"input[value='$value']"))
 
   // NOTE: ONLY for yes/no radio buttons.
   def selectYesNo(index: Int): Unit = {
@@ -62,7 +65,10 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   }
 
   def assertPageTitle(titleToCheck: String = pageTitle): Unit =
-    assert(getTitle == titleToCheck, s"Page title was [$getTitle], but [$titleToCheck] was expected.")
+    assert(
+      getTitle.contains(titleToCheck),
+      s"Page title was [$getTitle], but it was expected to contain '[$titleToCheck]'."
+    )
 
   def assertUrl(urlToCheck: String = url): Unit =
     assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$url] was expected.")

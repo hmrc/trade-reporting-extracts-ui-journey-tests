@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object REQ_0_RequestReportPage extends BasePage("/request-cds-report", "Request a report") {
+object REQ_0_RequestReportPage extends BasePage("/request-cds-report", "Request a CDS report") {
   override def continue(): Unit =
     click(By.cssSelector("a[class='govuk-button']"))
 }

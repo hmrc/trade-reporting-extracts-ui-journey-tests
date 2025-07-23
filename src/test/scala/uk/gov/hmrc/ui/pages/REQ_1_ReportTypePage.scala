@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_1_ReportTypePage extends BasePage("/data-download", "What type of data do you want to download?") {}
+object REQ_1_ReportTypePage extends BasePage("/data-download", "Which type of data do you want to download?") {}

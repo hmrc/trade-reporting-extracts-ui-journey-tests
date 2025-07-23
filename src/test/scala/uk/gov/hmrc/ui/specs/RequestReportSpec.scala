@@ -72,7 +72,7 @@ class RequestReportSpec extends BaseSpec {
       reportTypePage.assertPageTitle()
 
       And("the user can select 'import' as a type")
-      reportTypePage.selectOption(0)
+      reportTypePage.selectOptionByIndex(0)
     }
 
     Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
@@ -84,7 +84,7 @@ class RequestReportSpec extends BaseSpec {
       whichEORIPage.assertPageTitle()
 
       And("the user can select to use their own EORI number.")
-      whichEORIPage.selectOption(0)
+      whichEORIPage.selectOptionByIndex(0)
     }
 
     Scenario("[F1] REQ-4: The user selects the EORI role.") {
@@ -95,9 +95,13 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.assertUrl()
       reportOwnerTypePage.assertPageTitle()
 
+      And("the user can select the 'Declarant' role.")
+      reportOwnerTypePage.assertOptionText(0, "Declarant")
+      reportOwnerTypePage.selectOptionByIndex(0)
+
       And("the user can select the 'Importer' role.")
       reportOwnerTypePage.assertOptionText(1, "Importer")
-      reportOwnerTypePage.selectOption(1)
+      reportOwnerTypePage.selectOptionByIndex(1)
     }
 
     Scenario("[F1] REQ-5: The user selects the sub-type of their 'import' report.") {
@@ -108,8 +112,14 @@ class RequestReportSpec extends BaseSpec {
       reportImportTypePage.assertUrl()
       reportImportTypePage.assertPageTitle()
 
-      And("the user can select the 'import header' type.")
-      reportImportTypePage.selectOption(0)
+      And("the user can select the 'Import header' type.")
+      reportImportTypePage.selectOptionByIndex(0)
+
+      And("the user can select the 'Import item' type.")
+      reportImportTypePage.selectOptionByIndex(1)
+
+      And("the user can select the 'Import tax line' type.")
+      reportImportTypePage.selectOptionByIndex(2)
     }
 
     Scenario("[F1] REQ-7: The user selects the date range of their report.") {
@@ -121,7 +131,7 @@ class RequestReportSpec extends BaseSpec {
       reportDateRangeDecisionPage.assertPageTitle()
 
       And("the user can select the 'Custom date range' option")
-      reportDateRangeDecisionPage.selectOption(2)
+      reportDateRangeDecisionPage.selectOptionByIndex(1)
     }
 
     Scenario("[F1] REQ-8: The user gives a custom 'start' date range for their report.") {
@@ -133,6 +143,7 @@ class RequestReportSpec extends BaseSpec {
       ReportCustomStartPage.assertPageTitle()
 
       And("the user can enter the value '1st April 2025'.")
+      // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
       ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomDay, "1")
       ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
       ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
@@ -146,9 +157,10 @@ class RequestReportSpec extends BaseSpec {
       ReportCustomEndPage.assertUrl()
       ReportCustomEndPage.assertPageTitle()
 
-      And("the user can enter the value '2nd April 2025'.")
+      And("the user can enter the value '2nd May 2025'.")
+      // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "2")
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "4")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "5")
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
     }
 
@@ -160,8 +172,11 @@ class RequestReportSpec extends BaseSpec {
       reportNamePage.assertUrl()
       // reportNamePage.assertPageTitle() -- 24 April 2024: Title is incorrect. Correction is pending tech cleanup sweep (TRE-358).
 
-      And("the user can enter text into the text box")
-      reportNamePage.clearAndInputKeys(reportNamePage.inputReportName, "a")
+      And("the user can enter text with spaces into the text box of up to 70 characters.")
+      reportNamePage.clearAndInputKeys(
+        reportNamePage.inputReportName,
+        "My Reportinator 2000 Has 70 Characters Including My Spaces And Numbers"
+      )
     }
 
     Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
@@ -185,7 +200,7 @@ class RequestReportSpec extends BaseSpec {
       selectEmailsPage.assertUrl()
 
       And("the user can select the 'Add new email address' option")
-      selectEmailsPage.selectOption(2)
+      selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
     }
 
     Scenario("[F1] REQ 13: The user adds a new email.") {
@@ -237,7 +252,7 @@ class RequestReportSpec extends BaseSpec {
       reportTypePage.assertUrl()
 
       Then("the user can select 'export' as a type")
-      reportTypePage.selectOption(1)
+      reportTypePage.selectOptionByIndex(1)
     }
 
     Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
@@ -249,7 +264,7 @@ class RequestReportSpec extends BaseSpec {
       whichEORIPage.assertPageTitle()
 
       And("the user can select to use their own EORI number.")
-      whichEORIPage.selectOption(0)
+      whichEORIPage.selectOptionByIndex(0)
     }
 
     Scenario("[F2] REQ-4: The user selects the EORI role.") {
@@ -262,7 +277,7 @@ class RequestReportSpec extends BaseSpec {
 
       And("the user can select the 'Exporter' role.")
       reportOwnerTypePage.assertOptionText(1, "Exporter")
-      reportOwnerTypePage.selectOption(1)
+      reportOwnerTypePage.selectOptionByIndex(1)
     }
 
     Scenario("[F2] (END) REQ-7: The user is skipped to the 'report date range' page.") {
@@ -271,7 +286,7 @@ class RequestReportSpec extends BaseSpec {
 
       Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
-      reportDateRangeDecisionPage.assertPageTitle()
+      reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
     }
   }
 
