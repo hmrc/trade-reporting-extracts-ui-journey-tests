@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object DET_0_ContactDetailsPage extends BasePage("/contactDetails", "contactDetails") {}
+object DET_0_ContactDetailsPage extends BasePage("/contactDetails", "Your contact details") {}

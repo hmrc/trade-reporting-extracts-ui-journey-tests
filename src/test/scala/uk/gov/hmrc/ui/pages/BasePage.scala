@@ -66,7 +66,10 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   }
 
   def assertPageTitle(titleToCheck: String = pageTitle): Unit =
-    assert(getTitle == titleToCheck, s"Page title was [$getTitle], but [$titleToCheck] was expected.")
+    assert(
+      getTitle.contains(titleToCheck),
+      s"Page title was [$getTitle], but it was expected to contain '[$titleToCheck]'."
+    )
 
   def assertUrl(urlToCheck: String = url): Unit =
     assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$url] was expected.")

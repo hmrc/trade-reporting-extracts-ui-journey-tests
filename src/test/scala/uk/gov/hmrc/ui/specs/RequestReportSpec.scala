@@ -286,7 +286,7 @@ class RequestReportSpec extends BaseSpec {
 
       Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
-      reportDateRangeDecisionPage.assertPageTitle()
+      reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
     }
   }
 
