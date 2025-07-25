@@ -25,7 +25,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
 
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
   val url: String               = baseUrl + relativeUrl
-  val pageTitle: String         = s"$relativeTitle - Trade Reporting Extracts - GOV.UK"
+  val pageTitle: String         = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
   def navigateTo(urlToGet: String = url): Unit =
     get(urlToGet)

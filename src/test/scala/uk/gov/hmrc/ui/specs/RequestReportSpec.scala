@@ -159,7 +159,7 @@ class RequestReportSpec extends BaseSpec {
 
       And("the user can enter the value '2nd May 2025'.")
       // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "2")
+      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "1")
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "5")
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
     }
