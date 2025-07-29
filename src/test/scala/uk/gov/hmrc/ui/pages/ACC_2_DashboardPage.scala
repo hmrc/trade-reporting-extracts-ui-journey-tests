@@ -21,8 +21,8 @@ import org.openqa.selenium.By
 object ACC_2_DashboardPage extends BasePage("/dashboard", "dashboard") {
 
   def selectLink(linkToSelect: String): Unit = {
-    val clipLink = linkToSelect.replace(baseUrl, "")
-    click(By.cssSelector(s"a.govuk-link[href*='$clipLink']"))
+    val clippedLink = linkToSelect.replace(baseUrl, "")
+    click(By.cssSelector(s"a.govuk-link[href*='$clippedLink']"))
   }
 
   // "Reports"
