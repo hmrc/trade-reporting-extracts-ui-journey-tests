@@ -21,4 +21,5 @@ import org.openqa.selenium.By
 object REQ_10_ReportNamePage
     extends BasePage("/report-name", "What name will you use to identify this set of reports?") { // Note: "this/set of report[s]" is dynamic to how many report subtypes were selected.
   val inputReportName: By = By.cssSelector("input.govuk-input")
+  val inputLimit: Int     = 70
 }
