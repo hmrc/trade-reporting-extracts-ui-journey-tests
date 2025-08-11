@@ -31,8 +31,12 @@ object UserCredentialsBuilder {
   )
 
   val aSinglePartyUser: UserCredentials =
-    aUserCredentials.copy(affinityGroup = Organisation, enrolmentsData = Some(enrolmentSingleParty), isThirdParty = false)
-  
+    aUserCredentials.copy(
+      affinityGroup = Organisation,
+      enrolmentsData = Some(enrolmentSingleParty),
+      isThirdParty = false
+    )
+
   val aThirdPartyUser: UserCredentials =
     aUserCredentials.copy(affinityGroup = Organisation, enrolmentsData = Some(enrolmentThirdParty))
 }

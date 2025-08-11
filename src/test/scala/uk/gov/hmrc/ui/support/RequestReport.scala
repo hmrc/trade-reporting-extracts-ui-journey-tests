@@ -266,24 +266,32 @@ class RequestReport(enrollmentToUse: UserCredentials) extends Base {
       When("the user clicks to continue")
       reportTypePage.continue()
 
-      Then("the user is taken to the 'Which EORI' page")
-      whichEORIPage.assertUrl()
-      whichEORIPage.assertPageTitle()
+      if (enrollmentToUse.isThirdParty) {
+        Then("the user is taken to the 'Which EORI' page")
+        whichEORIPage.assertUrl()
+        whichEORIPage.assertPageTitle()
+      } else {
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
-    Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
-      Given("the user can select to use their own EORI number.")
-      whichEORIPage.selectOptionByIndex(0)
+    if (enrollmentToUse.isThirdParty) {
+      Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
+        Given("the user can select to use their own EORI number.")
+        whichEORIPage.selectOptionByIndex(0)
 
-      When("the user clicks to continue")
-      whichEORIPage.continue()
+        When("the user clicks to continue")
+        whichEORIPage.continue()
 
-      Then("the user is taken to the 'EORI Role' page")
-      reportOwnerTypePage.assertUrl()
-      reportOwnerTypePage.assertPageTitle()
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
-    Scenario("[F2] REQ-4: The user selects the EORI role.") {
+    Scenario("[F2] (END) REQ-4: The user selects the EORI role.") {
       Given("the user can select both the 'Declarant' and 'Exporter' roles.")
       reportOwnerTypePage.selectOptionByValue("declarant")
       reportOwnerTypePage.selectOptionByValue("exporter")
@@ -293,12 +301,8 @@ class RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
       Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
-      reportDateRangeDecisionPage.assertPageTitle(
-        "What date range do you want the report to cover?"
-      ) // 'Export' type only has a single report.
+      reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
     }
-
-    Scenario("[F2] (END) REQ-7: The user is skipped to the 'report date range' page.") {}
   }
 
   Feature(
