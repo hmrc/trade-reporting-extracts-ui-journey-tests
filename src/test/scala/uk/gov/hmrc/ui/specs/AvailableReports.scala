@@ -18,8 +18,9 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
+import uk.gov.hmrc.ui.support.Base
 
-class AvailableReports extends BaseSpec {
+class AvailableReports extends Base {
 
   private val loginPage            = AuthLoginStubPage
   private val dashboardPage        = ACC_2_DashboardPage

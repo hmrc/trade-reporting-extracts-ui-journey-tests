@@ -16,24 +16,7 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages._
-import uk.gov.hmrc.ui.support.Base
+import uk.gov.hmrc.ui.support._
 
-class UnauthorisedSpec extends Base {
-
-  private val loginPage        = AuthLoginStubPage
-  private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
-
-  Feature("The user encounters the unauthorised page.") {
-    Scenario("ACC-KO-1: User is not Authenticated.") {
-      Given("the user is not authenticated")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.continue()
-
-      Then("the user encounters the 'unauthorised' page")
-      unauthorisedPage.assertUrl()
-      unauthorisedPage.assertPageTitle()
-    }
-  }
-}
+class SingleRequestReportSpec extends RequestReport(false) {}
+class ThirdPartyRequestReportSpec extends RequestReport(true) {}
