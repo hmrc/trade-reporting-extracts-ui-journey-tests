@@ -34,7 +34,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   val pageTitle: String         = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(5))
+    .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofSeconds(2))
 
   def navigateTo(urlToGet: String = pageUrl): Unit =
