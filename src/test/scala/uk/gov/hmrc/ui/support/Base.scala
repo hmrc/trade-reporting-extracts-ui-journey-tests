@@ -29,7 +29,7 @@ trait Base
     with BeforeAndAfterAll
     with Browser
     with ScreenshotOnFailure {
-    
+
   override def beforeAll(): Unit = // Code to run before each spec starts.
     startBrowser()
 

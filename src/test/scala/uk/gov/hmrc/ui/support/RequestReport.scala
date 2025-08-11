@@ -17,9 +17,9 @@
 package uk.gov.hmrc.ui.support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
+import uk.gov.hmrc.ui.models.UserCredentials
 
-class RequestReport (isThirdParty: Boolean) extends Base {
+class RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_2_DashboardPage
@@ -38,10 +38,6 @@ class RequestReport (isThirdParty: Boolean) extends Base {
   private val checkYourAnswersPage        = REQ_14_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_15_ReportRequestSubmittedPage
 
-  if (isThirdParty) {
-    print("\n   DEBUG: SUCCESS. \n")
-  }
-
   Feature(
     "[F1] The user can request a new report of 'import'-type data and use their own EORI number to complete the journey."
   ) {
@@ -50,7 +46,7 @@ class RequestReport (isThirdParty: Boolean) extends Base {
       When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
+      loginPage.enterEnrollment(enrollmentToUse)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -82,7 +78,7 @@ class RequestReport (isThirdParty: Boolean) extends Base {
       When("the user clicks to continue")
       reportTypePage.continue()
 
-      if (isThirdParty) {
+      if (enrollmentToUse.isThirdParty) {
         Then("the user is taken to the 'Which EORI' page")
         whichEORIPage.assertUrl()
         whichEORIPage.assertPageTitle()
@@ -93,18 +89,18 @@ class RequestReport (isThirdParty: Boolean) extends Base {
       }
     }
 
-    if (!isThirdParty) {
-        Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
-          Given("the user selects to use their own EORI number.")
-          whichEORIPage.selectOptionByIndex(0)
+    if (enrollmentToUse.isThirdParty) {
+      Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
+        Given("the user selects to use their own EORI number.")
+        whichEORIPage.selectOptionByIndex(0)
 
-          When("the user clicks to continue")
-          whichEORIPage.continue()
+        When("the user clicks to continue")
+        whichEORIPage.continue()
 
-          Then("the user is taken to the 'EORI Role' page")
-          reportOwnerTypePage.assertUrl()
-          reportOwnerTypePage.assertPageTitle()
-        }
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
     Scenario("[F1] REQ-4: The user selects the EORI role.") {
@@ -186,7 +182,7 @@ class RequestReport (isThirdParty: Boolean) extends Base {
       When("the user clicks to continue")
       reportNamePage.continue()
 
-      if (isThirdParty) {
+      if (enrollmentToUse.isThirdParty) {
         Then("the user is taken to the 'choose to add email' page")
         chooseEmailPage.assertUrl()
         chooseEmailPage.assertPageTitle()
@@ -197,7 +193,7 @@ class RequestReport (isThirdParty: Boolean) extends Base {
       }
     }
 
-    if (!isThirdParty) {
+    if (enrollmentToUse.isThirdParty) {
       Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
         Given("the user selects the 'Yes' option")
         chooseEmailPage.selectYesNo(0)

@@ -21,5 +21,6 @@ case class UserCredentials(
   credentialRole: CredentialRole,
   confidenceLevel: Option[ConfidenceLevel],
   nino: Option[String],
-  enrolmentsData: Option[EnrolmentsData]
+  enrolmentsData: Option[EnrolmentsData],
+  isThirdParty: Boolean
 )

@@ -20,7 +20,13 @@ import uk.gov.hmrc.ui.models.EnrolmentsData
 
 object EnrolmentsDataBuilder {
 
-  val anEnrolmentsData: EnrolmentsData = EnrolmentsData(
+  val enrolmentThirdParty: EnrolmentsData = EnrolmentsData(
+    enrolmentKey = "HMRC-CUS-ORG",
+    identifierName = "EORINumber",
+    identifierValue = "GB123456789020"
+  )
+
+  val enrolmentSingleParty: EnrolmentsData = EnrolmentsData(
     enrolmentKey = "HMRC-CUS-ORG",
     identifierName = "EORINumber",
     identifierValue = "GB123456789020"

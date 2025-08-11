@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
+import support.builders.UserCredentialsBuilder.aThirdPartyUser
 import uk.gov.hmrc.ui.support.Base
 
 class AvailableReports extends Base {
@@ -31,7 +31,7 @@ class AvailableReports extends Base {
       Given("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
+      loginPage.enterEnrollment(aThirdPartyUser)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

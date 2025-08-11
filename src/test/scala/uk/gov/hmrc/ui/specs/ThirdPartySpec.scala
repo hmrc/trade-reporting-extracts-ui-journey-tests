@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.support._
+import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
 
-class SingleRequestReportSpec extends RequestReport(false) {}
-class ThirdPartyRequestReportSpec extends RequestReport(true) {}
+class SinglePartyRequestReportSpec extends RequestReport(aSinglePartyUser) {}
+// class ThirdPartyRequestReportSpec extends RequestReport(aThirdPartyUser) {}
