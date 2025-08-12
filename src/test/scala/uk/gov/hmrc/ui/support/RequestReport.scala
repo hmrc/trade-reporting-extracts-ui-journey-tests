@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.anOrganisationUserWithKnownEnrolment
+import uk.gov.hmrc.ui.models.UserCredentials
 
-class RequestReportSpec extends BaseSpec {
+class RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_2_DashboardPage
@@ -46,7 +46,7 @@ class RequestReportSpec extends BaseSpec {
       When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(anOrganisationUserWithKnownEnrolment)
+      loginPage.enterEnrollment(enrollmentToUse)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -75,24 +75,32 @@ class RequestReportSpec extends BaseSpec {
       Given("the user selects 'import' as a type")
       reportTypePage.selectOptionByIndex(0)
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportTypePage.continue()
 
-      Then("the user is taken to the 'Which EORI' page")
-      whichEORIPage.assertUrl()
-      whichEORIPage.assertPageTitle()
+      if (enrollmentToUse.isThirdParty) {
+        Then("the user is taken to the 'Which EORI' page")
+        whichEORIPage.assertUrl()
+        whichEORIPage.assertPageTitle()
+      } else {
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
-    Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
-      Given("the user selects to use their own EORI number.")
-      whichEORIPage.selectOptionByIndex(0)
+    if (enrollmentToUse.isThirdParty) {
+      Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
+        Given("the user selects to use their own EORI number.")
+        whichEORIPage.selectOptionByIndex(0)
 
-      When("the user clicks to continue from the previous page")
-      whichEORIPage.continue()
+        When("the user clicks to continue")
+        whichEORIPage.continue()
 
-      Then("the user is taken to the 'EORI Role' page")
-      reportOwnerTypePage.assertUrl()
-      reportOwnerTypePage.assertPageTitle()
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
     Scenario("[F1] REQ-4: The user selects the EORI role.") {
@@ -100,7 +108,7 @@ class RequestReportSpec extends BaseSpec {
       reportOwnerTypePage.selectOptionByValue("declarant")
       reportOwnerTypePage.selectOptionByValue("importer")
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportOwnerTypePage.continue()
 
       Then("the user is taken to the '(sub)type of report' page")
@@ -114,7 +122,7 @@ class RequestReportSpec extends BaseSpec {
       reportImportTypePage.selectOptionByIndex(1)
       reportImportTypePage.selectOptionByIndex(2)
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportImportTypePage.continue()
 
       Then("the user is taken to the 'report date range' page")
@@ -126,7 +134,7 @@ class RequestReportSpec extends BaseSpec {
       Given("the user selects the 'Custom date range' option")
       reportDateRangeDecisionPage.selectOptionByIndex(1)
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportDateRangeDecisionPage.continue()
 
       Then("the user is taken to the 'custom report range start' page")
@@ -141,7 +149,7 @@ class RequestReportSpec extends BaseSpec {
       ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
       ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       ReportCustomStartPage.continue()
 
       Then("the user is taken to the 'custom report range end' page")
@@ -156,7 +164,7 @@ class RequestReportSpec extends BaseSpec {
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "5")
       ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportDateRangeDecisionPage.continue()
 
       Then("the user is taken to the 'report name' page")
@@ -171,52 +179,60 @@ class RequestReportSpec extends BaseSpec {
         "a" * reportNamePage.inputLimit
       )
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportNamePage.continue()
 
-      Then("the user is taken to the 'choose to add email' page")
-      chooseEmailPage.assertUrl()
-      chooseEmailPage.assertPageTitle()
+      if (enrollmentToUse.isThirdParty) {
+        Then("the user is taken to the 'choose to add email' page")
+        chooseEmailPage.assertUrl()
+        chooseEmailPage.assertPageTitle()
+      } else {
+        Then("the user is taken to the 'Confirm Details' page")
+        checkYourAnswersPage.assertUrl()
+        checkYourAnswersPage.assertPageTitle()
+      }
     }
 
-    Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
-      Given("the user selects the 'Yes' option")
-      chooseEmailPage.selectYesNo(0)
+    if (enrollmentToUse.isThirdParty) {
+      Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
+        Given("the user selects the 'Yes' option")
+        chooseEmailPage.selectYesNo(0)
 
-      When("the user clicks to continue from the previous page")
-      chooseEmailPage.continue()
+        When("the user clicks to continue")
+        chooseEmailPage.continue()
 
-      Then("the user is taken to the 'choose to add email' page")
-      selectEmailsPage.assertUrl()
-      selectEmailsPage.assertPageTitle()
-    }
+        Then("the user is taken to the 'choose to add email' page")
+        selectEmailsPage.assertUrl()
+        selectEmailsPage.assertPageTitle()
+      }
 
-    Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
-      Given("the user selects the 'Add new email address' option")
-      selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
+      Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
+        Given("the user selects the 'Add new email address' option")
+        selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
 
-      When("the user clicks to continue from the previous page")
-      selectEmailsPage.continue()
+        When("the user clicks to continue")
+        selectEmailsPage.continue()
 
-      Then("the user is taken to the 'Enter new email address' page")
-      enterNewEmailPage.assertUrl()
-      enterNewEmailPage.assertPageTitle()
-    }
+        Then("the user is taken to the 'Enter new email address' page")
+        enterNewEmailPage.assertUrl()
+        enterNewEmailPage.assertPageTitle()
+      }
 
-    Scenario("[F1] REQ 13: The user adds a new email.") {
-      Given("the user enters the new email address in the text box")
-      enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
+      Scenario("[F1] REQ 13: The user adds a new email.") {
+        Given("the user enters the new email address in the text box")
+        enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
 
-      When("the user clicks to continue from the previous page")
-      enterNewEmailPage.continue()
+        When("the user clicks to continue")
+        enterNewEmailPage.continue()
 
-      Then("the user is taken to the 'Confirm Details' page")
-      checkYourAnswersPage.assertUrl()
-      checkYourAnswersPage.assertPageTitle()
+        Then("the user is taken to the 'Confirm Details' page")
+        checkYourAnswersPage.assertUrl()
+        checkYourAnswersPage.assertPageTitle()
+      }
     }
 
     Scenario("[F1] REQ-14: The user reaches the confirmation screen.") {
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       checkYourAnswersPage.continue()
 
       Then("the user is taken to the 'Successful Submission' page")
@@ -247,42 +263,46 @@ class RequestReportSpec extends BaseSpec {
       Given("the user can select 'export' as a type")
       reportTypePage.selectOptionByIndex(1)
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportTypePage.continue()
 
-      Then("the user is taken to the 'Which EORI' page")
-      whichEORIPage.assertUrl()
-      whichEORIPage.assertPageTitle()
+      if (enrollmentToUse.isThirdParty) {
+        Then("the user is taken to the 'Which EORI' page")
+        whichEORIPage.assertUrl()
+        whichEORIPage.assertPageTitle()
+      } else {
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
-    Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
-      Given("the user can select to use their own EORI number.")
-      whichEORIPage.selectOptionByIndex(0)
+    if (enrollmentToUse.isThirdParty) {
+      Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
+        Given("the user can select to use their own EORI number.")
+        whichEORIPage.selectOptionByIndex(0)
 
-      When("the user clicks to continue from the previous page")
-      whichEORIPage.continue()
+        When("the user clicks to continue")
+        whichEORIPage.continue()
 
-      Then("the user is taken to the 'EORI Role' page")
-      reportOwnerTypePage.assertUrl()
-      reportOwnerTypePage.assertPageTitle()
+        Then("the user is taken to the 'EORI Role' page")
+        reportOwnerTypePage.assertUrl()
+        reportOwnerTypePage.assertPageTitle()
+      }
     }
 
-    Scenario("[F2] REQ-4: The user selects the EORI role.") {
+    Scenario("[F2] (END) REQ-4: The user selects the EORI role.") {
       Given("the user can select both the 'Declarant' and 'Exporter' roles.")
       reportOwnerTypePage.selectOptionByValue("declarant")
       reportOwnerTypePage.selectOptionByValue("exporter")
 
-      When("the user clicks to continue from the previous page")
+      When("the user clicks to continue")
       reportOwnerTypePage.continue()
 
       Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
-      reportDateRangeDecisionPage.assertPageTitle(
-        "What date range do you want the report to cover?"
-      ) // 'Export' type only has a single report.
+      reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
     }
-
-    Scenario("[F2] (END) REQ-7: The user is skipped to the 'report date range' page.") {}
   }
 
   Feature(

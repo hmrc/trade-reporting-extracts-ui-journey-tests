@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package uk.gov.hmrc.ui.specs
 
-case class UserCredentials(
-  affinityGroup: AffinityGroup,
-  credentialRole: CredentialRole,
-  confidenceLevel: Option[ConfidenceLevel],
-  nino: Option[String],
-  enrolmentsData: Option[EnrolmentsData],
-  isThirdParty: Boolean
-)
+import uk.gov.hmrc.ui.support._
+import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
+
+class SinglePartyRequestReportSpec extends RequestReport(aSinglePartyUser) {}
+// class ThirdPartyRequestReportSpec extends RequestReport(aThirdPartyUser) {}

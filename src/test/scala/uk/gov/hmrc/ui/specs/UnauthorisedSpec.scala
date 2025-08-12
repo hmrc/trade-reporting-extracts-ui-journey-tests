@@ -17,8 +17,9 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
+import uk.gov.hmrc.ui.support.Base
 
-class UnauthorisedSpec extends BaseSpec {
+class UnauthorisedSpec extends Base {
 
   private val loginPage        = AuthLoginStubPage
   private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
