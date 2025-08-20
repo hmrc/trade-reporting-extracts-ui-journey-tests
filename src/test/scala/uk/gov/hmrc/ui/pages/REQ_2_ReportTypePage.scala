@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_0_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {}
+object REQ_2_ReportTypePage extends BasePage("/data-download", "Which type of data do you want to download?") {}

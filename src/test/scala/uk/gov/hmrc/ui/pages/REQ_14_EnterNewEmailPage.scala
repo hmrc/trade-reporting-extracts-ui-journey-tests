@@ -18,20 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object ACC_2_DashboardPage extends BasePage("/dashboard", "dashboard") {
-
-  def selectLink(linkToSelect: String): Unit = {
-    val clippedLink = linkToSelect.replace(baseUrl, "")
-    click(By.cssSelector(s"a.govuk-link[href*='$clippedLink']"))
-  }
-
-  // "Reports"
-  val linkRequestNewReport   = REQ_0_RequestReportPage.pageUrl
-  // val linkRequestedReports = x
-  val linkAvailableDownloads = AVR_0_AvailableReportsPage.pageUrl
-
-  // "Your Account"linkAvialableDownloads
-  val linkYourDetails = DET_0_ContactDetailsPage.pageUrl
-  // val linkMessages = x
+object REQ_14_EnterNewEmailPage extends BasePage("/new-notification-email", "Enter a new email address to receive notifications") {
+  val inputNewEmailAddress = By.cssSelector("input.govuk-input")
 
 }

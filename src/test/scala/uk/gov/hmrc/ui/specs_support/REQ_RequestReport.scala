@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.support
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import uk.gov.hmrc.ui.models.UserCredentials
 
-class RequestReport(enrollmentToUse: UserCredentials) extends Base {
+class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
   private val loginPage                   = AuthLoginStubPage
-  private val dashboardPage               = ACC_2_DashboardPage
-  private val requestReportPage           = REQ_0_RequestReportPage
-  private val reportTypePage              = REQ_1_ReportTypePage
-  private val whichEORIPage               = REQ_2_WhichEORIPage
-  private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
-  private val reportImportTypePage        = REQ_5_ImportTypeSelectionPage
-  private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
-  private val ReportCustomStartPage       = REQ_8_ReportCustomDateRangeStartPage
-  private val ReportCustomEndPage         = REQ_9_ReportCustomDateRangeEndPage
-  private val reportNamePage              = REQ_10_ReportNamePage
-  private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
-  private val selectEmailsPage            = REQ_12_SelectEmailsPage
-  private val enterNewEmailPage           = REQ_13_EnterNewEmail
-  private val checkYourAnswersPage        = REQ_14_CheckYourAnswersPage
-  private val requestSubmittedPage        = REQ_15_ReportRequestSubmittedPage
+  private val dashboardPage               = ACC_1_DashboardPage
+  private val requestReportPage           = REQ_1_RequestReportPage
+  private val reportTypePage              = REQ_2_ReportTypePage
+  private val whichEORIPage               = REQ_3_WhichEORIPage
+  private val reportOwnerTypePage         = REQ_5_ReportOwnerTypePage
+  private val reportImportTypePage        = REQ_6_ImportTypeSelectionPage
+  private val reportDateRangeDecisionPage = REQ_8_ReportDateRangeDecisionPage
+  private val ReportCustomStartPage       = REQ_9_ReportCustomDateRangeStartPage
+  private val ReportCustomEndPage         = REQ_10_ReportCustomDateRangeEndPage
+  private val reportNamePage              = REQ_11_ReportNamePage
+  private val chooseEmailPage             = REQ_12_ChooseToAddEmailPage
+  private val selectEmailsPage            = REQ_13_SelectEmailsPage
+  private val enterNewEmailPage           = REQ_14_EnterNewEmailPage
+  private val checkYourAnswersPage        = REQ_15_CheckYourAnswersPage
+  private val requestSubmittedPage        = REQ_16_ReportRequestSubmittedPage
 
   Feature(
     "[F1] The user can request a new report of 'import'-type data and use their own EORI number to complete the journey."

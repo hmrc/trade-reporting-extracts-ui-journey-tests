@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_2_WhichEORIPage extends BasePage("/which-eori", "Which EORI number do you want to use?") {}
+object REQ_15_CheckYourAnswersPage extends BasePage("/check-your-answers", "Check your answers before submitting your request") {}

@@ -18,7 +18,8 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object REQ_0_RequestReportPage extends BasePage("/request-cds-report", "Request a CDS report") {
-  override def continue(): Unit =
-    click(By.cssSelector("a[class='govuk-button']"))
+object REQ_10_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your reports to end?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+  val inputCustomDay: By   = By.cssSelector("input[name='value.day']")
+  val inputCustomMonth: By = By.cssSelector("input[name='value.month']")
+  val inputCustomYear: By  = By.cssSelector("input[name='value.year']")
 }

@@ -16,8 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_4_ReportOwnerTypePage
-    extends BasePage(
-      "/your-role",
-      "What is your role in the report?"
-    )
+object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {}

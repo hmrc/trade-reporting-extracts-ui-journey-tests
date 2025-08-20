@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_5_ImportTypeSelectionPage
-    extends BasePage(
-      "/import-report-type",
-      "Which type of import report do you need?"
-    ) {}
+object REQ_13_SelectEmailsPage
+    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {
+  val inputAddNewEmail: String = "AddNewEmail"
+}
