@@ -17,21 +17,21 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.aThirdPartyUser
-import uk.gov.hmrc.ui.support.Base
+import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import uk.gov.hmrc.ui.specs_support.Base
 
-class AvailableReports extends Base {
+class DET_YourDetailsSpec extends Base {
 
-  private val loginPage            = AuthLoginStubPage
-  private val dashboardPage        = ACC_2_DashboardPage
-  private val availableReportsPage = AVR_0_AvailableReportsPage
+  private val loginPage          = AuthLoginStubPage
+  private val dashboardPage      = ACC_1_DashboardPage
+  private val contactDetailsPage = DET_1_ContactDetailsPage
 
-  Feature("The user can view their available reports.") {
+  Feature("The user can view their account details.") {
     Scenario("ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aThirdPartyUser)
+      loginPage.enterEnrollment(aSinglePartyUser)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -39,14 +39,13 @@ class AvailableReports extends Base {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario("The user starts the 'Available for download' journey.") {
+    Scenario("DET-0: The user starts the 'Your Details' journey.") {
       Given("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(ACC_2_DashboardPage.linkAvailableDownloads)
+      dashboardPage.selectLink(dashboardPage.linkYourDetails)
 
-      Then("the user is taken to the 'available reports' page")
-      availableReportsPage.assertUrl()
-      // availableReportsPage.assertPageTitle() -- 02 June 2025: Page title pending whether reports are available to download. Right now its "There are no reports available to download yet".
-
+      Then("the user is taken to the 'contact details' page")
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
     }
   }
 }

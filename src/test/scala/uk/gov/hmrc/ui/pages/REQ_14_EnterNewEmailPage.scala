@@ -16,4 +16,10 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_2_WhichEORIPage extends BasePage("/which-eori", "Which EORI number do you want to use?") {}
+import org.openqa.selenium.By
+
+object REQ_14_EnterNewEmailPage
+    extends BasePage("/new-notification-email", "Enter a new email address to receive notifications") {
+  val inputNewEmailAddress = By.cssSelector("input.govuk-input")
+
+}

@@ -16,4 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object DET_0_ContactDetailsPage extends BasePage("/contact-details", "Your contact details") {}
+object REQ_5_ReportOwnerTypePage
+    extends BasePage(
+      "/your-role",
+      "What is your role in the report?"
+    )

@@ -16,4 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object GuidancePage extends BasePage("", "Request Customs Declaration Service data on imports and exports")
+object REQ_8_ReportDateRangeDecisionPage
+    extends BasePage(
+      "/date-range",
+      "What date range do you want the reports to cover?" // Note: "report[s]" is dynamic to how many report subtypes were selected.
+    ) {}
