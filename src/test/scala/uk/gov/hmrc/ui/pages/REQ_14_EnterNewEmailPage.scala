@@ -18,7 +18,8 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object REQ_14_EnterNewEmailPage extends BasePage("/new-notification-email", "Enter a new email address to receive notifications") {
+object REQ_14_EnterNewEmailPage
+    extends BasePage("/new-notification-email", "Enter a new email address to receive notifications") {
   val inputNewEmailAddress = By.cssSelector("input.govuk-input")
 
 }
