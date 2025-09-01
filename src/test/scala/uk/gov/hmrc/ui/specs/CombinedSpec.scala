@@ -22,4 +22,4 @@ import uk.gov.hmrc.ui.specs_support.REQ_RequestReport
 // The navigation path changes for these journeys, dependant on whether the user has single or third party access.
 
 // class SinglePartyRequestReportSpec extends REQ_RequestReport(aSinglePartyUser) {}
-class ThirdPartyRequestReportSpec extends RequestReport(aThirdPartyUser) {}
+class ThirdPartyRequestReportSpec extends REQ_RequestReport(aThirdPartyUser) {}
