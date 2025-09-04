@@ -29,7 +29,8 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
-  val pageUrl: String           = TestEnvironment.url("trade-reporting-extracts-frontend") + relativeUrl
+  protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
+  val pageUrl: String           = baseUrl + relativeUrl
   val pageTitle: String         = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
