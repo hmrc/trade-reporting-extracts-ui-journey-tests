@@ -27,11 +27,13 @@ object ACC_1_DashboardPage extends BasePage("/dashboard", "dashboard") {
 
   // "Reports"
   val linkRequestNewReport   = REQ_1_RequestReportPage.pageUrl
-  // val linkRequestedReports = x
+  val linkRequestedReports   = RQR_1_RequestedReportsPage.pageUrl
   val linkAvailableDownloads = AVR_1_AvailableReportsPage.pageUrl
 
-  // "Your Account"linkAvialableDownloads
+  // "Your Account"
   val linkYourDetails = DET_1_ContactDetailsPage.pageUrl
-  // val linkMessages = x
+
+  // "Give data access"
+  val linkAddThirdParty = ADD_1_AddThirdPartyPage.pageUrl
 
 }
