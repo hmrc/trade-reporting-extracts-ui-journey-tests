@@ -56,7 +56,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] Dashboard: The user selects the 'Request New Report' journey.") {
       When("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkRequestNewReport)
+      dashboardPage.clickLinkByURL(REQ_1_RequestReportPage.pageLink)
 
       Then("the user is taken to the information page")
       requestReportPage.assertUrl()
@@ -174,7 +174,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-10: The user enters a name for their report.") {
       Given(s"the user enters text with spaces into the text box of up to ${reportNamePage.inputLimit} characters.")
-      reportNamePage.clearAndInputKeys( "a" * reportNamePage.inputLimit)
+      reportNamePage.clearAndInputKeys("a" * reportNamePage.inputLimit)
 
       When("the user clicks to continue")
       reportNamePage.continue()
@@ -239,7 +239,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
-      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageUrl)
+      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageLink)
 
       Then("the user should be taken to the dashboard.")
       dashboardPage.assertUrl()

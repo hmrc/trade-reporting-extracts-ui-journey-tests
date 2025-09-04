@@ -19,14 +19,14 @@ package uk.gov.hmrc.ui.specs
 import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
 import uk.gov.hmrc.ui.specs_support.REQ_RequestReport
 
-/* 
-    QA NOTE: 
-        The screens for these journeys are modified/occur in a different order, 
+/*
+    QA NOTE:
+        The screens for these journeys are modified/occur in a different order,
         depending on whether a Single or Third Party user logs in.
 
         To avoid re-writing the entire spec again to cover each journey,
         we will just call it twice here with credentials for single and third party users.
-*/
+ */
 
 // Dashboard
 

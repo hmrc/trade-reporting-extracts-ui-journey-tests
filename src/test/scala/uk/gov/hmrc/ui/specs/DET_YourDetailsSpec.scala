@@ -41,7 +41,7 @@ class DET_YourDetailsSpec extends Base {
 
     Scenario("DET-0: The user starts the 'Your Details' journey.") {
       Given("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkYourDetails)
+      dashboardPage.clickLinkByURL(DET_1_ContactDetailsPage.pageLink)
 
       Then("the user is taken to the 'contact details' page")
       contactDetailsPage.assertUrl()
