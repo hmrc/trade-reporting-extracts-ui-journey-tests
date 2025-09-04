@@ -40,6 +40,9 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   def navigateTo(urlToGet: String = pageUrl): Unit =
     get(urlToGet)
 
+  def clickLinkByURL(url: String): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$url']"))
+
   def continue(): Unit =
     click(By.cssSelector("button.govuk-button"))
 

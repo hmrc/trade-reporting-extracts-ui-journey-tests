@@ -16,9 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
-object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {
-
-  def ClickLinkHomepage(): Unit = click(By.cssSelector(s"a.govuk-link[href*='dashboard']"))
-}
+object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {}

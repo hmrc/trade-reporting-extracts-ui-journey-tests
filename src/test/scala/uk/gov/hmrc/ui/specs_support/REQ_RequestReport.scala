@@ -242,7 +242,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
-      requestSubmittedPage.ClickLinkHomepage()
+      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageUrl)
 
       Then("the user should be taken to the dashboard.")
       dashboardPage.assertUrl()
