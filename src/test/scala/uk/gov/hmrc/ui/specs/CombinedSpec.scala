@@ -19,7 +19,17 @@ package uk.gov.hmrc.ui.specs
 import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
 import uk.gov.hmrc.ui.specs_support.REQ_RequestReport
 
-// The navigation path changes for these journeys, dependant on whether the user has single or third party access.
+/* 
+    QA NOTE: 
+        The screens for these journeys are modified/occur in a different order, 
+        depending on whether a Single or Third Party user logs in.
 
+        To avoid re-writing the entire spec again to cover each journey,
+        we will just call it twice here with credentials for single and third party users.
+*/
+
+// Dashboard
+
+// RequestReport
 // class SinglePartyRequestReportSpec extends REQ_RequestReport(aSinglePartyUser) {}
 class ThirdPartyRequestReportSpec extends REQ_RequestReport(aThirdPartyUser) {}
