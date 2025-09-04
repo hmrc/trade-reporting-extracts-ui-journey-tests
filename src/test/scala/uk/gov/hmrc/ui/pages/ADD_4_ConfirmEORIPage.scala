@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {
-  val titleNoReportsAvailable = "There are no reports available to download yet"
+object ADD_4_ConfirmEORIPage extends BasePage("/confirm-eori", "Confirm the EORI number for third-party access") {
 }

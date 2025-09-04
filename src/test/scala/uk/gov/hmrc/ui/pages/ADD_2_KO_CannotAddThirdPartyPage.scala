@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {
-  val titleNoReportsAvailable = "There are no reports available to download yet"
+object ADD_2_KO_CannotAddThirdPartyPage extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {
 }

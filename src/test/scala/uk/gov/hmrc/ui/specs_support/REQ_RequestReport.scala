@@ -62,8 +62,8 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
       requestReportPage.assertUrl()
     }
 
-    Scenario("[F1] REQ-0: The user selects 'Start' to begin the journey.") {
-      When("the user clicks 'start'.")
+    Scenario("[F1] REQ-0: The user selects 'Continue' to begin the journey.") {
+      When("the user clicks 'Continue'.")
       requestReportPage.continue()
 
       Then("the user is taken to the 'Data Download Type' page")

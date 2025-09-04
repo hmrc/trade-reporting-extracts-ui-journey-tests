@@ -16,6 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {
-  val titleNoReportsAvailable = "There are no reports available to download yet"
+object RQR_1_RequestedReportsPage extends BasePage("/requested-reports", "Requested reports") {
+    val titleNoReportsRequested = "You have not requested any reports yet"
 }

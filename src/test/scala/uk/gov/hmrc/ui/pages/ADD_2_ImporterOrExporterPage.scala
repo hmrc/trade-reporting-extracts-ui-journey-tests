@@ -16,6 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {
-  val titleNoReportsAvailable = "There are no reports available to download yet"
+object ADD_2_ImporterOrExporterPage extends BasePage("/importer-or-exporter", "Are you the importer or exporter for the data you want to share?") {
 }

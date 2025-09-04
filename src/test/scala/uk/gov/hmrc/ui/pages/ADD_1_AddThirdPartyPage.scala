@@ -16,6 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AVR_1_AvailableReportsPage extends BasePage("/available-to-download", "Available reports") {
-  val titleNoReportsAvailable = "There are no reports available to download yet"
+import org.openqa.selenium.By
+
+object ADD_1_AddThirdPartyPage extends BasePage("/add-a-third-party", "Add a third party") {
+    override def continue(): Unit =
+        click(By.cssSelector("a[class='govuk-button']"))
 }
