@@ -145,9 +145,9 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     Scenario("[F1] REQ-8: The user gives a custom 'start' date range for their report.") {
       Given("the user enters the value '1st April 2025'.")
       // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomDay, "1")
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
+      ReportCustomStartPage.clearAndInputKeys("1", ReportCustomStartPage.inputCustomDay)
+      ReportCustomStartPage.clearAndInputKeys("4", ReportCustomStartPage.inputCustomMonth)
+      ReportCustomStartPage.clearAndInputKeys("2025", ReportCustomStartPage.inputCustomYear)
 
       When("the user clicks to continue")
       ReportCustomStartPage.continue()
@@ -160,9 +160,9 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     Scenario("[F1] REQ-9: The user gives a custom 'end' date range for their report.") {
       Given("the user enters the value '2nd May 2025'.")
       // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "1")
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "5")
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
+      ReportCustomEndPage.clearAndInputKeys("1", ReportCustomEndPage.inputCustomDay)
+      ReportCustomEndPage.clearAndInputKeys("5", ReportCustomEndPage.inputCustomMonth)
+      ReportCustomEndPage.clearAndInputKeys("2025", ReportCustomEndPage.inputCustomYear)
 
       When("the user clicks to continue")
       reportDateRangeDecisionPage.continue()
@@ -174,10 +174,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-10: The user enters a name for their report.") {
       Given(s"the user enters text with spaces into the text box of up to ${reportNamePage.inputLimit} characters.")
-      reportNamePage.clearAndInputKeys(
-        reportNamePage.inputReportName,
-        "a" * reportNamePage.inputLimit
-      )
+      reportNamePage.clearAndInputKeys( "a" * reportNamePage.inputLimit)
 
       When("the user clicks to continue")
       reportNamePage.continue()
@@ -220,7 +217,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
       Scenario("[F1] REQ 13: The user adds a new email.") {
         Given("the user enters the new email address in the text box")
-        enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
+        enterNewEmailPage.clearAndInputKeys("abc@gmail.com")
 
         When("the user clicks to continue")
         enterNewEmailPage.continue()

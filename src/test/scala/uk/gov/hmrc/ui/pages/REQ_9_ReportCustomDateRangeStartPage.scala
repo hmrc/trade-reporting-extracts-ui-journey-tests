@@ -16,10 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
 object REQ_9_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
-  val inputCustomDay: By   = By.cssSelector("input[name='value.day']")
-  val inputCustomMonth: By = By.cssSelector("input[name='value.month']")
-  val inputCustomYear: By  = By.cssSelector("input[name='value.year']")
+  val inputCustomDay    = "input[name='value.day']"
+  val inputCustomMonth  = "input[name='value.month']"
+  val inputCustomYear   = "input[name='value.year']"
 }
