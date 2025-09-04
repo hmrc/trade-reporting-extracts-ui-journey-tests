@@ -41,7 +41,7 @@ class REQ_AvailableReports extends Base {
 
     Scenario("The user starts the 'Available for download' journey.") {
       Given("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkAvailableDownloads)
+      dashboardPage.clickLinkByURL(AVR_1_AvailableReportsPage.pageLink)
 
       Then("the user is taken to the 'available reports' page")
       availableReportsPage.assertUrl()
