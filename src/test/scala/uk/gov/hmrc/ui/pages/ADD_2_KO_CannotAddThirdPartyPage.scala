@@ -16,5 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_2_KO_CannotAddThirdPartyPage extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {
-}
+object ADD_2_KO_CannotAddThirdPartyPage
+    extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {}

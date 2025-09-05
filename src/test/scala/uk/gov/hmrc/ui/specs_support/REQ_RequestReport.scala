@@ -302,29 +302,31 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     }
   }
 
-  Feature(
-    "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
-  ) {
-    Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
+  if (enrollmentToUse.isThirdParty) {
+    Feature(
+      "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
+    ) {
+      Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
 
-    Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+      Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
 
-    Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
-    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
+      Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
+      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
 
-    Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
-  }
+      Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
+    }
 
-  Feature(
-    "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
-  ) {
-    Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
+    Feature(
+      "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
+    ) {
+      Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
 
-    Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+      Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
 
-    Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
-    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
+      Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
+      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
 
-    Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
+      Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
+    }
   }
 }

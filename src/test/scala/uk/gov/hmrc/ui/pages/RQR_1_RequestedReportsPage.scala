@@ -17,5 +17,5 @@
 package uk.gov.hmrc.ui.pages
 
 object RQR_1_RequestedReportsPage extends BasePage("/requested-reports", "Requested reports") {
-    val titleNoReportsRequested = "You have not requested any reports yet"
+  val titleNoReportsRequested = "You have not requested any reports yet"
 }

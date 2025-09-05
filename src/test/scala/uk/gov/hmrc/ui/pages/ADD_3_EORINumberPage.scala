@@ -16,5 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_3_EORINumberPage extends BasePage("/eori-number", "What is the EORI number you want to give access to?") {
-}
+object ADD_3_EORINumberPage extends BasePage("/eori-number", "What is the EORI number you want to give access to?") {}

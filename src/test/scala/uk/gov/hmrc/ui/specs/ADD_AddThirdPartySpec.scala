@@ -96,7 +96,7 @@ class ADD_AddThirdPartySpec extends Base {
       And("the user clicks to continue")
       ADD_3_EORINumberPage.continue()
 
-      // Then("the user is taken to the 'x' page")
+      // Then("the user is taken to the 'x' page") -- Waiting for further AddThirdParty pages to be implemented.
       // x.assertUrl()
       // x.assertPageTitle()
     }

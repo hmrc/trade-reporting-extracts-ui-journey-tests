@@ -19,6 +19,6 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 
 object ADD_1_AddThirdPartyPage extends BasePage("/add-a-third-party", "Add a third party") {
-    override def continue(): Unit =
-        click(By.cssSelector("a[class='govuk-button']"))
+  override def continue(): Unit =
+    click(By.cssSelector("a[class='govuk-button']"))
 }
