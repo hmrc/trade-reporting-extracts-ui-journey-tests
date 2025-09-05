@@ -20,32 +20,34 @@ import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
 import uk.gov.hmrc.ui.specs_support.Base
 
-class REQ_AvailableReports extends Base {
+class AVR_AvailableReportsSpec extends Base {
 
-  private val loginPage            = AuthLoginStubPage
-  private val dashboardPage        = ACC_1_DashboardPage
-  private val availableReportsPage = AVR_1_AvailableReportsPage
-
-  Feature("The user can view their available reports.") {
+  Feature("[F1] The user can view their available reports.") {
     Scenario("ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
-      loginPage.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(aSinglePartyUser)
+      AuthLoginStubPage.continue()
 
       Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
     }
 
-    Scenario("The user starts the 'Available for download' journey.") {
+    Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
       Given("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkAvailableDownloads)
+      ACC_1_DashboardPage.clickLinkByURL(AVR_1_AvailableReportsPage.pageLink)
 
       Then("the user is taken to the 'available reports' page")
-      availableReportsPage.assertUrl()
-      // availableReportsPage.assertPageTitle() -- 02 June 2025: Page title pending whether reports are available to download. Right now its "There are no reports available to download yet".
+      AVR_1_AvailableReportsPage.assertUrl()
+      // AVR_1_AvailableReportsPage.assertPageTitle()
+
+      /*
+        QA Note:
+          Page will only change when values are passed to mongo to make something show here.
+          TO-DO: Need to figure out how to do that.
+       */
 
     }
   }

@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {}
+object ADD_3_EORINumberPage extends BasePage("/eori-number", "What is the EORI number you want to give access to?") {}

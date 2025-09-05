@@ -20,32 +20,35 @@ import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
 import uk.gov.hmrc.ui.specs_support.Base
 
-class DET_YourDetailsSpec extends Base {
+class RQR_RequestedReportsSpec extends Base {
 
-  private val loginPage          = AuthLoginStubPage
-  private val dashboardPage      = ACC_1_DashboardPage
-  private val contactDetailsPage = DET_1_ContactDetailsPage
-
-  Feature("The user can view their account details.") {
-    Scenario("ACC-1: The user is authenticated.") {
+  Feature("[F1] The user can view their requested reports.") {
+    Scenario("[F1] ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
-      loginPage.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(aSinglePartyUser)
+      AuthLoginStubPage.continue()
 
       Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
     }
 
-    Scenario("DET-0: The user starts the 'Your Details' journey.") {
+    Scenario("[F1] RQR-1: The user starts the 'View Requested Reports' journey.") {
       Given("the user clicks the link on the dashboard")
-      dashboardPage.clickLinkByURL(DET_1_ContactDetailsPage.pageLink)
+      ACC_1_DashboardPage.clickLinkByURL(RQR_1_RequestedReportsPage.pageLink)
 
-      Then("the user is taken to the 'contact details' page")
-      contactDetailsPage.assertUrl()
-      contactDetailsPage.assertPageTitle()
+      Then("the user is taken to the 'requested reports' page")
+      RQR_1_RequestedReportsPage.assertUrl()
+      // RQR_1_RequestedReportsPage.assertPageTitle()
+
+      /*
+        QA Note:
+          Page will change title depending on whether REQ_RequestReport is ran before or after.
+          TO-DO: Need to figure out how to control this, or just combine the two specs.
+       */
+
     }
   }
 }

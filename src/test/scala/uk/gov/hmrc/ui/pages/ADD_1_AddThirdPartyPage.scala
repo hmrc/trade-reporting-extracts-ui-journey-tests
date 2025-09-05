@@ -16,4 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {}
+import org.openqa.selenium.By
+
+object ADD_1_AddThirdPartyPage extends BasePage("/add-a-third-party", "Add a third party") {
+  override def continue(): Unit =
+    click(By.cssSelector("a[class='govuk-button']"))
+}

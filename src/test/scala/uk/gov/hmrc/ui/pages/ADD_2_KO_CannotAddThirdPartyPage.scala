@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {}
+object ADD_2_KO_CannotAddThirdPartyPage
+    extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {}

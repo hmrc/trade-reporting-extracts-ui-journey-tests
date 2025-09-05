@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_16_ReportRequestSubmittedPage extends BasePage("/report-request-confirmation", "Report request submitted") {}
+object ADD_2_ImporterOrExporterPage
+    extends BasePage("/importer-or-exporter", "Are you the importer or exporter for the data you want to share?") {}

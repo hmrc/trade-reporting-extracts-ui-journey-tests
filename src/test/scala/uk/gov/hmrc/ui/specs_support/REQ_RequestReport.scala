@@ -56,14 +56,14 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] Dashboard: The user selects the 'Request New Report' journey.") {
       When("the user clicks the link on the dashboard")
-      dashboardPage.selectLink(dashboardPage.linkRequestNewReport)
+      dashboardPage.clickLinkByURL(REQ_1_RequestReportPage.pageLink)
 
       Then("the user is taken to the information page")
       requestReportPage.assertUrl()
     }
 
-    Scenario("[F1] REQ-0: The user selects 'Start' to begin the journey.") {
-      When("the user clicks 'start'.")
+    Scenario("[F1] REQ-0: The user selects 'Continue' to begin the journey.") {
+      When("the user clicks 'Continue'.")
       requestReportPage.continue()
 
       Then("the user is taken to the 'Data Download Type' page")
@@ -145,9 +145,9 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     Scenario("[F1] REQ-8: The user gives a custom 'start' date range for their report.") {
       Given("the user enters the value '1st April 2025'.")
       // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomDay, "1")
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomMonth, "4")
-      ReportCustomStartPage.clearAndInputKeys(ReportCustomStartPage.inputCustomYear, "2025")
+      ReportCustomStartPage.clearAndInputKeys("1", ReportCustomStartPage.inputCustomDay)
+      ReportCustomStartPage.clearAndInputKeys("4", ReportCustomStartPage.inputCustomMonth)
+      ReportCustomStartPage.clearAndInputKeys("2025", ReportCustomStartPage.inputCustomYear)
 
       When("the user clicks to continue")
       ReportCustomStartPage.continue()
@@ -160,9 +160,9 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     Scenario("[F1] REQ-9: The user gives a custom 'end' date range for their report.") {
       Given("the user enters the value '2nd May 2025'.")
       // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomDay, "1")
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomMonth, "5")
-      ReportCustomEndPage.clearAndInputKeys(ReportCustomEndPage.inputCustomYear, "2025")
+      ReportCustomEndPage.clearAndInputKeys("1", ReportCustomEndPage.inputCustomDay)
+      ReportCustomEndPage.clearAndInputKeys("5", ReportCustomEndPage.inputCustomMonth)
+      ReportCustomEndPage.clearAndInputKeys("2025", ReportCustomEndPage.inputCustomYear)
 
       When("the user clicks to continue")
       reportDateRangeDecisionPage.continue()
@@ -174,10 +174,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-10: The user enters a name for their report.") {
       Given(s"the user enters text with spaces into the text box of up to ${reportNamePage.inputLimit} characters.")
-      reportNamePage.clearAndInputKeys(
-        reportNamePage.inputReportName,
-        "a" * reportNamePage.inputLimit
-      )
+      reportNamePage.clearAndInputKeys("a" * reportNamePage.inputLimit)
 
       When("the user clicks to continue")
       reportNamePage.continue()
@@ -220,7 +217,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
       Scenario("[F1] REQ 13: The user adds a new email.") {
         Given("the user enters the new email address in the text box")
-        enterNewEmailPage.clearAndInputKeys(enterNewEmailPage.inputNewEmailAddress, "abc@gmail.com")
+        enterNewEmailPage.clearAndInputKeys("abc@gmail.com")
 
         When("the user clicks to continue")
         enterNewEmailPage.continue()
@@ -242,7 +239,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
-      requestSubmittedPage.ClickLinkHomepage()
+      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageLink)
 
       Then("the user should be taken to the dashboard.")
       dashboardPage.assertUrl()
@@ -305,29 +302,31 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
     }
   }
 
-  Feature(
-    "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
-  ) {
-    Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
+  if (enrollmentToUse.isThirdParty) {
+    Feature(
+      "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
+    ) {
+      Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
 
-    Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+      Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
 
-    Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
-    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
+      Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
+      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
 
-    Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
-  }
+      Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
+    }
 
-  Feature(
-    "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
-  ) {
-    Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
+    Feature(
+      "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
+    ) {
+      Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
 
-    Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
+      Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
 
-    Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
-    // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
+      Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
+      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
 
-    Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
+      Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
+    }
   }
 }

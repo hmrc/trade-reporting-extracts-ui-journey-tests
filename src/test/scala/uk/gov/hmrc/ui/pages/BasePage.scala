@@ -30,8 +30,9 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-  val pageUrl: String           = baseUrl + relativeUrl
-  val pageTitle: String         = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
+  val pageLink                  = relativeUrl.replace("/", "")
+  val pageUrl                   = baseUrl + relativeUrl
+  val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
@@ -40,11 +41,14 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   def navigateTo(urlToGet: String = pageUrl): Unit =
     get(urlToGet)
 
+  def clickLinkByURL(url: String): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$url']"))
+
   def continue(): Unit =
     click(By.cssSelector("button.govuk-button"))
 
-  def clearAndInputKeys(input: By, value: String): Unit =
-    sendKeys(input, value)
+  def clearAndInputKeys(value: String, inputSelector: String = "input.govuk-input"): Unit =
+    sendKeys(By.cssSelector(inputSelector), value)
 
   // NOTE: ONLY for a list of radio buttons and checkboxes, NOT FOR YES/NO PAGES.
   def selectOptionByIndex(index: Int): Unit =
