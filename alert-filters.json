@@ -1,0 +1,74 @@
+{
+  "add": [
+    {
+      "reason": "This issue 'X-Content-Type-Options Header Missing' is due to the header is set somewhere else",
+      "contextId": 1,
+      "url": "https://artefacts.tax.service.gov.uk/ui/native/chrome-browser/.*",
+      "urlIsRegex": "true",
+      "ruleId": 10021,
+      "newLevel": -1
+    },
+    {
+      "reason": "Auth login stub,caused by loosely scoped cookies.",
+      "contextId": 1,
+      "url": "http://localhost:9949/auth-login-stub/gg-sign-in",
+      "ruleId": 90033,
+      "urlIsRegex": "true",
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue is related to AUTH_LOGIN_STUB outside our scope,this is an informational alert and so no changes are required.",
+      "contextId": 1,
+      "url": "http://localhost:9949/auth-login-stub/assets/javascripts/bf90b6d1a303f4c749d1254a9240eda7-login.js",
+      "ruleId": 10027,
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue 'Re-examine Cache-control Directives' is header not set properly",
+      "contextId": 1,
+      "url": "https://content-autofill.googleapis.com/v1/pages/.*",
+      "urlIsRegex": "true",
+      "ruleId": 10015,
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue 'Re-examine Cache-control Directives' is header not set properly",
+      "contextId": 1,
+      "url": "https://artefacts.tax.service.gov.uk/artifactory/chrome-browser/known-good-versions-with-downloads.json",
+      "urlIsRegex": "true",
+      "ruleId": 10015,
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue is related to AUTH_LOGIN_STUB outside our scope,this is an informational alert and so no changes are required.",
+      "contextId": 1,
+      "url": "http://localhost:9949/auth-login-stub/hmrc-frontend/assets/hmrc-frontend-6.78.0.min.js",
+      "ruleId": 10027,
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue is related to AUTH_LOGIN_STUB outside our scope,caused by suspicious comment",
+      "contextId": 1,
+      "url": "http:\/\/localhost:9949\/auth-login-stub\/.*",
+      "ruleId": 10027,
+      "urlIsRegex": "true",
+      "newLevel": -1
+    },
+    {
+      "reason": "This issue 'X-Content-Type-Options Header Missing' is due to the header is set somewhere else",
+      "contextId": 1,
+      "url": "https://www.googletagmanager.com/.*",
+      "urlIsRegex": "true",
+      "ruleId": 10021,
+      "newLevel": -1
+    },
+    {
+      "reason": "Auth login stub,caused by Re-examine Cache-control Directives",
+      "contextId": 1,
+      "url": "http://localhost:9949/auth-login-stub/.*",
+      "ruleId": 10054,
+      "urlIsRegex": "true",
+      "newLevel": -1
+    }
+  ]
+}
