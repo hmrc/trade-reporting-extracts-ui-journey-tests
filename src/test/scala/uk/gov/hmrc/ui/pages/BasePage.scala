@@ -30,15 +30,15 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-  val pageLink                  = relativeUrl.replace("/", "")
-  val pageUrl                   = baseUrl + relativeUrl
+  val pageURL                   = relativeUrl.replace("/", "")
+  val pageFullAddress           = s"$baseUrl$relativeUrl"
   val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofSeconds(2))
 
-  def navigateTo(urlToGet: String = pageUrl): Unit =
+  def navigateTo(urlToGet: String = pageFullAddress): Unit =
     get(urlToGet)
 
   def clickLinkByURL(url: String): Unit =
@@ -69,7 +69,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
       s"Page title was [$getTitle], but it was expected to contain '[$titleToCheck]'."
     )
 
-  def assertUrl(urlToCheck: String = pageUrl): Unit =
+  def assertUrl(urlToCheck: String = pageFullAddress): Unit =
     fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
     assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
 }

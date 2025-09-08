@@ -37,7 +37,7 @@ class RQR_RequestedReportsSpec extends Base {
 
     Scenario("[F1] RQR-1: The user starts the 'View Requested Reports' journey.") {
       Given("the user clicks the link on the dashboard")
-      ACC_1_DashboardPage.clickLinkByURL(RQR_1_RequestedReportsPage.pageLink)
+      ACC_1_DashboardPage.clickLinkByURL(RQR_1_RequestedReportsPage.pageURL)
 
       Then("the user is taken to the 'requested reports' page")
       RQR_1_RequestedReportsPage.assertUrl()

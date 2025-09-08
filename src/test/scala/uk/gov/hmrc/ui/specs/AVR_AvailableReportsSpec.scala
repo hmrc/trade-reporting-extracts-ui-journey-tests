@@ -37,7 +37,7 @@ class AVR_AvailableReportsSpec extends Base {
 
     Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
       Given("the user clicks the link on the dashboard")
-      ACC_1_DashboardPage.clickLinkByURL(AVR_1_AvailableReportsPage.pageLink)
+      ACC_1_DashboardPage.clickLinkByURL(AVR_1_AvailableReportsPage.pageURL)
 
       Then("the user is taken to the 'available reports' page")
       AVR_1_AvailableReportsPage.assertUrl()

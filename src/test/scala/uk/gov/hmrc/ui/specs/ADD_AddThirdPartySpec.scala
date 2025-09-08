@@ -37,7 +37,7 @@ class ADD_AddThirdPartySpec extends Base {
 
     Scenario("[F1] Dashboard: The user starts the 'Add a Third party' journey.") {
       Given("the user clicks the link on the dashboard")
-      ACC_1_DashboardPage.clickLinkByURL(ADD_1_AddThirdPartyPage.pageLink)
+      ACC_1_DashboardPage.clickLinkByURL(ADD_1_AddThirdPartyPage.pageURL)
 
       Then("the user is taken to the 'Add a third party' starting page")
       ADD_1_AddThirdPartyPage.assertUrl()
@@ -67,7 +67,7 @@ class ADD_AddThirdPartySpec extends Base {
 
     Scenario("[F1] ADD-2-KO: The user selects the link to return to Dashboard.") {
       When("the user clicks 'Go to Homepage'")
-      ADD_2_KO_CannotAddThirdPartyPage.clickLinkByURL(ACC_1_DashboardPage.pageLink)
+      ADD_2_KO_CannotAddThirdPartyPage.clickLinkByURL(ACC_1_DashboardPage.pageURL)
 
       Then("the user is taken back to the Dashboard")
       ACC_1_DashboardPage.assertUrl()

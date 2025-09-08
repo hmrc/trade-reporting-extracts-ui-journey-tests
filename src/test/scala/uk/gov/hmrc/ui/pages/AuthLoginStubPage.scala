@@ -23,9 +23,9 @@ import uk.gov.hmrc.ui.models.UserCredentials
 
 object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
 
-  override val pageUrl = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
+  override val pageFullAddress = TestEnvironment.url("auth-login-stub") + "/gg-sign-in"
 
-  private val redirectionUrl          = ACC_1_DashboardPage.pageUrl
+  private val redirectionUrl          = ACC_1_DashboardPage.pageFullAddress
   private val redirectUrlSelector     = By.cssSelector("#redirectionUrl")
   private val enrolmentKeySelector    = By.cssSelector("#enrolment\\[0\\]\\.name")
   private val identifierNameSelector  = By.cssSelector("#input-0-0-name")
