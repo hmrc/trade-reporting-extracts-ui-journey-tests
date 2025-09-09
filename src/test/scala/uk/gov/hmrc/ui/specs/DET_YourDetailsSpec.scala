@@ -18,9 +18,9 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
-import uk.gov.hmrc.ui.specs_support.Base
+import uk.gov.hmrc.ui.specs_support.BaseSpec
 
-class DET_YourDetailsSpec extends Base {
+class DET_YourDetailsSpec extends BaseSpec {
 
   private val loginPage          = AuthLoginStubPage
   private val dashboardPage      = ACC_1_DashboardPage

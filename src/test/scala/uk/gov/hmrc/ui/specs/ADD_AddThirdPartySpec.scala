@@ -18,9 +18,9 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aThirdPartyUser
-import uk.gov.hmrc.ui.specs_support.Base
+import uk.gov.hmrc.ui.specs_support.BaseSpec
 
-class ADD_AddThirdPartySpec extends Base {
+class ADD_AddThirdPartySpec extends BaseSpec {
 
   Feature("[F1] The user can add a Third Party to their account") {
     Scenario("[F1] ACC-1: The user is authenticated.") {

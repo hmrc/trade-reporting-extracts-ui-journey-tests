@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs_support
 import uk.gov.hmrc.ui.pages._
 import uk.gov.hmrc.ui.models.UserCredentials
 
-class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
+class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage

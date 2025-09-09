@@ -18,9 +18,9 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
-import uk.gov.hmrc.ui.specs_support.Base
+import uk.gov.hmrc.ui.specs_support.BaseSpec
 
-class AVR_AvailableReportsSpec extends Base {
+class AVR_AvailableReportsSpec extends BaseSpec {
 
   Feature("[F1] The user can view their available reports.") {
     Scenario("ACC-1: The user is authenticated.") {

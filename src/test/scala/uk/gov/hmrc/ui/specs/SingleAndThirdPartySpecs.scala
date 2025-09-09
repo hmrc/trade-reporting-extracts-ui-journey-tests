@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.specs
 
-import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
-import uk.gov.hmrc.ui.specs_support.REQ_RequestReport
+import support.builders.UserCredentialsBuilder.aThirdPartyUser //{aSinglePartyUser, aThirdPartyUser}
+import uk.gov.hmrc.ui.specs_support.REQ_RequestReportSpec
 
 /*
     QA NOTE:
@@ -32,5 +32,5 @@ import uk.gov.hmrc.ui.specs_support.REQ_RequestReport
 // TO-DO: Insert checks for single vs third party dashboard.
 
 // RequestReport
-// class SinglePartyRequestReportSpec extends REQ_RequestReport(aSinglePartyUser) {}
-class ThirdPartyRequestReportSpec extends REQ_RequestReport(aThirdPartyUser) {}
+// class SinglePartyRequestReportSpec extends REQ_RequestReportSpec(aSinglePartyUser) {}
+class ThirdPartyRequestReportSpec extends REQ_RequestReportSpec(aThirdPartyUser) {}
