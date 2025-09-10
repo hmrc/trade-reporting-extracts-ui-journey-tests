@@ -21,7 +21,7 @@ import uk.gov.hmrc.ui.specs_support.REQ_RequestReportSpec
 
 /*
     QA NOTE:
-        The screens for these journeys are modified/occur in a different order,
+        The screens for these journeys are modified or occur in a different order,
         depending on whether a Single or Third Party user logs in.
 
         To avoid re-writing the entire spec again to cover each journey,
