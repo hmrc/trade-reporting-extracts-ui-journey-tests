@@ -56,7 +56,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
 
     Scenario("[F1] Dashboard: The user selects the 'Request New Report' journey.") {
       When("the user clicks the link on the dashboard")
-      dashboardPage.clickLinkByURL(REQ_1_RequestReportPage.pageURL)
+      requestReportPage.clickLinkToPage()
 
       Then("the user is taken to the information page")
       requestReportPage.assertUrl()
@@ -239,7 +239,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
 
     Scenario("[F1] REQ-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
-      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageURL)
+      dashboardPage.clickLinkToPage()
 
       Then("the user should be taken to the dashboard.")
       dashboardPage.assertUrl()

@@ -30,7 +30,6 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-  val pageURL                   = relativeUrl.replace("/", "")
   val pageFullAddress           = s"$baseUrl$relativeUrl"
   val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
@@ -41,8 +40,8 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   def navigateTo(urlToGet: String = pageFullAddress): Unit =
     get(urlToGet)
 
-  def clickLinkByURL(url: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$url']"))
+  def clickLinkToPage(linkText: String = relativeUrl.replace("/", "")): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$linkText']"))
 
   def continue(): Unit =
     click(By.cssSelector("button.govuk-button"))

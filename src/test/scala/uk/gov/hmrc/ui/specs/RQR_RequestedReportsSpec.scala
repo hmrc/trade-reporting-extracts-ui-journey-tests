@@ -22,26 +22,30 @@ import uk.gov.hmrc.ui.specs_support.BaseSpec
 
 class RQR_RequestedReportsSpec extends BaseSpec {
 
+  private val loginPage            = AuthLoginStubPage
+  private val dashboardPage        = ACC_1_DashboardPage
+  private val requestedReportsPage = RQR_1_RequestedReportsPage
+
   Feature("[F1] The user can view their requested reports.") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(aSinglePartyUser)
-      AuthLoginStubPage.continue()
+      loginPage.navigateTo()
+      loginPage.enterRedirectionUrl()
+      loginPage.enterEnrollment(aSinglePartyUser)
+      loginPage.continue()
 
       Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      dashboardPage.assertUrl()
+      dashboardPage.assertPageTitle()
     }
 
     Scenario("[F1] RQR-1: The user starts the 'View Requested Reports' journey.") {
       Given("the user clicks the link on the dashboard")
-      ACC_1_DashboardPage.clickLinkByURL(RQR_1_RequestedReportsPage.pageURL)
+      requestedReportsPage.clickLinkToPage()
 
       Then("the user is taken to the 'requested reports' page")
-      RQR_1_RequestedReportsPage.assertUrl()
-      // RQR_1_RequestedReportsPage.assertPageTitle()
+      requestedReportsPage.assertUrl()
+      // requestedReportsPage.assertPageTitle()
 
       /*
         QA Note:
