@@ -22,31 +22,32 @@ import org.scalatest.Sequential
 
 /*
     QA NOTE:
-        The screens for these journeys occur in a different order or have different titles, 
+        The screens for these journeys occur in a different order or have different titles,
         depending on whether a Single or Third Party user logs in or what order they're tested in.
 
             1.  To avoid re-writing the entire spec again to cover both single and third party users,
                 we will just call it twice here with appropriate credentials.
-            
+
             2.  To control the order the specs are run, thus which titles to expect,
                 we will list them here in the desired order.
  */
 
-class TradeReportingExtractsTests extends Sequential(
-    // Dashboard
-    // TO-DO: Insert checks for single vs third party user's dashboard.
-    ACC_KO_UnauthorisedSpec(),
-    
-    // Dashbaord - "Reports"
-    RQR_RequestedReportsSpec(false),
-    // REQ_RequestReportSpec(aSinglePartyUser),
-    REQ_RequestReportSpec(aThirdPartyUser),
-    RQR_RequestedReportsSpec(true),
-    AVR_AvailableReportsSpec(),
+class TradeReportingExtractsTests
+    extends Sequential(
+      // Dashboard
+      // TO-DO: Insert checks for single vs third party user's dashboard.
+      ACC_KO_UnauthorisedSpec(),
 
-    // Dashbaord - "Data Access"
-    ADD_AddThirdPartySpec(),
+      // Dashbaord - "Reports"
+      RQR_RequestedReportsSpec(false),
+      // REQ_RequestReportSpec(aSinglePartyUser),
+      REQ_RequestReportSpec(aThirdPartyUser),
+      RQR_RequestedReportsSpec(true),
+      AVR_AvailableReportsSpec(),
 
-    // Dashbaord - "Account"
-    DET_YourDetailsSpec()
-)
+      // Dashbaord - "Data Access"
+      ADD_AddThirdPartySpec(),
+
+      // Dashbaord - "Account"
+      DET_YourDetailsSpec()
+    )

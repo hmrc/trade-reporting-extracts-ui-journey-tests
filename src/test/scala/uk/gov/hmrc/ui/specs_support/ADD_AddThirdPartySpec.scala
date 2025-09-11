@@ -21,12 +21,12 @@ import support.builders.UserCredentialsBuilder.aThirdPartyUser
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
-  private val loginStub              = AuthLoginStubPage
-  private val dashboardPage          = ACC_1_DashboardPage
-  private val addThirdPartyPage      = ADD_1_AddThirdPartyPage
-  private val importerOrExporterPage = ADD_2_ImporterOrExporterPage
+  private val loginStub               = AuthLoginStubPage
+  private val dashboardPage           = ACC_1_DashboardPage
+  private val addThirdPartyPage       = ADD_1_AddThirdPartyPage
+  private val importerOrExporterPage  = ADD_2_ImporterOrExporterPage
   private val cannotAddThirdPartyPage = ADD_2_KO_CannotAddThirdPartyPage
-  private val eoriNumberPage         = ADD_3_EORINumberPage
+  private val eoriNumberPage          = ADD_3_EORINumberPage
 
   Feature("[F1] The user can add a Third Party to their account") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
