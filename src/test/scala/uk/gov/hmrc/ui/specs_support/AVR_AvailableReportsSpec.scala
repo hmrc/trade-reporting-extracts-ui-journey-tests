@@ -14,45 +14,39 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
-import uk.gov.hmrc.ui.specs_support.BaseSpec
 
-class RQR_RequestedReportsSpec extends BaseSpec {
+class AVR_AvailableReportsSpec extends BaseSpec {
 
-  private val loginPage            = AuthLoginStubPage
+  private val loginStub            = AuthLoginStubPage
   private val dashboardPage        = ACC_1_DashboardPage
-  private val requestedReportsPage = RQR_1_RequestedReportsPage
+  private val availableReportsPage = AVR_1_AvailableReportsPage
 
-  Feature("[F1] The user can view their requested reports.") {
-    Scenario("[F1] ACC-1: The user is authenticated.") {
+  Feature("[F1] The user can view their available reports.") {
+    Scenario("ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
-      loginPage.continue()
+      loginStub.navigateTo()
+      loginStub.enterRedirectionUrl()
+      loginStub.enterEnrollment(aSinglePartyUser)
+      loginStub.continue()
 
       Then("the user is taken to the dashboard.")
       dashboardPage.assertUrl()
       dashboardPage.assertPageTitle()
     }
 
-    Scenario("[F1] RQR-1: The user starts the 'View Requested Reports' journey.") {
+    Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
       Given("the user clicks the link on the dashboard")
-      requestedReportsPage.clickLinkToPage()
+      availableReportsPage.clickLinkToPage()
 
-      Then("the user is taken to the 'requested reports' page")
-      requestedReportsPage.assertUrl()
-      // requestedReportsPage.assertPageTitle()
+      Then("the user is taken to the 'available reports' page")
+      availableReportsPage.assertUrl()
+      // availableReportsPage.assertPageTitle()
 
-      /*
-        QA Note:
-          Page will change title depending on whether REQ_RequestReport is ran before or after.
-          TO-DO: Need to figure out how to control this, or just combine the two specs.
-       */
-
+      // QA Note: Reports will currently not appear available to download without stubs / MongoDB shenanigans.
     }
   }
 }

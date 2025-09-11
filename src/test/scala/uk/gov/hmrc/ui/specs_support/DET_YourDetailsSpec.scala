@@ -14,45 +14,37 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
-import uk.gov.hmrc.ui.specs_support.BaseSpec
 
-class AVR_AvailableReportsSpec extends BaseSpec {
+class DET_YourDetailsSpec extends BaseSpec {
 
-  private val loginStub            = AuthLoginStubPage
-  private val dashboardPage        = ACC_1_DashboardPage
-  private val availableReportsPage = AVR_1_AvailableReportsPage
+  private val loginPage          = AuthLoginStubPage
+  private val dashboardPage      = ACC_1_DashboardPage
+  private val contactDetailsPage = DET_1_ContactDetailsPage
 
-  Feature("[F1] The user can view their available reports.") {
+  Feature("The user can view their account details.") {
     Scenario("ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      loginStub.navigateTo()
-      loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(aSinglePartyUser)
-      loginStub.continue()
+      loginPage.navigateTo()
+      loginPage.enterRedirectionUrl()
+      loginPage.enterEnrollment(aSinglePartyUser)
+      loginPage.continue()
 
       Then("the user is taken to the dashboard.")
       dashboardPage.assertUrl()
       dashboardPage.assertPageTitle()
     }
 
-    Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
+    Scenario("DET-0: The user starts the 'Your Details' journey.") {
       Given("the user clicks the link on the dashboard")
-      availableReportsPage.clickLinkToPage()
+      DET_1_ContactDetailsPage.clickLinkToPage()
 
-      Then("the user is taken to the 'available reports' page")
-      availableReportsPage.assertUrl()
-      // AVR_1_AvailableReportsPage.assertPageTitle()
-
-      /*
-        QA Note:
-          Page will only change when values are passed to mongo to make something show here.
-          TO-DO: Need to figure out how to do that.
-       */
-
+      Then("the user is taken to the 'contact details' page")
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
     }
   }
 }

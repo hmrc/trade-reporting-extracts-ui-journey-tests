@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aThirdPartyUser
-import uk.gov.hmrc.ui.specs_support.BaseSpec
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
@@ -26,6 +25,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   private val dashboardPage          = ACC_1_DashboardPage
   private val addThirdPartyPage      = ADD_1_AddThirdPartyPage
   private val importerOrExporterPage = ADD_2_ImporterOrExporterPage
+  private val cannotAddThirdPartyPage = ADD_2_KO_CannotAddThirdPartyPage
   private val eoriNumberPage         = ADD_3_EORINumberPage
 
   Feature("[F1] The user can add a Third Party to their account") {
@@ -67,8 +67,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       importerOrExporterPage.continue()
 
       Then("the user is taken to the 'Cannot Add Third Party' kickout page")
-      ADD_2_KO_CannotAddThirdPartyPage.assertUrl()
-      ADD_2_KO_CannotAddThirdPartyPage.assertPageTitle()
+      cannotAddThirdPartyPage.assertUrl()
+      cannotAddThirdPartyPage.assertPageTitle()
     }
 
     Scenario("[F1] ADD-2-KO: The user selects the link to return to Dashboard.") {
