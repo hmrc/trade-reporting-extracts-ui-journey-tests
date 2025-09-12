@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs_support
 import uk.gov.hmrc.ui.pages._
 import uk.gov.hmrc.ui.models.UserCredentials
 
-class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
+class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
@@ -56,7 +56,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] Dashboard: The user selects the 'Request New Report' journey.") {
       When("the user clicks the link on the dashboard")
-      dashboardPage.clickLinkByURL(REQ_1_RequestReportPage.pageLink)
+      requestReportPage.clickLinkToPage()
 
       Then("the user is taken to the information page")
       requestReportPage.assertUrl()
@@ -239,7 +239,7 @@ class REQ_RequestReport(enrollmentToUse: UserCredentials) extends Base {
 
     Scenario("[F1] REQ-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
-      requestSubmittedPage.clickLinkByURL(ACC_1_DashboardPage.pageLink)
+      dashboardPage.clickLinkToPage()
 
       Then("the user should be taken to the dashboard.")
       dashboardPage.assertUrl()

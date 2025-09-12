@@ -14,41 +14,39 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
-import uk.gov.hmrc.ui.specs_support.Base
 
-class AVR_AvailableReportsSpec extends Base {
+class AVR_AvailableReportsSpec extends BaseSpec {
+
+  private val loginStub            = AuthLoginStubPage
+  private val dashboardPage        = ACC_1_DashboardPage
+  private val availableReportsPage = AVR_1_AvailableReportsPage
 
   Feature("[F1] The user can view their available reports.") {
     Scenario("ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(aSinglePartyUser)
-      AuthLoginStubPage.continue()
+      loginStub.navigateTo()
+      loginStub.enterRedirectionUrl()
+      loginStub.enterEnrollment(aSinglePartyUser)
+      loginStub.continue()
 
       Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      dashboardPage.assertUrl()
+      dashboardPage.assertPageTitle()
     }
 
     Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
       Given("the user clicks the link on the dashboard")
-      ACC_1_DashboardPage.clickLinkByURL(AVR_1_AvailableReportsPage.pageLink)
+      availableReportsPage.clickLinkToPage()
 
       Then("the user is taken to the 'available reports' page")
-      AVR_1_AvailableReportsPage.assertUrl()
-      // AVR_1_AvailableReportsPage.assertPageTitle()
+      availableReportsPage.assertUrl()
+      // availableReportsPage.assertPageTitle()
 
-      /*
-        QA Note:
-          Page will only change when values are passed to mongo to make something show here.
-          TO-DO: Need to figure out how to do that.
-       */
-
+      // QA Note: Reports will currently not appear available to download without stubs / MongoDB shenanigans.
     }
   }
 }

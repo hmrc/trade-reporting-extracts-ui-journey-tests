@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import uk.gov.hmrc.ui.specs_support.Base
 
-class ACC_KO_UnauthorisedSpec extends Base {
+class ACC_KO_UnauthorisedSpec extends BaseSpec {
 
   private val loginPage        = AuthLoginStubPage
   private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
