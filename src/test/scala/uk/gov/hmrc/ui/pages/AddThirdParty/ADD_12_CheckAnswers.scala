@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_12_Confirmation extends BasePage("/third-party-added-confirmation", "Third party successfully added") {}
+object ADD_12_CheckAnswers extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {}

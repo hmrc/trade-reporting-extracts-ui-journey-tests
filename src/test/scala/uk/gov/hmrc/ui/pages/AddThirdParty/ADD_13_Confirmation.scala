@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_5_AccessStart extends BasePage("/access-start-date", "When do you want this access to start?") {}
+object ADD_13_Confirmation extends BasePage("/third-party-added-confirmation", "Third party successfully added") {}

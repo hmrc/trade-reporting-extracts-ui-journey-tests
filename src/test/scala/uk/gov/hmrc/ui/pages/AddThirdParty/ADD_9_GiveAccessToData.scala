@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_7_DataTypes extends BasePage("/data-types", "Which types of data do you want to give access to?") {}
+object ADD_9_GiveAccessToData extends BasePage("/data-access-range", "Do you want to give access to all of your available import and export data?") {}

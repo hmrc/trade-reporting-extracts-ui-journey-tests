@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_10_DataEnd extends BasePage("/data-end-date", "When do you want to stop giving access to your data? (optional)") {}
+object ADD_8_DataTypes extends BasePage("/data-types", "Which types of data do you want to give access to?") {}
