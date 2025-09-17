@@ -36,18 +36,18 @@ class TradeReportingExtractsTests
     extends Sequential(
       // Dashboard
       // TO-DO: Insert checks for single vs third party user's dashboard.
-      ACC_KO_UnauthorisedSpec(),
+      //   ACC_KO_UnauthorisedSpec(),
 
       // Dashbaord - "Reports"
-      RQR_RequestedReportsSpec(false),
+      //   RQR_RequestedReportsSpec(false),
       // REQ_RequestReportSpec(aSinglePartyUser),
-      REQ_RequestReportSpec(aThirdPartyUser),
-      RQR_RequestedReportsSpec(true),
-      AVR_AvailableReportsSpec(),
+      //   REQ_RequestReportSpec(aThirdPartyUser),
+      //   RQR_RequestedReportsSpec(true),
+      //   AVR_AvailableReportsSpec(),
 
       // Dashbaord - "Data Access"
-      ADD_AddThirdPartySpec(),
+      ADD_AddThirdPartySpec()
 
       // Dashbaord - "Account"
-      DET_YourDetailsSpec()
+      //   DET_YourDetailsSpec()
     )

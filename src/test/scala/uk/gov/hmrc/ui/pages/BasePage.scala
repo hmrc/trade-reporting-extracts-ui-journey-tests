@@ -22,16 +22,29 @@ import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import org.openqa.selenium.support.ui.ExpectedConditions
 
 import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
+import scala.compiletime.ops.int
 
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
+  // URLs
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
   val pageFullAddress           = s"$baseUrl$relativeUrl"
   val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
+
+  // Common Selectors
+  val inputCustomDay   = "input[name='value.day']"
+  val inputCustomMonth = "input[name='value.month']"
+  val inputCustomYear  = "input[name='value.year']"
+
+  // Common Functions
+  def getCurrentDate(format: String = "dd-MM-yyyy"): Int =
+    LocalDateTime.now().format(DateTimeFormatter.ofPattern(format))
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
@@ -57,10 +70,8 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
     click(By.cssSelector(s"input[value='$value']"))
 
   // NOTE: ONLY for yes/no radio buttons.
-  def selectYesNo(index: Int): Unit = {
-    if (index == 0) click(By.cssSelector(s"#value"))
-    if (index == 1) click(By.cssSelector(s"#value-no"))
-  }
+  def selectYesNo(yesNo: Boolean): Unit =
+    if (yesNo) click(By.cssSelector(s"#value")) else click(By.cssSelector(s"#value-no"))
 
   def assertPageTitle(titleToCheck: String = pageTitle): Unit =
     assert(

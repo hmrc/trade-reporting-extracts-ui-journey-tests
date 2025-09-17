@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_10_DataStartPage extends BasePage("/data-start-date", "When do you want to give access to your data from?") {}
+object ADD_10_DataStartPage
+    extends BasePage("/data-start-date", "When do you want to give access to your data from?") {}

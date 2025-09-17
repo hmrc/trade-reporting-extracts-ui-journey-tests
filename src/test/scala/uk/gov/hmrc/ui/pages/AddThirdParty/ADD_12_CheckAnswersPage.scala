@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_12_CheckAnswersPage extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {}
+object ADD_12_CheckAnswersPage
+    extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {}

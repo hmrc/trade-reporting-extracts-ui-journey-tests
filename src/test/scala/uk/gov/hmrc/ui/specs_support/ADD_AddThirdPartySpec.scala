@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aThirdPartyUser
+import java.time.LocalDateTime
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
@@ -90,8 +91,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario("[F1] ADD-2: The user returns to select 'Yes' to continue.") {
-      Given("the user returns to 'Importer or Exporter' page")
+    Scenario("[F1] ADD-2: The user goes back to select 'Yes' to continue instead.") {
+      Given("the user returns to the 'Importer or Exporter' page")
       importerOrExporterPage.navigateTo()
 
       And("the user selects 'yes' to continue")
@@ -100,21 +101,57 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       When("the user clicks to continue")
       importerOrExporterPage.continue()
 
-      Then("the user is taken to the 'Importer or Exporter' page")
+      Then("the user is taken to the 'what EORI number' page")
       eoriNumberPage.assertUrl()
       eoriNumberPage.assertPageTitle()
     }
 
     Scenario("[F1] ADD-3: The user enters the EORI of the third party.") {
-      Given("the user enters 'GB123456789123456' page")
-      eoriNumberPage.clearAndInputKeys("GB123456789123456")
+      Given("the user enters 'GB123456789666' page")
+      eoriNumberPage.clearAndInputKeys("GB123456789666")
 
       And("the user clicks to continue")
       eoriNumberPage.continue()
 
-      // Then("the user is taken to the 'x' page") -- Waiting for further AddThirdParty pages to be implemented.
-      // x.assertUrl()
-      // x.assertPageTitle()
+      Then("the user is taken to the 'confirm EORI' page")
+      confirmEORIPage.assertUrl()
+      confirmEORIPage.assertPageTitle()
+    }
+
+    Scenario("[F1] ADD-4: The user selects 'No' and is taken back to the previous page.") {
+      Given("the user selects 'No' to enter a different EORI number")
+      confirmEORIPage.selectOptionByIndex(1)
+
+      And("the user clicks to continue")
+      confirmEORIPage.continue()
+
+      Then("the user is taken back to the 'what EORI number' page")
+      eoriNumberPage.assertUrl()
+      eoriNumberPage.assertPageTitle()
+    }
+
+    Scenario("[F1] ADD-4: The user goes back to select 'Yes' to continue instead.") {
+      Given("the user returns to the 'confirm EORI' page")
+      confirmEORIPage.navigateTo()
+
+      And("the user selects 'yes' to continue")
+      confirmEORIPage.selectOptionByIndex(0)
+
+      When("the user clicks to continue")
+      confirmEORIPage.continue()
+
+      Then("the user is taken to the 'access start' page")
+      accessStartPage.assertUrl()
+      accessStartPage.assertPageTitle()
+    }
+
+    Scenario("[F1] ADD-6: The user enters when they want access to start.") {
+      Given("the user enters a date four years before the current day")
+      println(accessStartPage.getCurrentDate("dd"))
+
+      accessStartPage.clearAndInputKeys("", accessStartPage.inputCustomDay)
+      accessStartPage.clearAndInputKeys("", accessStartPage.inputCustomMonth)
+      accessStartPage.clearAndInputKeys("", accessStartPage.inputCustomYear)
     }
   }
 }
