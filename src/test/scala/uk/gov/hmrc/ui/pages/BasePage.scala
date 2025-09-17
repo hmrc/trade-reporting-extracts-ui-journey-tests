@@ -28,7 +28,6 @@ import java.time.format.DateTimeFormatter
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
-import scala.compiletime.ops.int
 
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
@@ -43,8 +42,8 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   val inputCustomYear  = "input[name='value.year']"
 
   // Common Functions
-  def getCurrentDate(format: String = "dd-MM-yyyy"): Int =
-    LocalDateTime.now().format(DateTimeFormatter.ofPattern(format))
+  def getDateMinusYears(format: String = "dd-MM-yyyy", yearsToReduce: Int = 0): String =
+    LocalDateTime.now().minusYears(yearsToReduce).format(DateTimeFormatter.ofPattern(format))
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
