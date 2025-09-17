@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_6_AccessStart extends BasePage("/access-start-date", "When do you want this access to start?") {}
+object ADD_9_GiveAccessToDataPage extends BasePage("/data-access-range", "Do you want to give access to all of your available import and export data?") {}

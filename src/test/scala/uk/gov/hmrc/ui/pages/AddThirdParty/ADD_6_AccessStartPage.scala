@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_12_CheckAnswers extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {}
+object ADD_6_AccessStartPage extends BasePage("/access-start-date", "When do you want this access to start?") {}

@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_3_KO_EORIAlreadyAdded extends BasePage("/eori-already-added", "You have already given this EORI number third-party access") {}
+object ADD_10_DataStartPage extends BasePage("/data-start-date", "When do you want to give access to your data from?") {}

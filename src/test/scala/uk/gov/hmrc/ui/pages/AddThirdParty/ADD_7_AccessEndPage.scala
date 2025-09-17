@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_13_Confirmation extends BasePage("/third-party-added-confirmation", "Third party successfully added") {}
+object ADD_7_AccessEndPage extends BasePage("/access-end-date", "When do you want this access to end? (optional)") {}

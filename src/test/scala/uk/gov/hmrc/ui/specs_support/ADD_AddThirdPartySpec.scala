@@ -27,6 +27,16 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   private val importerOrExporterPage  = ADD_2_ImporterOrExporterPage
   private val cannotAddThirdPartyPage = ADD_2_KO_CannotAddThirdPartyPage
   private val eoriNumberPage          = ADD_3_EORINumberPage
+  private val eoriAlreadyAddedPage    = ADD_3_KO_EORIAlreadyAddedPage
+  private val confirmEORIPage         = ADD_4_ConfirmEORIPage
+  private val accessStartPage         = ADD_6_AccessStartPage
+  private val accessEndPage           = ADD_7_AccessEndPage
+  private val dataTypesPage           = ADD_8_DataTypesPage
+  private val giveAccessToDataPage    = ADD_9_GiveAccessToDataPage
+  private val dataStartPage           = ADD_10_DataStartPage
+  private val dataEndPage             = ADD_11_DataEndPage
+  private val checkAnswersPage        = ADD_12_CheckAnswersPage
+  private val confirmationPage        = ADD_13_ConfirmationPage
 
   Feature("[F1] The user can add a Third Party to their account") {
     Scenario("[F1] ACC-1: The user is authenticated.") {

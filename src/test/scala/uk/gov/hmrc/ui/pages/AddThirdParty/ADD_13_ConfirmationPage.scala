@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_9_GiveAccessToData extends BasePage("/data-access-range", "Do you want to give access to all of your available import and export data?") {}
+object ADD_13_ConfirmationPage extends BasePage("/third-party-added-confirmation", "Third party successfully added") {}
