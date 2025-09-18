@@ -16,5 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_9_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
-}
+object ADD_13_ConfirmationPage extends BasePage("/third-party-added-confirmation", "Third party successfully added") {}

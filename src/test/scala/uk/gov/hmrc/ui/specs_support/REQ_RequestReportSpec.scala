@@ -193,7 +193,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
     if (enrollmentToUse.isThirdParty) {
       Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
         Given("the user selects the 'Yes' option")
-        chooseEmailPage.selectYesNo(0)
+        chooseEmailPage.selectYesNo(true)
 
         When("the user clicks to continue")
         chooseEmailPage.continue()

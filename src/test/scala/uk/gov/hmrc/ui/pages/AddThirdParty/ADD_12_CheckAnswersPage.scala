@@ -16,5 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_9_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+import org.openqa.selenium.By
+
+object ADD_12_CheckAnswersPage
+    extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {
+  override def continue(): Unit = click(By.cssSelector("a.govuk-button"))
 }
