@@ -143,11 +143,19 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
     }
 
     Scenario("[F1] REQ-8: The user gives a custom 'start' date range for their report.") {
-      Given("the user enters the value '1st April 2025'.")
-      // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomStartPage.clearAndInputKeys("1", ReportCustomStartPage.inputCustomDay)
-      ReportCustomStartPage.clearAndInputKeys("4", ReportCustomStartPage.inputCustomMonth)
-      ReportCustomStartPage.clearAndInputKeys("2025", ReportCustomStartPage.inputCustomYear)
+      Given("the user enters a date up to four years ago for the date range to begin")
+      ReportCustomStartPage.clearAndInputKeys(
+        ReportCustomStartPage.getDateMinusYears("dd", 4),
+        ReportCustomStartPage.inputCustomDay
+      )
+      ReportCustomStartPage.clearAndInputKeys(
+        ReportCustomStartPage.getDateMinusYears("MM", 4),
+        ReportCustomStartPage.inputCustomMonth
+      )
+      ReportCustomStartPage.clearAndInputKeys(
+        ReportCustomStartPage.getDateMinusYears("yyyy", 4),
+        ReportCustomStartPage.inputCustomYear
+      )
 
       When("the user clicks to continue")
       ReportCustomStartPage.continue()
@@ -158,11 +166,19 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
     }
 
     Scenario("[F1] REQ-9: The user gives a custom 'end' date range for their report.") {
-      Given("the user enters the value '2nd May 2025'.")
-      // NOTE: The limit is currently set to 4 years ago: So in three years, this may need a custom value in future to dynamically go off whatever the date is.
-      ReportCustomEndPage.clearAndInputKeys("1", ReportCustomEndPage.inputCustomDay)
-      ReportCustomEndPage.clearAndInputKeys("5", ReportCustomEndPage.inputCustomMonth)
-      ReportCustomEndPage.clearAndInputKeys("2025", ReportCustomEndPage.inputCustomYear)
+      Given("the user enters a date up to four years ago for the date range to end")
+      ReportCustomEndPage.clearAndInputKeys(
+        ReportCustomEndPage.getDateMinusYears("dd", 4),
+        ReportCustomEndPage.inputCustomDay
+      )
+      ReportCustomEndPage.clearAndInputKeys(
+        ReportCustomEndPage.getDateMinusYears("MM", 4),
+        ReportCustomEndPage.inputCustomMonth
+      )
+      ReportCustomEndPage.clearAndInputKeys(
+        ReportCustomEndPage.getDateMinusYears("yyyy", 4),
+        ReportCustomEndPage.inputCustomYear
+      )
 
       When("the user clicks to continue")
       reportDateRangeDecisionPage.continue()
