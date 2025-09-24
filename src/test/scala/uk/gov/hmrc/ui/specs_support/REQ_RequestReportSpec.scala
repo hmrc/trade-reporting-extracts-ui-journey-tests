@@ -222,6 +222,10 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
         enterNewEmailPage.assertPageTitle()
       }
 
+      // QA Note:
+      // REQ-12 is skipped if the account has no additional email address associated.
+      // An email will need to be added earlier on in the tests/by direct DB editing.
+
       // Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
       //   Given("the user selects the 'Add new email address' option")
       //   selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
