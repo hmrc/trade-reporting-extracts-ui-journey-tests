@@ -214,26 +214,29 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
         When("the user clicks to continue")
         chooseEmailPage.continue()
 
-        Then("the user is taken to the 'choose to add email' page")
-        selectEmailsPage.assertUrl()
-        selectEmailsPage.assertPageTitle()
-      }
-
-      Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
-        Given("the user selects the 'Add new email address' option")
-        selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
-
-        When("the user clicks to continue")
-        selectEmailsPage.continue()
-
+        // Then("the user is taken to the 'choose to add email' page")
+        // selectEmailsPage.assertUrl()
+        // selectEmailsPage.assertPageTitle()
         Then("the user is taken to the 'Enter new email address' page")
         enterNewEmailPage.assertUrl()
         enterNewEmailPage.assertPageTitle()
       }
 
+      // Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
+      //   Given("the user selects the 'Add new email address' option")
+      //   selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
+
+      //   When("the user clicks to continue")
+      //   selectEmailsPage.continue()
+
+      //   Then("the user is taken to the 'Enter new email address' page")
+      //   enterNewEmailPage.assertUrl()
+      //   enterNewEmailPage.assertPageTitle()
+      // }
+
       Scenario("[F1] REQ 13: The user adds a new email.") {
         Given("the user enters the new email address in the text box")
-        enterNewEmailPage.clearAndInputKeys("abc@gmail.com")
+        enterNewEmailPage.clearAndInputKeys("myexample@email.com")
 
         When("the user clicks to continue")
         enterNewEmailPage.continue()
