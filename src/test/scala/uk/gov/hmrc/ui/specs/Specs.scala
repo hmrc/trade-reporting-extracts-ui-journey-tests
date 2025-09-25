@@ -44,6 +44,7 @@ class TradeReportingExtractsTests
       REQ_RequestReportSpec(aThirdPartyUser),
       RQR_RequestedReportsSpec(true),
       AVR_AvailableReportsSpec(),
+      REQ_ExportRequestReportSpec(aThirdPartyUser),
 
       // Dashbaord - "Data Access"
       ADD_AddThirdPartySpec(),

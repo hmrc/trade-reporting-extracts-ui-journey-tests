@@ -62,48 +62,41 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       requestReportPage.assertUrl()
     }
 
-    Scenario("[F1] REQ-0: The user selects 'Continue' to begin the journey.") {
+    Scenario("[F1] Step-0: The user selects 'Continue' to begin the journey.") {
       When("the user clicks 'Continue'.")
       requestReportPage.continue()
+
+      Then("the user is taken to the 'Which EORI' page")
+      whichEORIPage.assertUrl()
+      whichEORIPage.assertPageTitle()
+    }
+
+    Scenario("[F1] Step-1: The user selects to use their own EORI number.") {
+      Given("the user selects to use their own EORI number")
+      whichEORIPage.selectOptionByIndex(0)
+
+      When("the user clicks to continue")
+      whichEORIPage.continue()
 
       Then("the user is taken to the 'Data Download Type' page")
       reportTypePage.assertUrl()
       reportTypePage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-1: The user selects 'import' as the type of data.") {
+    Scenario("[F1] Step-2: The user selects 'import' as the type of data.") {
       Given("the user selects 'import' as a type")
       reportTypePage.selectOptionByIndex(0)
 
       When("the user clicks to continue")
       reportTypePage.continue()
 
-      if (enrollmentToUse.isThirdParty) {
-        Then("the user is taken to the 'Which EORI' page")
-        whichEORIPage.assertUrl()
-        whichEORIPage.assertPageTitle()
-      } else {
-        Then("the user is taken to the 'EORI Role' page")
-        reportOwnerTypePage.assertUrl()
-        reportOwnerTypePage.assertPageTitle()
-      }
+      Then("the user is taken to the 'EORI Role' page")
+      reportOwnerTypePage.assertUrl()
+      reportOwnerTypePage.assertPageTitle()
+
     }
 
-    if (enrollmentToUse.isThirdParty) {
-      Scenario("[F1] REQ-2: The user selects to use their own EORI number.") {
-        Given("the user selects to use their own EORI number.")
-        whichEORIPage.selectOptionByIndex(0)
-
-        When("the user clicks to continue")
-        whichEORIPage.continue()
-
-        Then("the user is taken to the 'EORI Role' page")
-        reportOwnerTypePage.assertUrl()
-        reportOwnerTypePage.assertPageTitle()
-      }
-    }
-
-    Scenario("[F1] REQ-4: The user selects the EORI role.") {
+    Scenario("[F1] Step-4: The user selects the EORI role.") {
       Given("the user can select both the 'Declarant' and 'Importer' roles.")
       reportOwnerTypePage.selectOptionByValue("declarant")
       reportOwnerTypePage.selectOptionByValue("importer")
@@ -116,7 +109,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       reportImportTypePage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-5: The user selects the sub-type of their 'import' report.") {
+    Scenario("[F1] Step-5: The user selects the sub-type of their 'import' report.") {
       Given("the user selects the 'Import header, item' and 'tax line' types.")
       reportImportTypePage.selectOptionByIndex(0)
       reportImportTypePage.selectOptionByIndex(1)
@@ -130,7 +123,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       reportDateRangeDecisionPage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-7: The user selects the date range of their report.") {
+    Scenario("[F1] Step-6: The user selects the date range of their report.") {
       Given("the user selects the 'Custom date range' option")
       reportDateRangeDecisionPage.selectOptionByIndex(1)
 
@@ -142,7 +135,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       ReportCustomStartPage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-8: The user gives a custom 'start' date range for their report.") {
+    Scenario("[F1] Step-7: The user gives a custom 'start' date range for their report.") {
       Given("the user enters a date up to four years ago for the date range to begin")
       ReportCustomStartPage.clearAndInputKeys(
         ReportCustomStartPage.getDateMinusYears("dd", 4),
@@ -165,7 +158,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       ReportCustomEndPage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-9: The user gives a custom 'end' date range for their report.") {
+    Scenario("[F1] Step-8: The user gives a custom 'end' date range for their report.") {
       Given("the user enters a date up to four years ago for the date range to end")
       ReportCustomEndPage.clearAndInputKeys(
         ReportCustomEndPage.getDateMinusYears("dd", 4),
@@ -188,7 +181,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       reportNamePage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-10: The user enters a name for their report.") {
+    Scenario("[F1] Step-9: The user enters a name for their report.") {
       Given(s"the user enters text with spaces into the text box of up to ${reportNamePage.inputLimit} characters.")
       reportNamePage.clearAndInputKeys("a" * reportNamePage.inputLimit)
 
@@ -207,7 +200,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
     }
 
     if (enrollmentToUse.isThirdParty) {
-      Scenario("[F1] REQ 11: The user selects whether to add another email for notifications.") {
+      Scenario("[F1] Step-10: The user selects whether to add another email for notifications.") {
         Given("the user selects the 'Yes' option")
         chooseEmailPage.selectYesNo(true)
 
@@ -226,7 +219,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       // REQ-12 is skipped if the account has no additional email address associated.
       // An email will need to be added earlier on in the tests/by direct DB editing.
 
-      // Scenario("[F1] REQ 12: The user selects what emails are to receive notifications.") {
+      // Scenario("[F1] Step-11: The user selects what emails are to receive notifications.") {
       //   Given("the user selects the 'Add new email address' option")
       //   selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
 
@@ -238,7 +231,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       //   enterNewEmailPage.assertPageTitle()
       // }
 
-      Scenario("[F1] REQ 13: The user adds a new email.") {
+      Scenario("[F1] Step-12: The user adds a new email.") {
         Given("the user enters the new email address in the text box")
         enterNewEmailPage.clearAndInputKeys("myexample@email.com")
 
@@ -251,7 +244,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       }
     }
 
-    Scenario("[F1] REQ-14: The user reaches the confirmation screen.") {
+    Scenario("[F1] Step-13: The user reaches the confirmation screen.") {
       When("the user clicks to continue")
       checkYourAnswersPage.continue()
 
@@ -260,7 +253,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       requestSubmittedPage.assertPageTitle()
     }
 
-    Scenario("[F1] REQ-15: The user successfully submits") {
+    Scenario("[F1] Step-14: The user successfully submits") {
       When("the user clicks to return to the homepage")
       dashboardPage.clickLinkToPage()
 
@@ -270,86 +263,4 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
     }
   }
 
-  Feature(
-    "[F2] The user can request a new report of 'export'-type data and use their own EORI number."
-  ) {
-    Scenario("[F2] Setup: The user starts on the 'Data Download Type' page") {
-      reportTypePage.navigateTo()
-      reportTypePage.assertUrl()
-      reportTypePage.assertPageTitle()
-    }
-
-    Scenario("[F2] REQ-1: The user selects 'export' as the type of data.") {
-      Given("the user can select 'export' as a type")
-      reportTypePage.selectOptionByIndex(1)
-
-      When("the user clicks to continue")
-      reportTypePage.continue()
-
-      if (enrollmentToUse.isThirdParty) {
-        Then("the user is taken to the 'Which EORI' page")
-        whichEORIPage.assertUrl()
-        whichEORIPage.assertPageTitle()
-      } else {
-        Then("the user is taken to the 'EORI Role' page")
-        reportOwnerTypePage.assertUrl()
-        reportOwnerTypePage.assertPageTitle()
-      }
-    }
-
-    if (enrollmentToUse.isThirdParty) {
-      Scenario("[F2] REQ-2: The user selects to use their own EORI number.") {
-        Given("the user can select to use their own EORI number.")
-        whichEORIPage.selectOptionByIndex(0)
-
-        When("the user clicks to continue")
-        whichEORIPage.continue()
-
-        Then("the user is taken to the 'EORI Role' page")
-        reportOwnerTypePage.assertUrl()
-        reportOwnerTypePage.assertPageTitle()
-      }
-    }
-
-    Scenario("[F2] (END) REQ-4: The user selects the EORI role.") {
-      Given("the user can select both the 'Declarant' and 'Exporter' roles.")
-      reportOwnerTypePage.selectOptionByValue("declarant")
-      reportOwnerTypePage.selectOptionByValue("exporter")
-
-      When("the user clicks to continue")
-      reportOwnerTypePage.continue()
-
-      Then("the user is taken to the 'report date range' page")
-      reportDateRangeDecisionPage.assertUrl()
-      reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
-    }
-  }
-
-  if (enrollmentToUse.isThirdParty) {
-    Feature(
-      "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
-    ) {
-      Scenario("[F3] REQ-1: The user selects 'import' as the type of data.")(pending)
-
-      Scenario("[F3] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
-
-      Scenario("[F3] REQ-3: The user selects the desired third party EORI.")(pending)
-      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
-
-      Scenario("[F3] (END) REQ-5: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
-    }
-
-    Feature(
-      "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
-    ) {
-      Scenario("[F4] REQ-1: The user selects 'export' as the type of data.")(pending)
-
-      Scenario("[F4] REQ-2: The user selects to use an EORI number they have authority over.")(pending)
-
-      Scenario("[F4] REQ-3: The user selects the desired third party EORI.")(pending)
-      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
-
-      Scenario("[F4] (END) REQ-7: The user is skipped to the 'report date range' page.")(pending)
-    }
-  }
 }
