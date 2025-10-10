@@ -33,7 +33,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
   private val ReportCustomEndPage         = REQ_10_ReportCustomDateRangeEndPage
   private val reportNamePage              = REQ_11_ReportNamePage
   private val chooseEmailPage             = REQ_12_ChooseToAddEmailPage
-  private val selectEmailsPage            = REQ_13_SelectEmailsPage
+  // private val selectEmailsPage            = REQ_13_SelectEmailsPage
   private val enterNewEmailPage           = REQ_14_EnterNewEmailPage
   private val checkYourAnswersPage        = REQ_15_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_16_ReportRequestSubmittedPage
@@ -216,7 +216,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       }
 
       // QA Note:
-      // REQ-12 is skipped if the account has no additional email address associated.
+      // Step-11 is skipped if the account has no additional email address associated.
       // An email will need to be added earlier on in the tests/by direct DB editing.
 
       // Scenario("[F1] Step-11: The user selects what emails are to receive notifications.") {
