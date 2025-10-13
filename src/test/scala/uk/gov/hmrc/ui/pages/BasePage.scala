@@ -52,6 +52,12 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   def navigateTo(urlToGet: String = pageFullAddress): Unit =
     get(urlToGet)
 
+  def browserBack: Unit =
+    Driver.instance.navigate().back()
+
+  def browserForward: Unit =
+    Driver.instance.navigate().forward()
+
   def clickLinkToPage(linkText: String = relativeUrl.replace("/", "")): Unit =
     click(By.cssSelector(s"a.govuk-link[href*='$linkText']"))
 
