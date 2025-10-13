@@ -16,12 +16,12 @@
 
 package support.builders
 
-import support.builders.EnrolmentsDataBuilder.{enrolmentSingleParty, enrolmentThirdParty}
+import support.builders.EnrolmentsDataBuilder._
 import uk.gov.hmrc.ui.models._
 
 object UserCredentialsBuilder {
 
-  val aUserCredentials: UserCredentials = UserCredentials(
+  private val aUserCredentials: UserCredentials = UserCredentials(
     affinityGroup = Organisation,
     credentialRole = User,
     confidenceLevel = None,
@@ -32,11 +32,19 @@ object UserCredentialsBuilder {
 
   val aSinglePartyUser: UserCredentials =
     aUserCredentials.copy(
-      affinityGroup = Organisation,
       enrolmentsData = Some(enrolmentSingleParty),
       isThirdParty = false
     )
 
   val aThirdPartyUser: UserCredentials =
-    aUserCredentials.copy(affinityGroup = Organisation, enrolmentsData = Some(enrolmentThirdParty))
+    aUserCredentials.copy(
+      enrolmentsData = Some(enrolmentThirdParty),
+      isThirdParty = true
+    )
+
+  val aRandomUser: UserCredentials =
+    aUserCredentials.copy(
+      enrolmentsData = Some(enrolmentRandomEORI),
+      isThirdParty = true
+    )
 }

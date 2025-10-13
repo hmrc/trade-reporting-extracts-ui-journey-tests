@@ -17,11 +17,12 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
+import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI
 import support.builders.UserCredentialsBuilder.aThirdPartyUser
 
-import scala.util.Random
-
 class ADD_AddThirdPartySpec extends BaseSpec {
+
+  private val randEORI = enrolmentRandomEORI.identifierValue
 
   private val loginStub               = AuthLoginStubPage
   private val dashboardPage           = ACC_1_DashboardPage
@@ -39,9 +40,6 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   private val dataEndPage             = ADD_11_DataEndPage
   private val checkAnswersPage        = ADD_12_CheckAnswersPage
   private val confirmationPage        = ADD_13_ConfirmationPage
-
-  private var thirdPartyEORI = "GB"
-  1 to 12 foreach { _ => thirdPartyEORI += Random.between(1, 9).toString() }
 
   Feature("[F1] The user can add a Third Party to their account") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
@@ -111,8 +109,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-5: The user enters the EORI of the third party.") {
-      Given(s"the user enters '$thirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
+      Given(s"the user enters '$randEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(randEORI)
 
       And("the user clicks to continue")
       eoriNumberPage.continue()
@@ -330,8 +328,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       Given("the user jumps to the EORI number page.")
       eoriNumberPage.navigateTo()
 
-      And(s"the user enters again '$thirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
+      And(s"the user enters again '$randEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(randEORI)
 
       When("the user clicks to continue")
       eoriNumberPage.continue()
