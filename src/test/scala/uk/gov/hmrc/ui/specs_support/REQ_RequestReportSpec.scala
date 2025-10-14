@@ -35,6 +35,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
   private val chooseEmailPage             = REQ_12_ChooseToAddEmailPage
   private val selectEmailsPage            = REQ_13_SelectEmailsPage
   private val enterNewEmailPage           = REQ_14_EnterNewEmailPage
+  private val checkNewEmailPage           = REQ_14_1_CheckEmailPage
   private val checkYourAnswersPage        = REQ_15_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_16_ReportRequestSubmittedPage
 
@@ -238,13 +239,25 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
         When("the user clicks to continue")
         enterNewEmailPage.continue()
 
-        Then("the user is taken to the 'Confirm Details' page")
+        Then("the user is taken to the 'check new email' page")
+        checkNewEmailPage.assertUrl()
+        checkNewEmailPage.assertPageTitle()
+      }
+
+      Scenario("[F1] Step-13: The user clicks 'yes' to confirm the new email.") {
+        Given("the user clicks 'yes' to confirm the new email")
+        checkNewEmailPage.selectYesNo(true)
+
+        When("the user clicks to continue")
+        checkNewEmailPage.continue()
+
+        Then("the user is taken to the 'check your answers' page")
         checkYourAnswersPage.assertUrl()
         checkYourAnswersPage.assertPageTitle()
       }
     }
 
-    Scenario("[F1] Step-13: The user reaches the confirmation screen.") {
+    Scenario("[F1] Step-14: The user reaches the confirmation screen.") {
       When("the user clicks to continue")
       checkYourAnswersPage.continue()
 
@@ -253,7 +266,7 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       requestSubmittedPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-14: The user successfully submits") {
+    Scenario("[F1] Step-15: The user successfully submits") {
       When("the user clicks to return to the homepage")
       dashboardPage.clickLinkToPage()
 
