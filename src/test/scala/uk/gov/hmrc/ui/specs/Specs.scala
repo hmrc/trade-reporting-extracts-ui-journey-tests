@@ -16,39 +16,49 @@
 
 package uk.gov.hmrc.ui.specs
 
-import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
+import support.builders.UserCredentialsBuilder._
 import uk.gov.hmrc.ui.specs_support._
 import org.scalatest.Sequential
 
 /*
     QA NOTE:
-        The screens for these journeys occur in a different order or have different titles,
-        depending on whether a Single or Third Party user logs in or what order they're tested in.
+        The screens for these journeys occur in a different order or change different titles,
+        depending on whether a Single or Third Party user logs in and how the data changes in the DB.
 
             1.  To avoid re-writing the entire spec again to cover both single and third party users,
                 we will just call it twice here with appropriate credentials.
 
             2.  To control the order the specs are run, thus which titles to expect,
-                we will list them here in the desired order.
+                we will list them here in the desired order with certain conditions.
+
+            3.  Where a random EORI is needed (especially for third party journeys)
+                the one generated in "EnrolmentsDataBuilder.scala" for "enrolmentRandomEORI" is used.
  */
 
 class TradeReportingExtractsTests
     extends Sequential(
-      // Dashboard
-      // TO-DO: Insert checks for single vs third party user's dashboard.
-      ACC_KO_UnauthorisedSpec(),
+      // Access
+      new ACC_KO_UnauthorisedSpec(),
 
-      // Dashbaord - "Reports"
-      RQR_RequestedReportsSpec(false),
-      // REQ_RequestReportSpec(aSinglePartyUser),
-      REQ_RequestReportSpec(aThirdPartyUser),
-      RQR_RequestedReportsSpec(true),
-      AVR_AvailableReportsSpec(),
-      REQ_ExportRequestReportSpec(aThirdPartyUser),
+      // Reports
 
-      // Dashbaord - "Data Access"
-      ADD_AddThirdPartySpec(),
+      new RQR_RequestedReportsSpec(false), // false -- "no reports requested"
+      new REQ_RequestReportSpec(aThirdPartyUser),
+      new REQ_ExportRequestReportSpec(aThirdPartyUser),
+      new RQR_RequestedReportsSpec(true), // true -- "reports have been requested"
+      new AVR_AvailableReportsSpec(),
 
-      // Dashbaord - "Account"
-      DET_YourDetailsSpec()
+      // Third Party
+
+      new MTP_ManageThirdPartySpec(false), // false, false -- "no third parties added", "no removing"
+      new ADD_AddThirdPartySpec(),
+      new MTP_ManageThirdPartySpec(true), // true, false -- "third parties are added", "no removing"
+      new MTP_ManageThirdPartySpec(
+        true,
+        true
+      ), // true, true -- "third parties are added", "third party to be removed"
+
+      // Account
+
+      new DET_YourDetailsSpec()
     )
