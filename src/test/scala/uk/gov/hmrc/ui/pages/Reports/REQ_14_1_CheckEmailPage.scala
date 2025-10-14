@@ -16,6 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_14_1_CheckEmailPage
-    extends BasePage("/check-new-email", "Check new email address") {
-}
+object REQ_14_1_CheckEmailPage extends BasePage("/check-new-email", "Check new email address") {}
