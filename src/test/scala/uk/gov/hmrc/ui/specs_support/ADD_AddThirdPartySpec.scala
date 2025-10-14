@@ -17,12 +17,10 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI
+import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 import support.builders.UserCredentialsBuilder.aThirdPartyUser
 
 class ADD_AddThirdPartySpec extends BaseSpec {
-
-  private val randEORI = enrolmentRandomEORI.identifierValue
 
   private val loginStub               = AuthLoginStubPage
   private val dashboardPage           = ACC_1_DashboardPage
