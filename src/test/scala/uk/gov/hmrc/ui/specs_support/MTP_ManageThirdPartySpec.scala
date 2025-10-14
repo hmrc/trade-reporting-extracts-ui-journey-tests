@@ -15,7 +15,6 @@
  */
 
 package uk.gov.hmrc.ui.specs_support
-
 import uk.gov.hmrc.ui.pages._
 import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
@@ -30,7 +29,9 @@ class MTP_ManageThirdPartySpec(thirdPartyAdded: Boolean, removeThirdParty: Boole
   private val removeThirdPartyPage = MTP_3_RemoveThirdPartyPage
   private val removeConfirmationPage = MTP_4_RemoveConfirmationPage
 
-  Feature("[F1] The user can manage third parties added") {
+  private val featureTitle = "[F1] The user can" + (if (thirdPartyAdded) " see no third parties are added" else " add a third party") + (if (removeThirdParty) " and remove it" else "")
+
+  Feature(featureTitle) {
     Scenario("[F1] ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()

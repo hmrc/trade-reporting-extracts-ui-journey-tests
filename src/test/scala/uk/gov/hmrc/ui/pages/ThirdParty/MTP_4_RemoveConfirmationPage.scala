@@ -17,5 +17,5 @@
 package uk.gov.hmrc.ui.pages
 import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 
-object MTP_4_RemoveConfirmationPage extends BasePage(s"/third-party-removed-confirmation/$randEORI", "Third-party removed") {
-}
+object MTP_4_RemoveConfirmationPage
+    extends BasePage(s"/third-party-removed-confirmation/$randEORI", "Third-party removed") {}
