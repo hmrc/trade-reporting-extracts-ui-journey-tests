@@ -19,19 +19,18 @@ import uk.gov.hmrc.ui.pages._
 import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
 
-class MTP_ManageThirdPartySpec(thirdPartyAdded: Boolean, removeThirdParty: Boolean = false) extends BaseSpec {
+import org.mongodb.scala._
 
-  private val loginPage            = AuthLoginStubPage
-  private val dashboardPage        = ACC_1_DashboardPage
-  private val addThirdPartyPage    = ADD_1_AddThirdPartyPage
-  private val manageThirdPartyPage = MTP_1_ManageThirdPartyPage
+class MTP_ManageThirdPartySpec extends BaseSpec {
+
+  private val loginPage                 = AuthLoginStubPage
+  private val dashboardPage             = ACC_1_DashboardPage
+  private val manageThirdPartyPage      = MTP_1_ManageThirdPartyPage
   private val viewThirdPartyDetailsPage = MTP_2_ViewThirdPartyDetailsPage
-  private val removeThirdPartyPage = MTP_3_RemoveThirdPartyPage
-  private val removeConfirmationPage = MTP_4_RemoveConfirmationPage
+  private val removeThirdPartyPage      = MTP_3_RemoveThirdPartyPage
+  private val removeConfirmationPage    = MTP_4_RemoveConfirmationPage
 
-  private val featureTitle = "[F1] The user can" + (if (thirdPartyAdded) " see no third parties are added" else " add a third party") + (if (removeThirdParty) " and remove it" else "")
-
-  Feature(featureTitle) {
+  Feature("[F1] The user can manage their third parties.") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
       Given("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
@@ -44,96 +43,70 @@ class MTP_ManageThirdPartySpec(thirdPartyAdded: Boolean, removeThirdParty: Boole
       dashboardPage.assertPageTitle()
     }
 
-    if (!thirdPartyAdded)
-    {
-      Scenario("[F1] Step-1: The user has not added any third parties to their account.") {
-        Given("the user clicks the link on the dashboard")
-        manageThirdPartyPage.clickLinkToPage()
+    Scenario(s"[F1] Step-1: The user has added the third party '$randEORI' to their account.") {
+      Given("the user clicks the link on the dashboard")
+      manageThirdPartyPage.clickLinkToPage()
 
-        Then("the user is taken to the 'manage' page")
-        manageThirdPartyPage.assertUrl()
-        manageThirdPartyPage.assertPageTitle(manageThirdPartyPage.titleNoThirdPartiesAdded)
-      }
-
-      Scenario("[F1] Step-2: The user clicks the link to start the add third party journey.") {
-        Given("the user clicks the link to add a third party")
-        addThirdPartyPage.clickLinkToPage()
-
-        Then("the user is taken to the 'add a third party' page")
-        addThirdPartyPage.assertUrl()
-        addThirdPartyPage.assertPageTitle()
-      }
+      Then("the user is taken to the 'manage' page")
+      manageThirdPartyPage.assertUrl()
+      manageThirdPartyPage.assertPageTitle()
     }
-    else
-    {
-      Scenario(s"[F1] Step-1: The user has added the third party '$randEORI' to their account.") {
-        Given("the user clicks the link on the dashboard")
-        manageThirdPartyPage.clickLinkToPage()
 
-        Then("the user is taken to the 'manage' page")
-        manageThirdPartyPage.assertUrl()
-        manageThirdPartyPage.assertPageTitle()
-      }
+    Scenario(s"[F1] Step-2: The user clicks to view '$randEORI' details.") {
+      Given("the user clicks the 'view' link.")
+      viewThirdPartyDetailsPage.clickLinkToPage()
 
-      Scenario(s"[F1] Step-2: The user clicks to view '$randEORI' details.") {
-        Given("the user clicks the 'view' link.")
-        viewThirdPartyDetailsPage.clickLinkToPage()
+      Then("the user is taken to the 'view third party details' page")
+      viewThirdPartyDetailsPage.assertUrl()
+      viewThirdPartyDetailsPage.assertPageTitle()
+    }
 
-        Then("the user is taken to the 'view third party details' page")
-        viewThirdPartyDetailsPage.assertUrl()
-        viewThirdPartyDetailsPage.assertPageTitle()
-      }
-    
-      Scenario(s"[F1] Step-3: The user clicks to remove '$randEORI'.") {
-        Given("the user returns to the manage page.")
-        viewThirdPartyDetailsPage.browserBack
-        
-        When("the user clicks the 'remove' link.")
-        removeThirdPartyPage.clickLinkToPage()
+    Scenario(s"[F1] Step-3: The user clicks to remove '$randEORI'.") {
+      Given("the user returns to the manage page.")
+      viewThirdPartyDetailsPage.browserBack
 
-        Then("the user is taken to the 'remove third party' page")
-        removeThirdPartyPage.assertUrl()
-        removeThirdPartyPage.assertPageTitle()
-      }
+      When("the user clicks the 'remove' link.")
+      removeThirdPartyPage.clickLinkToPage()
 
-      Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$randEORI'.") {
-        Given("the user clicks 'no' to removing the third party")
-        removeThirdPartyPage.selectYesNo(false)
+      Then("the user is taken to the 'remove third party' page")
+      removeThirdPartyPage.assertUrl()
+      removeThirdPartyPage.assertPageTitle()
+    }
 
-        And ("the user clicks to continue")
-        removeThirdPartyPage.continue()
+    Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$randEORI'.") {
+      Given("the user clicks 'no' to removing the third party")
+      removeThirdPartyPage.selectYesNo(false)
 
-        Then("the user is taken to the 'dashboard' page")
-        dashboardPage.assertUrl()
-        dashboardPage.assertPageTitle()
-      }
+      And("the user clicks to continue")
+      removeThirdPartyPage.continue()
 
-      if (removeThirdParty)
-      {
-        Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$randEORI'.") {
-          Given("the user returns to the remove page")
-          dashboardPage.browserBack
+      Then("the user is taken to the 'dashboard' page")
+      dashboardPage.assertUrl()
+      dashboardPage.assertPageTitle()
+    }
 
-          When("the user clicks 'yes' to removing the third party")
-          removeThirdPartyPage.selectYesNo(true)
+    Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$randEORI'.") {
+      Given("the user returns to the remove page")
+      dashboardPage.browserBack
 
-          And("the user clicks to continue")
-          removeThirdPartyPage.continue()
+      When("the user clicks 'yes' to removing the third party")
+      removeThirdPartyPage.selectYesNo(true)
 
-          Then("the user is taken to the 'confirmation' page")
-          removeConfirmationPage.assertUrl()
-          removeConfirmationPage.assertPageTitle()
-        }
+      And("the user clicks to continue")
+      removeThirdPartyPage.continue()
 
-        Scenario(s"[F1] Step-6: The user returns to the dashboard.") {
-          Given("the user clicks to return to the 'manage' page")
-          manageThirdPartyPage.clickLinkToPage()
+      Then("the user is taken to the 'confirmation' page")
+      removeConfirmationPage.assertUrl()
+      removeConfirmationPage.assertPageTitle()
+    }
 
-          Then("the user is taken to the 'manage' page which is now empty again.")
-          manageThirdPartyPage.assertUrl()
-          manageThirdPartyPage.assertPageTitle(manageThirdPartyPage.titleNoThirdPartiesAdded)
-        }
-      }
+    Scenario(s"[F1] Step-6: The user returns to the dashboard.") {
+      Given("the user clicks to return to the 'manage' page")
+      manageThirdPartyPage.clickLinkToPage()
+
+      Then("the user is taken to the 'manage' page which is now empty again.")
+      manageThirdPartyPage.assertUrl()
+      manageThirdPartyPage.assertPageTitle(manageThirdPartyPage.titleNoThirdPartiesAdded)
     }
   }
 }
