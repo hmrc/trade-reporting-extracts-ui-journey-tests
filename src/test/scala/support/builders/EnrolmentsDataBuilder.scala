@@ -17,8 +17,12 @@
 package support.builders
 
 import uk.gov.hmrc.ui.models.EnrolmentsData
+import scala.util.Random
 
 object EnrolmentsDataBuilder {
+
+  private var randomEORI = "GB"
+  1 to 12 foreach { _ => randomEORI += Random.between(1, 9).toString() }
 
   val enrolmentThirdParty: EnrolmentsData = EnrolmentsData(
     enrolmentKey = "HMRC-CUS-ORG",
@@ -30,6 +34,12 @@ object EnrolmentsDataBuilder {
     enrolmentKey = "HMRC-CUS-ORG",
     identifierName = "EORINumber",
     identifierValue = "GB123456789020"
+  )
+
+  val enrolmentRandomEORI: EnrolmentsData = EnrolmentsData(
+    enrolmentKey = "HMRC-CUS-ORG",
+    identifierName = "EORINumber",
+    identifierValue = randomEORI
   )
 
 }

@@ -16,39 +16,35 @@
 
 package uk.gov.hmrc.ui.specs
 
-import support.builders.UserCredentialsBuilder.{aSinglePartyUser, aThirdPartyUser}
+import support.builders.UserCredentialsBuilder._
 import uk.gov.hmrc.ui.specs_support._
 import org.scalatest.Sequential
 
 /*
-    QA NOTE:
-        The screens for these journeys occur in a different order or have different titles,
-        depending on whether a Single or Third Party user logs in or what order they're tested in.
-
-            1.  To avoid re-writing the entire spec again to cover both single and third party users,
-                we will just call it twice here with appropriate credentials.
-
-            2.  To control the order the specs are run, thus which titles to expect,
-                we will list them here in the desired order.
+    QA Note:
+        Multiple tests use a random EORI generated in "EnrolmentsDataBuilder.scala"
+        which is assigned to "enrolmentRandomEORI".
  */
 
 class TradeReportingExtractsTests
     extends Sequential(
-      // Dashboard
-      // TO-DO: Insert checks for single vs third party user's dashboard.
+      //   Access
+
       ACC_KO_UnauthorisedSpec(),
 
-      // Dashbaord - "Reports"
-      RQR_RequestedReportsSpec(false),
-      // REQ_RequestReportSpec(aSinglePartyUser),
+      //   Reports
+
       REQ_RequestReportSpec(aThirdPartyUser),
-      RQR_RequestedReportsSpec(true),
-      AVR_AvailableReportsSpec(),
       REQ_ExportRequestReportSpec(aThirdPartyUser),
+      RQR_RequestedReportsSpec(),
+      AVR_AvailableReportsSpec(),
 
-      // Dashbaord - "Data Access"
+      //   Third Party
+
       ADD_AddThirdPartySpec(),
+      MTP_ManageThirdPartySpec(),
 
-      // Dashbaord - "Account"
+      //   Account
+
       DET_YourDetailsSpec()
     )

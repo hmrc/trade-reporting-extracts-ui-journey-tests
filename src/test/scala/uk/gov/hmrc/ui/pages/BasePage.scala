@@ -33,6 +33,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
 
   // URLs
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
+  val pageRelativeAddress       = relativeUrl
   val pageFullAddress           = s"$baseUrl$relativeUrl"
   val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 

@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs_support
 import uk.gov.hmrc.ui.pages._
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
 
-class RQR_RequestedReportsSpec(reportRequested: Boolean) extends BaseSpec {
+class RQR_RequestedReportsSpec extends BaseSpec {
 
   private val loginPage            = AuthLoginStubPage
   private val dashboardPage        = ACC_1_DashboardPage
@@ -44,11 +44,7 @@ class RQR_RequestedReportsSpec(reportRequested: Boolean) extends BaseSpec {
 
       Then("the user is taken to the 'requested reports' page")
       requestedReportsPage.assertUrl()
-
-      if (reportRequested)
-        requestedReportsPage.assertPageTitle()
-      else
-        requestedReportsPage.assertPageTitle(requestedReportsPage.titleNoReportsRequested)
+      requestedReportsPage.assertPageTitle()
     }
   }
 }
