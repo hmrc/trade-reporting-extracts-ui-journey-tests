@@ -52,7 +52,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
     Scenario(s"[F1] Step-2: The user clicks to view '$randEORI' details.") {
       Given("the user clicks the 'view' link.")
-      viewThirdPartyDetailsPage.clickLinkToPage()
+      viewThirdPartyDetailsPage.clickLinkToPage(viewThirdPartyDetailsPage.pageRelativeAddress)
 
       Then("the user is taken to the 'view third party details' page")
       viewThirdPartyDetailsPage.assertUrl()
@@ -61,10 +61,10 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
     Scenario(s"[F1] Step-3: The user clicks to remove '$randEORI'.") {
       Given("the user returns to the manage page.")
-      viewThirdPartyDetailsPage.browserBack
+      manageThirdPartyPage.navigateTo()
 
       When("the user clicks the 'remove' link.")
-      removeThirdPartyPage.clickLinkToPage()
+      removeThirdPartyPage.clickLinkToPage(removeThirdPartyPage.pageRelativeAddress)
 
       Then("the user is taken to the 'remove third party' page")
       removeThirdPartyPage.assertUrl()
@@ -85,7 +85,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
     Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$randEORI'.") {
       Given("the user returns to the remove page")
-      dashboardPage.browserBack
+      removeThirdPartyPage.navigateTo()
 
       And("the user clicks 'yes' to removing the third party")
       removeThirdPartyPage.selectYesNo(true)

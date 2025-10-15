@@ -33,6 +33,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
 
   // URLs
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
+  val pageRelativeAddress       = relativeUrl
   val pageFullAddress           = s"$baseUrl$relativeUrl"
   val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
 
@@ -51,12 +52,6 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
 
   def navigateTo(urlToGet: String = pageFullAddress): Unit =
     get(urlToGet)
-
-  def browserBack: Unit =
-    Driver.instance.navigate().back()
-
-  def browserForward: Unit =
-    Driver.instance.navigate().forward()
 
   def clickLinkToPage(linkText: String = relativeUrl.replace("/", "")): Unit =
     click(By.cssSelector(s"a.govuk-link[href*='$linkText']"))
