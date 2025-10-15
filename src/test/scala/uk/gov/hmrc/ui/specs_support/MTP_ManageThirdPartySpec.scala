@@ -19,8 +19,6 @@ import uk.gov.hmrc.ui.pages._
 import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 import support.builders.UserCredentialsBuilder.aSinglePartyUser
 
-import org.mongodb.scala._
-
 class MTP_ManageThirdPartySpec extends BaseSpec {
 
   private val loginPage                 = AuthLoginStubPage
@@ -32,7 +30,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
   Feature("[F1] The user can manage their third parties.") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
       loginPage.enterEnrollment(aSinglePartyUser)
@@ -44,7 +42,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
     }
 
     Scenario(s"[F1] Step-1: The user has added the third party '$randEORI' to their account.") {
-      Given("the user clicks the link on the dashboard")
+      When("the user clicks the link on the dashboard")
       manageThirdPartyPage.clickLinkToPage()
 
       Then("the user is taken to the 'manage' page")
@@ -77,7 +75,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       Given("the user clicks 'no' to removing the third party")
       removeThirdPartyPage.selectYesNo(false)
 
-      And("the user clicks to continue")
+      When("the user clicks to continue")
       removeThirdPartyPage.continue()
 
       Then("the user is taken to the 'dashboard' page")
@@ -89,10 +87,10 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       Given("the user returns to the remove page")
       dashboardPage.browserBack
 
-      When("the user clicks 'yes' to removing the third party")
+      And("the user clicks 'yes' to removing the third party")
       removeThirdPartyPage.selectYesNo(true)
 
-      And("the user clicks to continue")
+      When("the user clicks to continue")
       removeThirdPartyPage.continue()
 
       Then("the user is taken to the 'confirmation' page")
@@ -101,7 +99,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
     }
 
     Scenario(s"[F1] Step-6: The user returns to the dashboard.") {
-      Given("the user clicks to return to the 'manage' page")
+      When("the user clicks to return to the 'manage' page")
       manageThirdPartyPage.clickLinkToPage()
 
       Then("the user is taken to the 'manage' page which is now empty again.")
