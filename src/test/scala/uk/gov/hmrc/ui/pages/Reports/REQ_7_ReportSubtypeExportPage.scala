@@ -23,5 +23,5 @@ object REQ_7_ReportSubtypeExportPage
       "/export-item-report",
       "You are requesting an export item report"
     ) {
-        override def continue(): Unit = click(By.cssSelector("a[class='govuk-button']"))
-    }
+  override def continue(): Unit = click(By.cssSelector("a[class='govuk-button']"))
+}
