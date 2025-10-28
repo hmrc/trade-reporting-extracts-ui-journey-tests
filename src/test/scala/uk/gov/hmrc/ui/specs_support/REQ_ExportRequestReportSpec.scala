@@ -27,6 +27,7 @@ class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends Base
   private val reportTypePage              = REQ_2_ReportTypePage
   private val whichEORIPage               = REQ_3_WhichEORIPage
   private val reportOwnerTypePage         = REQ_5_ReportOwnerTypePage
+  private val reportSubTypeExportPage     = REQ_7_ReportSubtypeExportPage
   private val reportDateRangeDecisionPage = REQ_8_ReportDateRangeDecisionPage
 
   Feature(
@@ -86,7 +87,7 @@ class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends Base
       reportOwnerTypePage.assertPageTitle()
     }
 
-    Scenario("[F2] (END) Step-3: The user selects the EORI role.") {
+    Scenario("[F2] Step-3: The user selects the EORI roles.") {
       Given("the user can select both the 'Declarant' and 'Exporter' roles.")
       reportOwnerTypePage.selectOptionByValue("declarant")
       reportOwnerTypePage.selectOptionByValue("exporter")
@@ -94,37 +95,18 @@ class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends Base
       When("the user clicks to continue")
       reportOwnerTypePage.continue()
 
+      Then("the user is taken to the 'export' subtype page")
+      reportSubTypeExportPage.assertUrl()
+      reportSubTypeExportPage.assertPageTitle()
+    }
+
+    Scenario("[F2] E(ND) Step-4: The user continues on to the date range page.") {
+      When("the user clicks to continue")
+      reportSubTypeExportPage.continue()
+
       Then("the user is taken to the 'report date range' page")
       reportDateRangeDecisionPage.assertUrl()
       reportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
-    }
-  }
-
-  if (enrollmentToUse.isThirdParty) {
-    Feature(
-      "[F3] The user can request a new report of 'import'-type data but use a third-party EORI number."
-    ) {
-      Scenario("[F3] Step-1: The user selects 'import' as the type of data.")(pending)
-
-      Scenario("[F3] Step-2: The user selects to use an EORI number they have authority over.")(pending)
-
-      Scenario("[F3] Step-3: The user selects the desired third party EORI.")(pending)
-      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
-
-      Scenario("[F3] (END) Step-4: The user is skipped to selecting the sub-type of their 'import' report.")(pending)
-    }
-
-    Feature(
-      "[F4] The user can request a new report of 'export'-type data but use a third-party EORI number."
-    ) {
-      Scenario("[F4] Step-1: The user selects 'export' as the type of data.")(pending)
-
-      Scenario("[F4] Step-2: The user selects to use an EORI number they have authority over.")(pending)
-
-      Scenario("[F4] Step-3: The user selects the desired third party EORI.")(pending)
-      // 29 April 2025 -- The content for this page is changing from dropdown to radio buttons. So we might as well wait for this change (dropdowns not used anywhere else).
-
-      Scenario("[F4] (END) Step-4: The user is skipped to the 'report date range' page.")(pending)
     }
   }
 }
