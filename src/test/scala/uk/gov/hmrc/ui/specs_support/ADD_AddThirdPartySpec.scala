@@ -146,17 +146,17 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-8: The user enters when they want access to start.") {
-      Given("the user enters a date four years before the current day")
+      Given("the user enters the current date.")
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("dd", 0),
+        accessStartPage.getDateMinusYears("dd"),
         accessStartPage.inputCustomDay
       )
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("MM", 0),
+        accessStartPage.getDateMinusYears("MM"),
         accessStartPage.inputCustomMonth
       )
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("yyyy", 0),
+        accessStartPage.getDateMinusYears("yyyy"),
         accessStartPage.inputCustomYear
       )
 
