@@ -16,8 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_5_ReportOwnerTypePage
-    extends BasePage(
-      "/your-role",
-      "What is your role in the report?"
-    )
+object REQ_2_WhichEORIPage extends BasePage("/which-eori", "Which EORI number do you want to use?") {}

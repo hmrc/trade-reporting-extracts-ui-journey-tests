@@ -16,5 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_9_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+object REQ_12_SelectEmailsPage
+    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {
+  val inputAddNewEmail: String = "AddNewEmail"
 }

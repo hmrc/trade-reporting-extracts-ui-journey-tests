@@ -16,12 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
-object REQ_7_ReportSubtypeExportPage
-    extends BasePage(
-      "/export-item-report",
-      "You are requesting an export item report"
-    ) {
-  override def continue(): Unit = click(By.cssSelector("a[class='govuk-button']"))
+object REQ_8_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
 }

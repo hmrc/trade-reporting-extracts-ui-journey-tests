@@ -16,8 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_8_ReportDateRangeDecisionPage
-    extends BasePage(
-      "/date-range",
-      "What date range do you want the reports to cover?" // Note: "report[s]" is dynamic to how many report subtypes were selected.
-    ) {}
+object REQ_3_ReportTypePage extends BasePage("/data-download", "Which type of data do you want to download?") {}

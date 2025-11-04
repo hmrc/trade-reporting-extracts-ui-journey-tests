@@ -16,4 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_2_ReportTypePage extends BasePage("/data-download", "Which type of data do you want to download?") {}
+object REQ_5_ImportTypeSelectionPage
+    extends BasePage(
+      "/import-report-type",
+      "Which type of import report do you need?"
+    ) {}

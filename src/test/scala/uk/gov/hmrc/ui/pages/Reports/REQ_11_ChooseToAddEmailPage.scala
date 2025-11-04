@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_6_ImportTypeSelectionPage
+object REQ_11_ChooseToAddEmailPage
     extends BasePage(
-      "/import-report-type",
-      "Which type of import report do you need?"
+      "/add-another-email",
+      "Do you want to add another email for notifications?"
     ) {}

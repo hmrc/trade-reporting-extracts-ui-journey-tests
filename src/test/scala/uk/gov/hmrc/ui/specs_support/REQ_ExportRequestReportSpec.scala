@@ -24,11 +24,11 @@ class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends Base
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
   private val requestReportPage           = REQ_1_RequestReportPage
-  private val reportTypePage              = REQ_2_ReportTypePage
-  private val whichEORIPage               = REQ_3_WhichEORIPage
-  private val reportOwnerTypePage         = REQ_5_ReportOwnerTypePage
-  private val reportSubTypeExportPage     = REQ_7_ReportSubtypeExportPage
-  private val reportDateRangeDecisionPage = REQ_8_ReportDateRangeDecisionPage
+  private val whichEORIPage               = REQ_2_WhichEORIPage
+  private val reportTypePage              = REQ_3_ReportTypePage
+  private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
+  private val reportSubTypeExportPage     = REQ_6_ReportSubtypeExportPage
+  private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
 
   Feature(
     "The user can request a new report of 'export'-type data and use their own EORI number to complete the journey."

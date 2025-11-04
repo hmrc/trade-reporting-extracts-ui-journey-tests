@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_14_1_CheckEmailPage extends BasePage("/check-new-email", "Check new email address") {}
+object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your reports to end?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+}

@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_12_ChooseToAddEmailPage
+object REQ_7_ReportDateRangeDecisionPage
     extends BasePage(
-      "/add-another-email",
-      "Do you want to add another email for notifications?"
+      "/date-range",
+      "What date range do you want the reports to cover?" // Note: "report[s]" is dynamic to how many report subtypes were selected.
     ) {}
