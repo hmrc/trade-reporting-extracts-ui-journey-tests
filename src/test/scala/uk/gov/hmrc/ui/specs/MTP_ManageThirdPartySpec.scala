@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.userMain
-import support.builders.EnrolmentsDataBuilder.enrolmentThirdParty.identifierValue as thirdPartyEORI
+import support.BaseSpec
 
 class MTP_ManageThirdPartySpec extends BaseSpec {
 
@@ -29,11 +28,16 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
   private val removeConfirmationPage    = MTP_4_RemoveConfirmationPage
 
   Feature("[F1] The user can manage their third parties.") {
+    Scenario(s"[F1] SETUP: Prepare MongoDB with $userThirdPartyEORI already added to $userTraderEori.") {
+      Given("the mongoDB is prepped then a success should be returned.")
+      assert(PrepMongoInsertRecord == true)
+    }
+
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      When("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(userMain)
+      loginPage.enterEnrollment(userTraderLogin)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -41,7 +45,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-1: The user has added the third party '$thirdPartyEORI' to their account.") {
+    Scenario(s"[F1] Step-1: The user can see the third party '$userThirdPartyEORI' is added to their account.") {
       When("the user clicks the link on the dashboard")
       manageThirdPartyPage.clickLinkToPage()
 
@@ -50,16 +54,16 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       manageThirdPartyPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-2: The user clicks to view '$thirdPartyEORI' details.") {
+    Scenario(s"[F1] Step-2: The user clicks to view '$userThirdPartyEORI' details.") {
       Given("the user clicks the 'view' link.")
       viewThirdPartyDetailsPage.clickLinkToPage(viewThirdPartyDetailsPage.pageRelativeAddress)
 
       Then("the user is taken to the 'view third party details' page")
-      viewThirdPartyDetailsPage.assertUrl()
+      viewThirdPartyDetailsPage.assertUrl(viewThirdPartyDetailsPage.pageFullAddress + userThirdPartyEORI)
       viewThirdPartyDetailsPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-3: The user clicks to remove '$thirdPartyEORI'.") {
+    Scenario(s"[F1] Step-3: The user clicks to remove '$userThirdPartyEORI'.") {
       Given("the user returns to the manage page.")
       manageThirdPartyPage.navigateTo()
 
@@ -67,11 +71,11 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       removeThirdPartyPage.clickLinkToPage(removeThirdPartyPage.pageRelativeAddress)
 
       Then("the user is taken to the 'remove third party' page")
-      removeThirdPartyPage.assertUrl()
+      removeThirdPartyPage.assertUrl(removeThirdPartyPage.pageFullAddress + userThirdPartyEORI)
       removeThirdPartyPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$thirdPartyEORI'.") {
+    Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$userThirdPartyEORI'.") {
       Given("the user clicks 'no' to removing the third party")
       removeThirdPartyPage.selectYesNo(false)
 
@@ -83,9 +87,9 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$thirdPartyEORI'.") {
+    Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$userThirdPartyEORI'.") {
       Given("the user returns to the remove page")
-      removeThirdPartyPage.navigateTo()
+      removeThirdPartyPage.navigateTo(removeThirdPartyPage.pageFullAddress + userThirdPartyEORI)
 
       And("the user clicks 'yes' to removing the third party")
       removeThirdPartyPage.selectYesNo(true)
@@ -94,7 +98,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       removeThirdPartyPage.continue()
 
       Then("the user is taken to the 'confirmation' page")
-      removeConfirmationPage.assertUrl()
+      removeConfirmationPage.assertUrl(removeConfirmationPage.pageFullAddress + userThirdPartyEORI)
       removeConfirmationPage.assertPageTitle()
     }
 

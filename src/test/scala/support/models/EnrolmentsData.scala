@@ -16,4 +16,8 @@
 
 package support.models
 
-case class EnrolmentsData(enrolmentKey: String, identifierName: String, identifierValue: String)
+case class EnrolmentsData(
+  enrolmentKey: String = "HMRC-CUS-ORG",
+  identifierName: String = "EORINumber",
+  identifierValue: String
+)

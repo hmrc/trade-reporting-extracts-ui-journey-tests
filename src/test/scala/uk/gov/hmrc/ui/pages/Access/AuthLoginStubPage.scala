@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
-import support.models.UserCredentials
+import support.models.EnrolmentsData
 
 object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
 
@@ -36,10 +36,9 @@ object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
   def enterRedirectionUrl(continueUrl: String = redirectionUrl): Unit =
     sendKeys(redirectUrlSelector, redirectionUrl)
 
-  def enterEnrollment(userCredentials: UserCredentials): Unit =
-    userCredentials.enrolmentsData.foreach { data =>
-      sendKeys(enrolmentKeySelector, data.enrolmentKey)
-      sendKeys(identifierNameSelector, data.identifierName)
-      sendKeys(identifierValueSelector, data.identifierValue)
-    }
+  def enterEnrollment(userEnrolment: EnrolmentsData): Unit = {
+    sendKeys(enrolmentKeySelector, userEnrolment.enrolmentKey)
+    sendKeys(identifierNameSelector, userEnrolment.identifierName)
+    sendKeys(identifierValueSelector, userEnrolment.identifierValue)
+  }
 }

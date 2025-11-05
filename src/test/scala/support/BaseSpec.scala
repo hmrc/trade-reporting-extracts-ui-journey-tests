@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package support
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
+
+import support.models.MongoDocument
+import support.helpers.MongoInsertRecord
+import support.builders.EnrolmentsDataBuilder.BuildEnrolment
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -29,6 +33,18 @@ trait BaseSpec
     with BeforeAndAfterAll
     with Browser
     with ScreenshotOnFailure {
+
+  // Generate random EORIs.
+  val userTraderLogin     = BuildEnrolment()
+  val userTraderEori = userTraderLogin.identifierValue
+  val userThirdPartyLogin = BuildEnrolment()
+  val userThirdPartyEORI = userThirdPartyLogin.identifierValue
+
+  // Populate the MongoDB document and ready for use.
+  def PrepMongoInsertRecord: Boolean = MongoInsertRecord(new MongoDocument(
+    traderEori = userTraderEori,
+    thirdPartyEORI = userThirdPartyEORI
+  ))
 
   // Code to run before each spec starts.
   override def beforeAll(): Unit =

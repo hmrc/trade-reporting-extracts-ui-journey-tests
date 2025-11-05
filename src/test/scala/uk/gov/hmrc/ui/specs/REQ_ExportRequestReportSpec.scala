@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.userMain
+import support.BaseSpec
 
 class REQ_ExportRequestReportSpec() extends BaseSpec {
 
@@ -35,10 +35,10 @@ class REQ_ExportRequestReportSpec() extends BaseSpec {
   ) {
 
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      When("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(userMain)
+      loginPage.enterEnrollment(userTraderLogin)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

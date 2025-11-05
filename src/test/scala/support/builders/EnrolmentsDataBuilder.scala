@@ -27,16 +27,8 @@ object EnrolmentsDataBuilder {
     return code
   }
 
-  val enrolmentMain: EnrolmentsData = EnrolmentsData(
-    enrolmentKey = "HMRC-CUS-ORG",
-    identifierName = "EORINumber",
-    identifierValue = randomEORI
-  )
-
-  val enrolmentThirdParty: EnrolmentsData = EnrolmentsData(
-    enrolmentKey = "HMRC-CUS-ORG",
-    identifierName = "EORINumber",
-    identifierValue = randomEORI
+  def BuildEnrolment(eori: String = randomEORI): EnrolmentsData = EnrolmentsData(
+    identifierValue = eori
   )
 
 }

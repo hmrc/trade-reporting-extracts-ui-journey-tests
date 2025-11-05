@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.userMain
-import support.builders.EnrolmentsDataBuilder.enrolmentThirdParty.identifierValue as thirdPartyEORI
+import support.BaseSpec
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
@@ -41,10 +40,10 @@ class ADD_AddThirdPartySpec extends BaseSpec {
 
   Feature("[F1] The user can add a Third Party to their account") {
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginStub.navigateTo()
       loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(userMain)
+      loginStub.enterEnrollment(userTraderLogin)
       loginStub.continue()
 
       Then("the user is taken to the dashboard.")
@@ -107,8 +106,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-5: The user enters the EORI of the third party.") {
-      Given(s"the user enters '$thirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
+      Given(s"the user enters '$userThirdPartyEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(userThirdPartyEORI)
 
       And("the user clicks to continue")
       eoriNumberPage.continue()
@@ -326,8 +325,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       Given("the user jumps to the EORI number page.")
       eoriNumberPage.navigateTo()
 
-      And(s"the user enters again '$thirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
+      And(s"the user enters again '$userThirdPartyEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(userThirdPartyEORI)
 
       When("the user clicks to continue")
       eoriNumberPage.continue()

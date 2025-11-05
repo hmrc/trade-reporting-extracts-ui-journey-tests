@@ -15,7 +15,5 @@
  */
 
 package uk.gov.hmrc.ui.pages
-import support.builders.EnrolmentsDataBuilder.enrolmentThirdParty.identifierValue as thirdPartyEORI
 
-object MTP_2_ViewThirdPartyDetailsPage
-    extends BasePage(s"/third-party-details-$thirdPartyEORI", "Third-party details") {}
+object MTP_2_ViewThirdPartyDetailsPage extends BasePage("/third-party-details-", "Third-party details") {}

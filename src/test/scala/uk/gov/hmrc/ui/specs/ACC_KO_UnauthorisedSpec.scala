@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
+import support.BaseSpec
 
 class ACC_KO_UnauthorisedSpec extends BaseSpec {
 
@@ -25,7 +26,7 @@ class ACC_KO_UnauthorisedSpec extends BaseSpec {
 
   Feature("The user encounters the unauthorised page.") {
     Scenario("ACC-KO-1: User is not Authenticated.") {
-      Given("the user is not authenticated")
+      When("the user attempts to log in without a EORI / not authenticated")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
       loginPage.continue()
