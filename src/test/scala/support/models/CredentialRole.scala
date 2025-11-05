@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package support.models
 
-case class EnrolmentsData(enrolmentKey: String, identifierName: String, identifierValue: String)
+sealed trait CredentialRole
+
+case object Assistant extends CredentialRole
+case object User extends CredentialRole

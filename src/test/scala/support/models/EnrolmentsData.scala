@@ -14,19 +14,6 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package support.models
 
-sealed trait ConfidenceLevel {
-  val confidenceLevel: String
-  override val toString: String = confidenceLevel
-}
-
-case object CL50 extends ConfidenceLevel {
-  override val confidenceLevel: String = "50"
-}
-case object CL200 extends ConfidenceLevel {
-  override val confidenceLevel: String = "200"
-}
-case object CL250 extends ConfidenceLevel {
-  override val confidenceLevel: String = "250"
-}
+case class EnrolmentsData(enrolmentKey: String, identifierName: String, identifierValue: String)

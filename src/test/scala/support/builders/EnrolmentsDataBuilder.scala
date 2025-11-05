@@ -16,7 +16,7 @@
 
 package support.builders
 
-import uk.gov.hmrc.ui.models.EnrolmentsData
+import support.models.EnrolmentsData
 import scala.util.Random
 
 object EnrolmentsDataBuilder {

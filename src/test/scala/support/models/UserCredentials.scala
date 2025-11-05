@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package support.models
 
-sealed trait CredentialRole
-
-case object Assistant extends CredentialRole
-case object User extends CredentialRole
+case class UserCredentials(
+  affinityGroup: AffinityGroup,
+  credentialRole: CredentialRole,
+  confidenceLevel: Option[ConfidenceLevel],
+  nino: Option[String],
+  enrolmentsData: Option[EnrolmentsData],
+  isThirdParty: Boolean
+)

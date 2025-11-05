@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.specs_support
 
-import uk.gov.hmrc.ui.models.UserCredentials
+import support.models.UserCredentials
 import uk.gov.hmrc.ui.pages._
 
 class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {

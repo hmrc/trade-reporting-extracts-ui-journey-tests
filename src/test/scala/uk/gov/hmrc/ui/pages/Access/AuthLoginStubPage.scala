@@ -16,10 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-class AuthLoginStubPage
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.models.UserCredentials
+import support.models.UserCredentials
 
 object AuthLoginStubPage extends BasePage("", "Authority Wizard") {
 

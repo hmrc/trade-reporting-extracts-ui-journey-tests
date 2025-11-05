@@ -17,7 +17,7 @@
 package support.builders
 
 import support.builders.EnrolmentsDataBuilder._
-import uk.gov.hmrc.ui.models._
+import support.models._
 
 object UserCredentialsBuilder {
 
