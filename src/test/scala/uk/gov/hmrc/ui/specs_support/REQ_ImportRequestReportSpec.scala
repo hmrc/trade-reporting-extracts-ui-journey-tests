@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import support.models.UserCredentials
 import support.builders.UserCredentialsBuilder.userMain
 
 class REQ_RequestReportSpec() extends BaseSpec {

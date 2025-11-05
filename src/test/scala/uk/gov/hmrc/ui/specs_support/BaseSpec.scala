@@ -30,10 +30,12 @@ trait BaseSpec
     with Browser
     with ScreenshotOnFailure {
 
-  override def beforeAll(): Unit = // Code to run before each spec starts.
+  // Code to run before each spec starts.
+  override def beforeAll(): Unit =
     startBrowser()
 
-  override def afterAll(): Unit = // Code to run after each spec finishes.
+  // Code to run after each spec finishes.
+  override def afterAll(): Unit =
     quitBrowser()
 
 }
