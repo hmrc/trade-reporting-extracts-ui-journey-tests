@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.ui.specs_support
 
-import support.models.UserCredentials
 import uk.gov.hmrc.ui.pages._
+import support.models.UserCredentials
+import support.builders.UserCredentialsBuilder.userMain
 
-class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
+class REQ_ExportRequestReportSpec() extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
@@ -38,7 +39,7 @@ class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends Base
       When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(enrollmentToUse)
+      loginPage.enterEnrollment(userMain)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

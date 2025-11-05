@@ -17,8 +17,8 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
-import support.builders.UserCredentialsBuilder.aThirdPartyUser
+import support.builders.UserCredentialsBuilder.userMain
+import support.builders.EnrolmentsDataBuilder.enrolmentThirdParty.identifierValue as thirdPartyEORI
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
@@ -44,7 +44,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       Given("the user logs in using an organisation with a known enrolment")
       loginStub.navigateTo()
       loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(aThirdPartyUser)
+      loginStub.enterEnrollment(userMain)
       loginStub.continue()
 
       Then("the user is taken to the dashboard.")
@@ -107,8 +107,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-5: The user enters the EORI of the third party.") {
-      Given(s"the user enters '$randEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(randEORI)
+      Given(s"the user enters '$thirdPartyEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
 
       And("the user clicks to continue")
       eoriNumberPage.continue()
@@ -326,8 +326,8 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       Given("the user jumps to the EORI number page.")
       eoriNumberPage.navigateTo()
 
-      And(s"the user enters again '$randEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(randEORI)
+      And(s"the user enters again '$thirdPartyEORI' as the third party EORI")
+      eoriNumberPage.clearAndInputKeys(thirdPartyEORI)
 
       When("the user clicks to continue")
       eoriNumberPage.continue()

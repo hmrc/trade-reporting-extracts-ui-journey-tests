@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.ui.specs
 
-import support.builders.UserCredentialsBuilder._
 import uk.gov.hmrc.ui.specs_support._
 import org.scalatest.Sequential
 
@@ -34,8 +33,8 @@ class TradeReportingExtractsTests
 
       //   Reports
 
-      REQ_RequestReportSpec(aThirdPartyUser),
-      REQ_ExportRequestReportSpec(aThirdPartyUser),
+      REQ_RequestReportSpec(),
+      REQ_ExportRequestReportSpec(),
       RQR_RequestedReportsSpec(),
       AVR_AvailableReportsSpec(),
 

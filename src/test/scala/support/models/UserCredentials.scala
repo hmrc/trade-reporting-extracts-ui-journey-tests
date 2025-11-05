@@ -17,10 +17,5 @@
 package support.models
 
 case class UserCredentials(
-  affinityGroup: AffinityGroup,
-  credentialRole: CredentialRole,
-  confidenceLevel: Option[ConfidenceLevel],
-  nino: Option[String],
-  enrolmentsData: Option[EnrolmentsData],
-  isThirdParty: Boolean
+  enrolmentsData: Option[EnrolmentsData]
 )

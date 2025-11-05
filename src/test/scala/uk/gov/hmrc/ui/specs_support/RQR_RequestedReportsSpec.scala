@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import support.builders.UserCredentialsBuilder.userMain
 
 class RQR_RequestedReportsSpec extends BaseSpec {
 
@@ -30,7 +30,7 @@ class RQR_RequestedReportsSpec extends BaseSpec {
       Given("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
+      loginPage.enterEnrollment(userMain)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

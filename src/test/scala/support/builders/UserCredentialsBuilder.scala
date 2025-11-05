@@ -16,35 +16,16 @@
 
 package support.builders
 
+import support.models.UserCredentials
 import support.builders.EnrolmentsDataBuilder._
-import support.models._
 
 object UserCredentialsBuilder {
 
-  private val aUserCredentials: UserCredentials = UserCredentials(
-    affinityGroup = Organisation,
-    credentialRole = User,
-    confidenceLevel = None,
-    nino = None,
-    enrolmentsData = None,
-    isThirdParty = true
+  val userMain: UserCredentials = UserCredentials(
+    enrolmentsData = Some(enrolmentMain)
   )
 
-  val aSinglePartyUser: UserCredentials =
-    aUserCredentials.copy(
-      enrolmentsData = Some(enrolmentSingleParty),
-      isThirdParty = false
-    )
-
-  val aThirdPartyUser: UserCredentials =
-    aUserCredentials.copy(
-      enrolmentsData = Some(enrolmentThirdParty),
-      isThirdParty = true
-    )
-
-  val aRandomUser: UserCredentials =
-    aUserCredentials.copy(
-      enrolmentsData = Some(enrolmentRandomEORI),
-      isThirdParty = true
-    )
+  val userThirdParty: UserCredentials = UserCredentials(
+    enrolmentsData = Some(enrolmentThirdParty)
+  )
 }

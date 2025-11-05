@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.specs_support
 import uk.gov.hmrc.ui.pages._
-import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
-import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import support.builders.UserCredentialsBuilder.userMain
+import support.builders.EnrolmentsDataBuilder.enrolmentThirdParty.identifierValue as thirdPartyEORI
 
 class MTP_ManageThirdPartySpec extends BaseSpec {
 
@@ -33,7 +33,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       When("the user logs in using an organisation with a known enrolment")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
+      loginPage.enterEnrollment(userMain)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -41,7 +41,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-1: The user has added the third party '$randEORI' to their account.") {
+    Scenario(s"[F1] Step-1: The user has added the third party '$thirdPartyEORI' to their account.") {
       When("the user clicks the link on the dashboard")
       manageThirdPartyPage.clickLinkToPage()
 
@@ -50,7 +50,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       manageThirdPartyPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-2: The user clicks to view '$randEORI' details.") {
+    Scenario(s"[F1] Step-2: The user clicks to view '$thirdPartyEORI' details.") {
       Given("the user clicks the 'view' link.")
       viewThirdPartyDetailsPage.clickLinkToPage(viewThirdPartyDetailsPage.pageRelativeAddress)
 
@@ -59,7 +59,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       viewThirdPartyDetailsPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-3: The user clicks to remove '$randEORI'.") {
+    Scenario(s"[F1] Step-3: The user clicks to remove '$thirdPartyEORI'.") {
       Given("the user returns to the manage page.")
       manageThirdPartyPage.navigateTo()
 
@@ -71,7 +71,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       removeThirdPartyPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$randEORI'.") {
+    Scenario(s"[F1] Step-4: The user clicks 'no' to removing '$thirdPartyEORI'.") {
       Given("the user clicks 'no' to removing the third party")
       removeThirdPartyPage.selectYesNo(false)
 
@@ -83,7 +83,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       dashboardPage.assertPageTitle()
     }
 
-    Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$randEORI'.") {
+    Scenario(s"[F1] Step-5: The user clicks 'yes' to removing '$thirdPartyEORI'.") {
       Given("the user returns to the remove page")
       removeThirdPartyPage.navigateTo()
 

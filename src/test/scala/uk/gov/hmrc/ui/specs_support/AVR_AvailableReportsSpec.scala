@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs_support
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import support.builders.UserCredentialsBuilder.userMain
 
 class AVR_AvailableReportsSpec extends BaseSpec {
 
@@ -30,7 +30,7 @@ class AVR_AvailableReportsSpec extends BaseSpec {
       Given("the user logs in using an organisation with a known enrolment")
       loginStub.navigateTo()
       loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(aSinglePartyUser)
+      loginStub.enterEnrollment(userMain)
       loginStub.continue()
 
       Then("the user is taken to the dashboard.")
