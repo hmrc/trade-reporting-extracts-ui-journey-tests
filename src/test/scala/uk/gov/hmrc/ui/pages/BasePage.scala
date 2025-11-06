@@ -35,7 +35,7 @@ abstract class BasePage(relativeUrl: String, relativeTitle: String) extends Page
   protected val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
   val pageRelativeAddress       = relativeUrl
   val pageFullAddress           = s"$baseUrl$relativeUrl"
-  val pageTitle                 = s"$relativeTitle - Get customs declaration data for imports and exports - GOV.UK"
+  val pageTitle                 = s"$relativeTitle - Get customs data for import and export declarations - GOV.UK"
 
   // Common Selectors
   val inputCustomDay   = "input[name='value.day']"
