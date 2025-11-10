@@ -17,30 +17,30 @@
 package support.models
 
 private val cli = "mongodb://localhost:27017/?directConnection=true"
-private val db = "trade-reporting-extracts"
+private val db  = "trade-reporting-extracts"
 
-object  Collections {
-    val reports = "tre-report-request"
-    val users = "tre-user"
+object Collections {
+  val reports = "tre-report-request"
+  val users   = "tre-user"
 }
 
-object  AccessTypes {
-    val importType = "IMPORTS"
-    val exportType = "EXPORTS"
+object AccessTypes {
+  val importType = "IMPORTS"
+  val exportType = "EXPORTS"
 }
 
 case class MongoDocument(
-    // Mongo Details
-    client: String = cli,
-    database: String = db,
-    collection: String = Collections.users,
+  // Mongo Details
+  client: String = cli,
+  database: String = db,
+  collection: String = Collections.users,
 
-    // Trader Details
-    addThirdParty: Boolean = true,
-    traderEori: String,
-    additionalEmail: String = "additional@email.com",
+  // Trader Details
+  addThirdParty: Boolean = true,
+  traderEori: String,
+  additionalEmail: String = "additional@email.com",
 
-    // Third Party Details
-    thirdPartyEORI: String,
-    accessType: List[String] = List(AccessTypes.importType, AccessTypes.exportType)
+  // Third Party Details
+  thirdPartyEORI: String,
+  accessType: List[String] = List(AccessTypes.importType, AccessTypes.exportType)
 )

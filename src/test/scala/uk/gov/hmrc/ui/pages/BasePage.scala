@@ -32,10 +32,10 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 abstract class BasePage(relativeUrl: String, relativeTitle: String) extends PageObject {
 
   // URLs
-  val baseUrl: String = TestEnvironment.url("trade-reporting-extracts-frontend")
-  val pageRelativeAddress       = relativeUrl
-  val pageFullAddress           = s"$baseUrl$relativeUrl"
-  val pageTitle                 = s"$relativeTitle - Get customs data for import and export declarations - GOV.UK"
+  val baseUrl: String     = TestEnvironment.url("trade-reporting-extracts-frontend")
+  val pageRelativeAddress = relativeUrl
+  val pageFullAddress     = s"$baseUrl$relativeUrl"
+  val pageTitle           = s"$relativeTitle - Get customs data for import and export declarations - GOV.UK"
 
   // Common Selectors
   val inputCustomDay   = "input[name='value.day']"

@@ -36,15 +36,17 @@ trait BaseSpec
 
   // Generate random EORIs.
   val userTraderLogin     = BuildEnrolment()
-  val userTraderEori = userTraderLogin.identifierValue
+  val userTraderEori      = userTraderLogin.identifierValue
   val userThirdPartyLogin = BuildEnrolment()
-  val userThirdPartyEORI = userThirdPartyLogin.identifierValue
+  val userThirdPartyEORI  = userThirdPartyLogin.identifierValue
 
   // Populate the MongoDB document and ready for use.
-  def PrepMongoInsertRecord: Boolean = MongoInsertRecord(new MongoDocument(
-    traderEori = userTraderEori,
-    thirdPartyEORI = userThirdPartyEORI
-  ))
+  def PrepMongoInsertRecord: Boolean = MongoInsertRecord(
+    new MongoDocument(
+      traderEori = userTraderEori,
+      thirdPartyEORI = userThirdPartyEORI
+    )
+  )
 
   // Code to run before each spec starts.
   override def beforeAll(): Unit =

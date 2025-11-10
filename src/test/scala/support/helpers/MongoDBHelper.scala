@@ -28,7 +28,7 @@ import org.mongodb.scala.result._
 
 def MongoInsertRecord(doc: MongoDocument): Boolean = {
 
-  var success: Boolean                      = false
+  var success: Boolean = false
 
   val mongoClient                           = MongoClient(doc.client)
   val database: MongoDatabase               = mongoClient.getDatabase(doc.database)
@@ -36,11 +36,13 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
 
   var thirdParty: List[Document] = List()
   if (doc.addThirdParty) {
-    thirdParty = List(Document(
-      "eori" -> doc.thirdPartyEORI,
-      "accessStart" -> Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-      "accessType" -> doc.accessType
-    ))
+    thirdParty = List(
+      Document(
+        "eori"        -> doc.thirdPartyEORI,
+        "accessStart" -> Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+        "accessType"  -> doc.accessType
+      )
+    )
   }
 
   val observable: Observable[InsertOneResult] = collection.insertOne(
@@ -55,10 +57,10 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
     override def onNext(result: InsertOneResult): Unit = {}
     override def onError(e: Throwable): Unit           =
       println("\n\nFAILURE: MONGO [InsertManyResult]: " + e.getMessage + "\n\n")
-    override def onComplete(): Unit                    = { 
-        println("\n\nSUCCESS: MONGO [InsertOneResult].\n\n") 
-        success = true
-      }
+    override def onComplete(): Unit                    = {
+      println("\n\nSUCCESS: MONGO [InsertOneResult].\n\n")
+      success = true
+    }
   })
 
   Thread.sleep(1000)
@@ -67,5 +69,3 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   return success
 
 }
-
-
