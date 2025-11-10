@@ -83,7 +83,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
 
     Scenario("[F1] Step-3: The user selects the link to return to Dashboard.") {
       When("the user clicks 'Go to Homepage'")
-      dashboardPage.clickLinkToPage()
+      cannotAddThirdPartyPage.clickGreyButton()
 
       Then("the user is taken back to the Dashboard")
       dashboardPage.assertUrl()

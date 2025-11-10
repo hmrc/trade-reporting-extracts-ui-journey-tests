@@ -16,5 +16,10 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.ACC_1_DashboardPage.pageRelativeAddress as dashAddress
+
 object ADD_2_KO_CannotAddThirdPartyPage
-    extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {}
+    extends BasePage("/cannot-add-third-party", "You cannot add a third party to your account") {
+  def clickGreyButton(): Unit = click(By.cssSelector(s"a[href*='$dashAddress']"))
+}
