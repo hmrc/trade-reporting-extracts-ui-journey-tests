@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.driver
+package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.WebDriver
-import uk.gov.hmrc.selenium.webdriver.Driver
-
-trait BrowserDriver {
-
-  implicit def driver: WebDriver = Driver.instance
-
-}
+object REQ_7_ReportDateRangeDecisionPage
+    extends BasePage(
+      "/date-range",
+      "What date range do you want the reports to cover?" // Note: "report[s]" is dynamic to how many report subtypes were selected.
+    ) {}

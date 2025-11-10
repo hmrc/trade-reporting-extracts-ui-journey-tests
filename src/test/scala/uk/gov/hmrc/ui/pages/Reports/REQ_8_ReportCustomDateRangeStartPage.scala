@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package uk.gov.hmrc.ui.pages
 
-case class EnrolmentsData(enrolmentKey: String, identifierName: String, identifierValue: String)
+object REQ_8_ReportCustomDateRangeStartPage extends BasePage("/start-date", "When do you want your reports to start?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+}

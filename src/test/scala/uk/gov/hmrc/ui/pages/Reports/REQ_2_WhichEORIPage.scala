@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_2_ReportTypePage extends BasePage("/data-download", "Which type of data do you want to download?") {}
+object REQ_2_WhichEORIPage extends BasePage("/which-eori", "Which EORI number do you want to use?") {}

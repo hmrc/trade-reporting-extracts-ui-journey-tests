@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package support.models
 
-object REQ_13_SelectEmailsPage
-    extends BasePage("/notification-email", "Which email address do you want to receive notifications?") {
-  val inputAddNewEmail: String = "AddNewEmail"
-}
+case class EnrolmentsData(
+  enrolmentKey: String = "HMRC-CUS-ORG",
+  identifierName: String = "EORINumber",
+  identifierValue: String
+)

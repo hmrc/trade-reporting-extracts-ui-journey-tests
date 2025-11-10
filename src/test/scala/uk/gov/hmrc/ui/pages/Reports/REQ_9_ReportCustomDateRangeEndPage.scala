@@ -16,8 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_5_ReportOwnerTypePage
-    extends BasePage(
-      "/your-role",
-      "What is your role in the report?"
-    )
+object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your reports to end?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+}

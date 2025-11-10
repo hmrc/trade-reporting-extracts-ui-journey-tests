@@ -16,30 +16,19 @@
 
 package support.builders
 
-import uk.gov.hmrc.ui.models.EnrolmentsData
+import support.models.EnrolmentsData
 import scala.util.Random
 
 object EnrolmentsDataBuilder {
 
-  private var randomEORI = "GB"
-  1 to 12 foreach { _ => randomEORI += Random.between(1, 9).toString() }
+  def randomEORI: String = {
+    var code = "GB"
+    1 to 12 foreach { _ => code += Random.between(1, 9).toString() }
+    return code
+  }
 
-  val enrolmentThirdParty: EnrolmentsData = EnrolmentsData(
-    enrolmentKey = "HMRC-CUS-ORG",
-    identifierName = "EORINumber",
-    identifierValue = "GB123456789020"
-  )
-
-  val enrolmentSingleParty: EnrolmentsData = EnrolmentsData(
-    enrolmentKey = "HMRC-CUS-ORG",
-    identifierName = "EORINumber",
-    identifierValue = "GB123456789020"
-  )
-
-  val enrolmentRandomEORI: EnrolmentsData = EnrolmentsData(
-    enrolmentKey = "HMRC-CUS-ORG",
-    identifierName = "EORINumber",
-    identifierValue = randomEORI
+  def BuildEnrolment(eori: String = randomEORI): EnrolmentsData = EnrolmentsData(
+    identifierValue = eori
   )
 
 }

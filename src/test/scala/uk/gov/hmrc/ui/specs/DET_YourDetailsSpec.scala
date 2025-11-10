@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
 
@@ -27,10 +27,10 @@ class DET_YourDetailsSpec extends BaseSpec {
 
   Feature("The user can view their account details.") {
     Scenario("ACC-1: The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(aSinglePartyUser)
+      loginPage.enterEnrollment(userTraderLogin)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

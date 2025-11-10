@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_6_ImportTypeSelectionPage
+object REQ_5_ImportTypeSelectionPage
     extends BasePage(
       "/import-report-type",
       "Which type of import report do you need?"

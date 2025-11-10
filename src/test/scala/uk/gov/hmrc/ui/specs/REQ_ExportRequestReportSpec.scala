@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.models.UserCredentials
 import uk.gov.hmrc.ui.pages._
+import support.BaseSpec
 
-class REQ_ExportRequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
+class REQ_ExportRequestReportSpec() extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
   private val requestReportPage           = REQ_1_RequestReportPage
-  private val reportTypePage              = REQ_2_ReportTypePage
-  private val whichEORIPage               = REQ_3_WhichEORIPage
-  private val reportOwnerTypePage         = REQ_5_ReportOwnerTypePage
-  private val reportSubTypeExportPage     = REQ_7_ReportSubtypeExportPage
-  private val reportDateRangeDecisionPage = REQ_8_ReportDateRangeDecisionPage
+  private val whichEORIPage               = REQ_2_WhichEORIPage
+  private val reportTypePage              = REQ_3_ReportTypePage
+  private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
+  private val reportSubTypeExportPage     = REQ_6_ReportSubtypeExportPage
+  private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
 
   Feature(
     "The user can request a new report of 'export'-type data and use their own EORI number to complete the journey."
   ) {
 
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      When("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(enrollmentToUse)
+      loginPage.enterEnrollment(userTraderLogin)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package uk.gov.hmrc.ui.pages
 
-case class UserCredentials(
-  affinityGroup: AffinityGroup,
-  credentialRole: CredentialRole,
-  confidenceLevel: Option[ConfidenceLevel],
-  nino: Option[String],
-  enrolmentsData: Option[EnrolmentsData],
-  isThirdParty: Boolean
-)
+import org.openqa.selenium.By
+
+object REQ_6_ReportSubtypeExportPage
+    extends BasePage(
+      "/export-item-report",
+      "You are requesting an export item report"
+    ) {
+  override def continue(): Unit = click(By.cssSelector("a[class='govuk-button']"))
+}

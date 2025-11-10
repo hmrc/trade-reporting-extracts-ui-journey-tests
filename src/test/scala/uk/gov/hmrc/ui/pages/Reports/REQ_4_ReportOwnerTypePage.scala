@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package uk.gov.hmrc.ui.pages
 
-sealed trait AffinityGroup
-
-case object Agent extends AffinityGroup
-case object Individual extends AffinityGroup
-case object Organisation extends AffinityGroup
+object REQ_4_ReportOwnerTypePage
+    extends BasePage(
+      "/your-role",
+      "What is your role in the report?"
+    )

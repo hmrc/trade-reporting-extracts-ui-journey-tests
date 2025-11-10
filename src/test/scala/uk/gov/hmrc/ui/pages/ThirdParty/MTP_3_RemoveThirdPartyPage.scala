@@ -15,7 +15,6 @@
  */
 
 package uk.gov.hmrc.ui.pages
-import support.builders.EnrolmentsDataBuilder.enrolmentRandomEORI.identifierValue as randEORI
 
 object MTP_3_RemoveThirdPartyPage
-    extends BasePage(s"/remove-third-party/$randEORI", "Are you sure you want to remove this third party?") {}
+    extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?")

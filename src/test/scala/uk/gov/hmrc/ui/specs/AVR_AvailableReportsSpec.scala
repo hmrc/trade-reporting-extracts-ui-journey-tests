@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import support.builders.UserCredentialsBuilder.aSinglePartyUser
+import support.BaseSpec
 
 class AVR_AvailableReportsSpec extends BaseSpec {
 
@@ -27,10 +27,10 @@ class AVR_AvailableReportsSpec extends BaseSpec {
 
   Feature("[F1] The user can view their available reports.") {
     Scenario("ACC-1: The user is authenticated.") {
-      Given("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginStub.navigateTo()
       loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(aSinglePartyUser)
+      loginStub.enterEnrollment(userTraderLogin)
       loginStub.continue()
 
       Then("the user is taken to the dashboard.")

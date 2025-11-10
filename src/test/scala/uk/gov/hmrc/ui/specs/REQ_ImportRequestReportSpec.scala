@@ -14,40 +14,44 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs_support
+package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages._
-import uk.gov.hmrc.ui.models.UserCredentials
+import support.BaseSpec
 
-class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
+class REQ_RequestReportSpec() extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
   private val requestReportPage           = REQ_1_RequestReportPage
-  private val reportTypePage              = REQ_2_ReportTypePage
-  private val whichEORIPage               = REQ_3_WhichEORIPage
-  private val reportOwnerTypePage         = REQ_5_ReportOwnerTypePage
-  private val reportImportTypePage        = REQ_6_ImportTypeSelectionPage
-  private val reportDateRangeDecisionPage = REQ_8_ReportDateRangeDecisionPage
-  private val ReportCustomStartPage       = REQ_9_ReportCustomDateRangeStartPage
-  private val ReportCustomEndPage         = REQ_10_ReportCustomDateRangeEndPage
-  private val reportNamePage              = REQ_11_ReportNamePage
-  private val chooseEmailPage             = REQ_12_ChooseToAddEmailPage
-  // private val selectEmailsPage            = REQ_13_SelectEmailsPage
-  private val enterNewEmailPage           = REQ_14_EnterNewEmailPage
-  private val checkNewEmailPage           = REQ_14_1_CheckEmailPage
+  private val reportTypePage              = REQ_3_ReportTypePage
+  private val whichEORIPage               = REQ_2_WhichEORIPage
+  private val reportOwnerTypePage         = REQ_4_ReportOwnerTypePage
+  private val reportImportTypePage        = REQ_5_ImportTypeSelectionPage
+  private val reportDateRangeDecisionPage = REQ_7_ReportDateRangeDecisionPage
+  private val ReportCustomStartPage       = REQ_8_ReportCustomDateRangeStartPage
+  private val ReportCustomEndPage         = REQ_9_ReportCustomDateRangeEndPage
+  private val reportNamePage              = REQ_10_ReportNamePage
+  private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
+  private val selectEmailsPage            = REQ_12_SelectEmailsPage
+  private val enterNewEmailPage           = REQ_13_EnterNewEmailPage
+  private val checkNewEmailPage           = REQ_14_CheckEmailPage
   private val checkYourAnswersPage        = REQ_15_CheckYourAnswersPage
   private val requestSubmittedPage        = REQ_16_ReportRequestSubmittedPage
 
   Feature(
     "[F1] The user can request a new report of 'import'-type data and use their own EORI number to complete the journey."
   ) {
+    Scenario(s"[F1] SETUP: Prepare MongoDB with 'additional email' data.") {
+      Given("the mongoDB is prepped then a success should be returned.")
+      assert(PrepMongoInsertRecord == true)
+    }
 
     Scenario("[F1] ACC-1: The user is authenticated.") {
-      When("the user logs in using an organisation with a known enrolment")
+      When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
       loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(enrollmentToUse)
+      loginPage.enterEnrollment(userTraderLogin)
       loginPage.continue()
 
       Then("the user is taken to the dashboard.")
@@ -189,72 +193,57 @@ class REQ_RequestReportSpec(enrollmentToUse: UserCredentials) extends BaseSpec {
       When("the user clicks to continue")
       reportNamePage.continue()
 
-      if (enrollmentToUse.isThirdParty) {
-        Then("the user is taken to the 'choose to add email' page")
-        chooseEmailPage.assertUrl()
-        chooseEmailPage.assertPageTitle()
-      } else {
-        Then("the user is taken to the 'Confirm Details' page")
-        checkYourAnswersPage.assertUrl()
-        checkYourAnswersPage.assertPageTitle()
-      }
+      Then("the user is taken to the 'choose to add email' page")
+      chooseEmailPage.assertUrl()
+      chooseEmailPage.assertPageTitle()
     }
 
-    if (enrollmentToUse.isThirdParty) {
-      Scenario("[F1] Step-10: The user selects whether to add another email for notifications.") {
-        Given("the user selects the 'Yes' option")
-        chooseEmailPage.selectYesNo(true)
+    Scenario("[F1] Step-10: The user selects whether to add another email for notifications.") {
+      Given("the user selects the 'Yes' option")
+      chooseEmailPage.selectYesNo(true)
 
-        When("the user clicks to continue")
-        chooseEmailPage.continue()
+      When("the user clicks to continue")
+      chooseEmailPage.continue()
 
-        // Then("the user is taken to the 'choose to add email' page")
-        // selectEmailsPage.assertUrl()
-        // selectEmailsPage.assertPageTitle()
-        Then("the user is taken to the 'Enter new email address' page")
-        enterNewEmailPage.assertUrl()
-        enterNewEmailPage.assertPageTitle()
-      }
+      Then("the user is taken to the 'choose to add email' page")
+      selectEmailsPage.assertUrl()
+      selectEmailsPage.assertPageTitle()
+    }
 
-      // QA Note:
-      // Step-11 is skipped if the account has no additional email address associated.
-      // An email will need to be added earlier on in the tests/by direct DB editing.
+    Scenario("[F1] Step-11: The user selects what emails are to receive notifications.") {
+      Given("the user selects the 'Add new email address' option")
+      selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
 
-      // Scenario("[F1] Step-11: The user selects what emails are to receive notifications.") {
-      //   Given("the user selects the 'Add new email address' option")
-      //   selectEmailsPage.selectOptionByValue(selectEmailsPage.inputAddNewEmail)
+      When("the user clicks to continue")
+      selectEmailsPage.continue()
 
-      //   When("the user clicks to continue")
-      //   selectEmailsPage.continue()
+      Then("the user is taken to the 'Enter new email address' page")
+      enterNewEmailPage.assertUrl()
+      enterNewEmailPage.assertPageTitle()
+    }
 
-      //   Then("the user is taken to the 'Enter new email address' page")
-      //   enterNewEmailPage.assertUrl()
-      //   enterNewEmailPage.assertPageTitle()
-      // }
+    Scenario("[F1] Step-12: The user adds a new email.") {
+      Given("the user enters the new email address in the text box")
+      enterNewEmailPage.clearAndInputKeys("myexample@email.com")
 
-      Scenario("[F1] Step-12: The user adds a new email.") {
-        Given("the user enters the new email address in the text box")
-        enterNewEmailPage.clearAndInputKeys("myexample@email.com")
+      When("the user clicks to continue")
+      enterNewEmailPage.continue()
 
-        When("the user clicks to continue")
-        enterNewEmailPage.continue()
+      Then("the user is taken to the 'check new email' page")
+      checkNewEmailPage.assertUrl()
+      checkNewEmailPage.assertPageTitle()
+    }
 
-        Then("the user is taken to the 'check new email' page")
-        checkNewEmailPage.assertUrl()
-        checkNewEmailPage.assertPageTitle()
-      }
+    Scenario("[F1] Step-13: The user clicks 'yes' to confirm the new email.") {
+      Given("the user clicks 'yes' to confirm the new email")
+      checkNewEmailPage.selectYesNo(true)
 
-      Scenario("[F1] Step-13: The user clicks 'yes' to confirm the new email.") {
-        Given("the user clicks 'yes' to confirm the new email")
-        checkNewEmailPage.selectYesNo(true)
+      When("the user clicks to continue")
+      checkNewEmailPage.continue()
 
-        When("the user clicks to continue")
-        checkNewEmailPage.continue()
-
-        Then("the user is taken to the 'check your answers' page")
-        checkYourAnswersPage.assertUrl()
-        checkYourAnswersPage.assertPageTitle()
-      }
+      Then("the user is taken to the 'check your answers' page")
+      checkYourAnswersPage.assertUrl()
+      checkYourAnswersPage.assertPageTitle()
     }
 
     Scenario("[F1] Step-14: The user reaches the confirmation screen.") {

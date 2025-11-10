@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.models
+package uk.gov.hmrc.ui.pages
 
-sealed trait CredentialRole
+import org.openqa.selenium.By
 
-case object Assistant extends CredentialRole
-case object User extends CredentialRole
+object REQ_13_EnterNewEmailPage
+    extends BasePage("/new-notification-email", "Enter a new email address to receive notifications") {
+  val inputNewEmailAddress = By.cssSelector("input.govuk-input")
+
+}
