@@ -44,7 +44,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
   ) {
     Scenario(s"[F1] SETUP: Prepare MongoDB with 'additional email' data.") {
       Given("the mongoDB is prepped then a success should be returned.")
-      assert(PrepMongoInsertRecord == true)
+      assert(PrepMongoInsertRecord() == true)
     }
 
     Scenario("[F1] ACC-1: The user is authenticated.") {
@@ -187,7 +187,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
     }
 
     Scenario("[F1] Step-9: The user enters a name for their report.") {
-      Given(s"the user enters text with spaces into the text box of up to ${reportNamePage.inputLimit} characters.")
+      Given(s"the user enters text into the text box of up to ${reportNamePage.inputLimit} characters.")
       reportNamePage.clearAndInputKeys("a" * reportNamePage.inputLimit)
 
       When("the user clicks to continue")

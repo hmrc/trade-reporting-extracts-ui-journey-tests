@@ -16,5 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
+// QA Note: The proper URL is "/remove-third-party/<EORI Number>" <-- Account for this when writing tests.
 object MTP_3_RemoveThirdPartyPage
     extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?")
