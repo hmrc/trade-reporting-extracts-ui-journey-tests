@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
+// QA Note: The proper URL is "/third-party-details-<EORI Number>" <-- Account for this when writing tests.
 object MTP_2_ViewThirdPartyDetailsPage extends BasePage("/third-party-details-", "Third-party details") {}

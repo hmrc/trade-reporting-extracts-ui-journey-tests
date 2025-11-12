@@ -41,12 +41,12 @@ trait BaseSpec
   val userThirdPartyEORI  = userThirdPartyLogin.identifierValue
 
   // Populate the MongoDB document and ready for use.
-  def PrepMongoInsertRecord: Boolean = MongoInsertRecord(
-    new MongoDocument(
+  def PrepMongoInsertRecord(
+    doc: MongoDocument = new MongoDocument(
       traderEori = userTraderEori,
       thirdPartyEORI = userThirdPartyEORI
     )
-  )
+  ): Boolean = MongoInsertRecord(doc)
 
   // Code to run before each spec starts.
   override def beforeAll(): Unit =

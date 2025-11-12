@@ -30,7 +30,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
   Feature("[F1] The user can manage their third parties.") {
     Scenario(s"[F1] SETUP: Prepare MongoDB with $userThirdPartyEORI already added to $userTraderEori.") {
       Given("the mongoDB is prepped then a success should be returned.")
-      assert(PrepMongoInsertRecord == true)
+      assert(PrepMongoInsertRecord() == true)
     }
 
     Scenario("[F1] ACC-1: The user is authenticated.") {
@@ -56,7 +56,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
     Scenario(s"[F1] Step-2: The user clicks to view '$userThirdPartyEORI' details.") {
       Given("the user clicks the 'view' link.")
-      viewThirdPartyDetailsPage.clickLinkToPage(viewThirdPartyDetailsPage.pageRelativeAddress)
+      viewThirdPartyDetailsPage.clickLinkToPage(viewThirdPartyDetailsPage.pageRelativeAddress + userThirdPartyEORI)
 
       Then("the user is taken to the 'view third party details' page")
       viewThirdPartyDetailsPage.assertUrl(viewThirdPartyDetailsPage.pageFullAddress + userThirdPartyEORI)
@@ -68,7 +68,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       manageThirdPartyPage.navigateTo()
 
       When("the user clicks the 'remove' link.")
-      removeThirdPartyPage.clickLinkToPage(removeThirdPartyPage.pageRelativeAddress)
+      removeThirdPartyPage.clickLinkToPage(removeThirdPartyPage.pageRelativeAddress + userThirdPartyEORI)
 
       Then("the user is taken to the 'remove third party' page")
       removeThirdPartyPage.assertUrl(removeThirdPartyPage.pageFullAddress + userThirdPartyEORI)

@@ -29,6 +29,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   private val eoriNumberPage          = ADD_3_EORINumberPage
   private val eoriAlreadyAddedPage    = ADD_3_KO_EORIAlreadyAddedPage
   private val confirmEORIPage         = ADD_4_ConfirmEORIPage
+  private val referenceNamePage       = ADD_5_ReferenceNamePage
   private val accessStartPage         = ADD_6_AccessStartPage
   private val accessEndPage           = ADD_7_AccessEndPage
   private val dataTypesPage           = ADD_8_DataTypesPage
@@ -140,11 +141,23 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       confirmEORIPage.continue()
 
       Then("the user is taken to the 'access start' page")
+      referenceNamePage.assertUrl()
+      referenceNamePage.assertPageTitle()
+    }
+
+    Scenario("[F1] Step-8: The user enters a reference name for the EORI.") {
+      Given(s"the user enters text into the text box of up to ${referenceNamePage.inputLimit} characters.")
+      referenceNamePage.clearAndInputKeys("a" * referenceNamePage.inputLimit)
+
+      When("the user clicks to continue")
+      referenceNamePage.continue()
+
+      Then("the user is taken to the 'access start' page")
       accessStartPage.assertUrl()
       accessStartPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-8: The user enters when they want access to start.") {
+    Scenario("[F1] Step-9: The user enters when they want access to start.") {
       Given("the user enters the current date.")
       accessStartPage.clearAndInputKeys(
         accessStartPage.getDateMinusYears("dd"),
@@ -167,7 +180,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       accessEndPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-9: The user enters when they want access to end.") {
+    Scenario("[F1] Step-10: The user enters when they want access to end.") {
       Given("the user just clicks continue.")
       accessEndPage.continue()
 
@@ -176,7 +189,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       dataTypesPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-10: The user selects what data types the third party can access.") {
+    Scenario("[F1] Step-11: The user selects what data types the third party can access.") {
       Given("the user selects both 'Import' and 'Export' data types")
       dataTypesPage.selectOptionByIndex(0)
       dataTypesPage.selectOptionByIndex(1)
@@ -189,7 +202,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       giveAccessToDataPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-11: The user selects whether they want to give access to all available data") {
+    Scenario("[F1] Step-12: The user selects whether they want to give access to all available data") {
       Given("the user selects 'no' to set a custom date")
       giveAccessToDataPage.selectOptionByIndex(1)
 
@@ -201,7 +214,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       dataStartPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-12: The user enters the access start date for their data") {
+    Scenario("[F1] Step-13: The user enters the access start date for their data") {
       Given("the user enters a date up to four years from the current date")
       dataStartPage.clearAndInputKeys(
         dataStartPage.getDateMinusYears("dd", 4),
@@ -224,7 +237,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       dataEndPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-13: The user enters the access end date for their data") {
+    Scenario("[F1] Step-14: The user enters the access end date for their data") {
       Given("the user just clicks continue.")
       dataEndPage.continue()
 
@@ -235,7 +248,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
 
     // Confirmation Page - Scenarios
 
-    Scenario("[F1] Step-14: The user can change if they are importer or exporter.") {
+    Scenario("[F1] Step-15: The user can change if they are importer or exporter.") {
       Given("the user clicks the link to change if they are importer or exporter")
       importerOrExporterPage.clickLinkToPage()
 
@@ -243,7 +256,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
       importerOrExporterPage.assertPageTitle()
     }
 
-    Scenario("[F1] Step-15: The user can change the EORI number to add.") {
+    Scenario("[F1] Step-16: The user can change the EORI number to add.") {
       Given("the user returns to the check answers page")
       checkAnswersPage.navigateTo()
 

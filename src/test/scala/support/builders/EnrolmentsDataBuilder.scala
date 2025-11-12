@@ -21,13 +21,14 @@ import scala.util.Random
 
 object EnrolmentsDataBuilder {
 
-  def randomEORI: String = {
-    var code = "GB"
-    1 to 12 foreach { _ => code += Random.between(1, 9).toString() }
-    return code
+  def randomEORI(startCode: String = "GB99", amount: Int = 10): String = {
+    var randEORI =
+      startCode // In stubs "GB99" is a business which has not shared data, prompting the 'add reference name' screen in AddThirdParty journey.
+    1 to amount foreach { _ => randEORI += Random.between(1, 9).toString() }
+    return randEORI
   }
 
-  def BuildEnrolment(eori: String = randomEORI): EnrolmentsData = EnrolmentsData(
+  def BuildEnrolment(eori: String = randomEORI()): EnrolmentsData = EnrolmentsData(
     identifierValue = eori
   )
 

@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-// QA Note: The proper URL is "/remove-third-party/<EORI Number>" <-- Account for this when writing tests.
-object MTP_3_RemoveThirdPartyPage
-    extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?")
+object TPA_1_BusinessesAccessToPage
+    extends BasePage("/businesses-you-have-access-to", "Businesses you have third-party access to") {
+  val titleNoAccess = "You do not have third-party access to any businesses"
+}
