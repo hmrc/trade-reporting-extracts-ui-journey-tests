@@ -21,10 +21,10 @@ import scala.util.Random
 
 object EnrolmentsDataBuilder {
 
-  def randomEORI(startCode: String = "GB"): String = {
+  def randomEORI(startCode: String = "GB99", amount: Int = 10): String = {
     var randEORI =
-      startCode + "99" // In stubs "GB99" is a business which has not shared data, prompting the 'add reference name' screen in AddThirdParty journey.
-    1 to 10 foreach { _ => randEORI += Random.between(1, 9).toString() }
+      startCode // In stubs "GB99" is a business which has not shared data, prompting the 'add reference name' screen in AddThirdParty journey.
+    1 to amount foreach { _ => randEORI += Random.between(1, 9).toString() }
     return randEORI
   }
 
