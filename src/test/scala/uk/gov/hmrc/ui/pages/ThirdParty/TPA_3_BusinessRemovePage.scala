@@ -17,4 +17,5 @@
 package uk.gov.hmrc.ui.pages
 
 // QA Note: The proper URL is "/remove-my-access-<EORI Number>" <-- Account for this when writing tests.
-object TPA_3_BusinessRemovePage extends BasePage("/remove-my-access-", "Are you sure you want to remove your third-party access?") {}
+object TPA_3_BusinessRemovePage
+    extends BasePage("/remove-my-access-", "Are you sure you want to remove your third-party access?") {}

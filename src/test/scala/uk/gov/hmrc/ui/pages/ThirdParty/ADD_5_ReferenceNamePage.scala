@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_5_ReferenceNamePage extends BasePage("/reference-name", "What name will you use to reference this EORI number?") {
-  val inputLimit: Int     = 100
+object ADD_5_ReferenceNamePage
+    extends BasePage("/reference-name", "What name will you use to reference this EORI number?") {
+  val inputLimit: Int = 100
 }

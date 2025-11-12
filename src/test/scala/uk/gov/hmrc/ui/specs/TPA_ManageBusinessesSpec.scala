@@ -20,12 +20,12 @@ import support.BaseSpec
 
 class TPA_ManageBusinessesSpec extends BaseSpec {
 
-  private val loginPage                 = AuthLoginStubPage
-  private val dashboardPage             = ACC_1_DashboardPage
-  private val businessesAccessTo        = TPA_1_BusinessesAccessToPage
-  private val businessDetails           = TPA_2_BusinessDetailsPage
-  private val businessRemove            = TPA_3_BusinessRemovePage
-  private val businessRemovedConfirm    = TPA_4_BusinessRemoveConfirmPage
+  private val loginPage              = AuthLoginStubPage
+  private val dashboardPage          = ACC_1_DashboardPage
+  private val businessesAccessTo     = TPA_1_BusinessesAccessToPage
+  private val businessDetails        = TPA_2_BusinessDetailsPage
+  private val businessRemove         = TPA_3_BusinessRemovePage
+  private val businessRemovedConfirm = TPA_4_BusinessRemoveConfirmPage
 
   Feature("[F1] The user can manage the businesses they have access to.") {
     Scenario(s"[F1] SETUP: Prepare MongoDB with $userThirdPartyEORI already added to $userTraderEori.") {
@@ -91,14 +91,16 @@ class TPA_ManageBusinessesSpec extends BaseSpec {
       Given(s"the user returns to the 'are you sure?' page.")
       businessRemove.navigateTo(businessRemove.pageFullAddress + userTraderEori)
 
-      And ("the user selects the 'yes' radio button.")
+      And("the user selects the 'yes' radio button.")
       businessRemove.selectYesNo(true)
 
       When(s"the user clicks to continue.")
       businessRemove.continue()
 
       Then("the user is taken back to the 'Access Removed Confirmation' page.")
-      businessRemovedConfirm.assertUrl(businessRemovedConfirm.baseUrl + userTraderEori + businessRemovedConfirm.pageRelativeAddress)
+      businessRemovedConfirm.assertUrl(
+        businessRemovedConfirm.baseUrl + "/" + userTraderEori + businessRemovedConfirm.pageRelativeAddress
+      )
       businessRemovedConfirm.assertPageTitle()
     }
 

@@ -17,4 +17,5 @@
 package uk.gov.hmrc.ui.pages
 
 // QA Note: The proper URL is "<EORI Number>-access-removed-confirmation" <-- Account for this when writing tests.
-object TPA_4_BusinessRemoveConfirmPage extends BasePage("-access-removed-confirmation", "Your third-party access has been removed") {}
+object TPA_4_BusinessRemoveConfirmPage
+    extends BasePage("-access-removed-confirmation", "Your third-party access has been removed") {}
