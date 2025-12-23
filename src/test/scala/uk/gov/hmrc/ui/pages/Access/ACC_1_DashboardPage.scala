@@ -16,4 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ACC_1_DashboardPage extends BasePage("/dashboard", "dashboard") {}
+object ACC_1_DashboardPage extends BasePage("/dashboard", "") {
+  override val pageTitle = "Get customs data for import and export declarations - GOV.UK"
+}
