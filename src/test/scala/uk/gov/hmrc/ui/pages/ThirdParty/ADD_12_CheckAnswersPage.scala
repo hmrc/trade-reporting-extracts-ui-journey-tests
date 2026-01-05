@@ -19,6 +19,4 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 
 object ADD_12_CheckAnswersPage
-    extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {
-  override def continue(): Unit = click(By.cssSelector("a.govuk-button"))
-}
+    extends BasePage("/check-your-answers-third-party", "Check your answers before adding a new third party") {}
