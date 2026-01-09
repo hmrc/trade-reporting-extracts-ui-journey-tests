@@ -98,7 +98,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       removeThirdPartyPage.continue()
 
       Then("the user is taken to the 'confirmation' page")
-      removeConfirmationPage.assertUrl(removeConfirmationPage.pageFullAddress + userThirdPartyEORI)
+      removeConfirmationPage.assertUrl(removeConfirmationPage.pageFullAddress)
       removeConfirmationPage.assertPageTitle()
     }
 

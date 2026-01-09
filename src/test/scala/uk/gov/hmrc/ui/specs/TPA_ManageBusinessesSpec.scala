@@ -97,10 +97,8 @@ class TPA_ManageBusinessesSpec extends BaseSpec {
       When(s"the user clicks to continue.")
       businessRemove.continue()
 
-      Then("the user is taken back to the 'Access Removed Confirmation' page.")
-      businessRemovedConfirm.assertUrl(
-        businessRemovedConfirm.baseUrl + "/" + userTraderEori + businessRemovedConfirm.pageRelativeAddress
-      )
+      Then("the user is taken to the 'Access Removed Confirmation' page.")
+      businessRemovedConfirm.assertUrl()
       businessRemovedConfirm.assertPageTitle()
     }
 

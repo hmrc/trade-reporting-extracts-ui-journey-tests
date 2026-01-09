@@ -16,5 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-// QA Note: The proper URL is "/third-party-removed-confirmation/<EORI Number>" <-- Account for this when writing tests.
-object MTP_4_RemoveConfirmationPage extends BasePage("/third-party-removed-confirmation/", "Third-party removed")
+object MTP_4_RemoveConfirmationPage extends BasePage("/third-party-removed-confirmation", "Third-party removed")
