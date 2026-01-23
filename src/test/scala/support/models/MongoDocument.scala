@@ -38,7 +38,6 @@ case class MongoDocument(
   // Trader Details
   addThirdParty: Boolean = true,
   traderEori: String,
-  additionalEmail: String = "additional@email.com",
 
   // Third Party Details
   thirdPartyEORI: String,

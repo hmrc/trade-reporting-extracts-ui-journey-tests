@@ -52,7 +52,6 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   val observable: Observable[InsertOneResult] = collection.insertOne(
     Document(
       "eori"             -> doc.traderEori,
-      "additionalEmails" -> List(doc.additionalEmail),
       "authorisedUsers"  -> thirdParty
     )
   )
