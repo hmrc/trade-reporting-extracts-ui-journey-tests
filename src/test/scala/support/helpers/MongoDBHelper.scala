@@ -51,8 +51,8 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   // Ready the full document to go into MongoDB, with Third Party data (if any).
   val observable: Observable[InsertOneResult] = collection.insertOne(
     Document(
-      "eori"             -> doc.traderEori,
-      "authorisedUsers"  -> thirdParty
+      "eori"            -> doc.traderEori,
+      "authorisedUsers" -> thirdParty
     )
   )
 
