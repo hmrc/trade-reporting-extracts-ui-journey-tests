@@ -33,7 +33,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
   private val ReportCustomEndPage         = REQ_9_ReportCustomDateRangeEndPage
   private val reportNamePage              = REQ_10_ReportNamePage
   private val chooseEmailPage             = REQ_11_ChooseToAddEmailPage
-  private val selectEmailsPage            = REQ_12_SelectEmailsPage
+  // private val selectEmailsPage            = REQ_12_SelectEmailsPage
   private val enterNewEmailPage           = REQ_13_EnterNewEmailPage
   private val checkNewEmailPage           = REQ_14_CheckEmailPage
   private val checkYourAnswersPage        = REQ_15_CheckYourAnswersPage
