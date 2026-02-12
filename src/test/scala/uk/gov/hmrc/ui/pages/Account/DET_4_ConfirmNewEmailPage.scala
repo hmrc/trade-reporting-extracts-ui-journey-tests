@@ -18,10 +18,19 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
 
-object DET_4_ConfirmNewEmailPage extends BasePage("/email-added?emailAddress=", "x") {
+object DET_4_ConfirmNewEmailPage extends BasePage("/email-added?emailAddress=", " added") {
+
+    override def assertPageTitle(additionalEmail: String): Unit = {
+        val addEmailTitle = additionalEmail + pageTitle
+        assert (
+            getTitle.contains(addEmailTitle),
+            s"Page title was [$getTitle], but it was expected to contain '[$addEmailTitle]'."
+        )
+    }
+    
     override def assertUrl(additionalEmail : String): Unit = {
-        val addemailURL: String = pageRelativeAddress + additionalEmail.replace("@", "%40")
-        fluentWait.until(ExpectedConditions.urlContains(addemailURL))
-        assert(getCurrentUrl == addemailURL, s"Url was: [$getCurrentUrl], but [$addemailURL] was expected.")
+        val addEmailURL: String = pageRelativeAddress + additionalEmail.replace("@", "%40")
+        fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
+        assert(getCurrentUrl == addEmailURL, s"Url was: [$getCurrentUrl], but [$addEmailURL] was expected.")
     }
 }
