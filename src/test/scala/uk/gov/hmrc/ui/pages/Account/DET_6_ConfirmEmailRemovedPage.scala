@@ -18,16 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
 
-object DET_4_ConfirmNewEmailPage extends BasePage("/email-added?emailAddress=", " added") {
-
-    // The email added is included in the page's title.
-    override def assertPageTitle(additionalEmail: String): Unit = {
-        val addEmailTitle = additionalEmail + pageTitle
-        assert (
-            getTitle.contains(addEmailTitle),
-            s"Page title was [$getTitle], but it was expected to contain '[$addEmailTitle]'."
-        )
-    }
+object DET_6_ConfirmEmailRemovedPage extends BasePage("/email-removed-confirmation?emailAddress=", "Email removed") {
 
     // Replace email "@" with unicode "%40" in the URL.
     override def assertUrl(additionalEmail : String): Unit = {
