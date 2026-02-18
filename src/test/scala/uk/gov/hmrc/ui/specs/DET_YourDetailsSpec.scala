@@ -27,12 +27,12 @@ class DET_YourDetailsSpec extends BaseSpec {
   private val addNewEmailPage         = DET_2_AddNewEmailPage
   private val checkNewEmailPage       = DET_3_CheckNewEmailPage
   private val confirmNewEmailPage     = DET_4_ConfirmNewEmailPage
-  private val removeEmailPage         = DET_5_RemoveEmailPage
-  private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
+  // private val removeEmailPage         = DET_5_RemoveEmailPage
+  // private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
 
   private val strNewEmail = "additionalEmail@email.com"
 
-  Feature("[F1] The user can view their account details.") {
+  Feature("[F1] The user can view their account details and add an additional email") {
     Scenario("ACC-1: The user is authenticated.") {
       When(s"the user logs in with EORI $userTraderEori.")
       loginPage.navigateTo()
@@ -117,4 +117,8 @@ class DET_YourDetailsSpec extends BaseSpec {
       contactDetailsPage.assertPageTitle()
     }
   }
+
+  // Feature("[F2] The user can view their account details and remove an additional email") {
+  //   Scenario("[F2] Step-1: x") {}
+  // }
 }
