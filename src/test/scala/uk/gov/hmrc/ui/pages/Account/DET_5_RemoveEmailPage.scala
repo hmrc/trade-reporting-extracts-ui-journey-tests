@@ -15,12 +15,17 @@
  */
 
 package uk.gov.hmrc.ui.pages
-
+import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 
 object DET_5_RemoveEmailPage extends BasePage("/email-removed?emailAddress=", "Remove email address") {
 
   // Replace email "@" with unicode "%40" in the URL.
+
+  override def clickLinkToPage(additionalEmail: String): Unit =
+    val newURL = pageRelativeAddress + additionalEmail.replace("@", "%40")
+    click(By.cssSelector(s"a.govuk-link[href*='$newURL']"))
+
   override def assertUrl(additionalEmail: String): Unit = {
     val addEmailURL: String = baseUrl + pageRelativeAddress + additionalEmail.replace("@", "%40")
     fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
