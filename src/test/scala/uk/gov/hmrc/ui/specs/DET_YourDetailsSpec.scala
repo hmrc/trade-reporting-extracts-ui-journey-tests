@@ -21,12 +21,12 @@ import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
 
-  private val loginPage               = AuthLoginStubPage
-  private val dashboardPage           = ACC_1_DashboardPage
-  private val contactDetailsPage      = DET_1_ContactDetailsPage
-  private val addNewEmailPage         = DET_2_AddNewEmailPage
-  private val checkNewEmailPage       = DET_3_CheckNewEmailPage
-  private val confirmNewEmailPage     = DET_4_ConfirmNewEmailPage
+  private val loginPage           = AuthLoginStubPage
+  private val dashboardPage       = ACC_1_DashboardPage
+  private val contactDetailsPage  = DET_1_ContactDetailsPage
+  private val addNewEmailPage     = DET_2_AddNewEmailPage
+  private val checkNewEmailPage   = DET_3_CheckNewEmailPage
+  private val confirmNewEmailPage = DET_4_ConfirmNewEmailPage
   // private val removeEmailPage         = DET_5_RemoveEmailPage
   // private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
 
