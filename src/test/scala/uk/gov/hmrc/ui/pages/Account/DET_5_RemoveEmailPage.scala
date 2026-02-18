@@ -20,10 +20,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 
 object DET_5_RemoveEmailPage extends BasePage("/email-removed?emailAddress=", "Remove email address") {
 
-    // Replace email "@" with unicode "%40" in the URL.
-    override def assertUrl(additionalEmail : String): Unit = {
-        val addEmailURL: String = pageRelativeAddress + additionalEmail.replace("@", "%40")
-        fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
-        assert(getCurrentUrl == addEmailURL, s"Url was: [$getCurrentUrl], but [$addEmailURL] was expected.")
-    }
+  // Replace email "@" with unicode "%40" in the URL.
+  override def assertUrl(additionalEmail: String): Unit = {
+    val addEmailURL: String = baseUrl + pageRelativeAddress + additionalEmail.replace("@", "%40")
+    fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
+    assert(getCurrentUrl == addEmailURL, s"Url was: [$getCurrentUrl], but [$addEmailURL] was expected.")
+  }
 }

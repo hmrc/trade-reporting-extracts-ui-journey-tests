@@ -20,19 +20,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 
 object DET_4_ConfirmNewEmailPage extends BasePage("/email-added?emailAddress=", " added") {
 
-    // The email added is included in the page's title.
-    override def assertPageTitle(additionalEmail: String): Unit = {
-        val addEmailTitle = additionalEmail + pageTitle
-        assert (
-            getTitle.contains(addEmailTitle),
-            s"Page title was [$getTitle], but it was expected to contain '[$addEmailTitle]'."
-        )
-    }
+  // The email added is included in the page's title.
+  override def assertPageTitle(additionalEmail: String): Unit = {
+    val addEmailTitle = additionalEmail + pageTitle
+    assert(
+      getTitle.contains(addEmailTitle),
+      s"Page title was [$getTitle], but it was expected to contain '[$addEmailTitle]'."
+    )
+  }
 
-    // Replace email "@" with unicode "%40" in the URL.
-    override def assertUrl(additionalEmail : String): Unit = {
-        val addEmailURL: String = pageRelativeAddress + additionalEmail.replace("@", "%40")
-        fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
-        assert(getCurrentUrl == addEmailURL, s"Url was: [$getCurrentUrl], but [$addEmailURL] was expected.")
-    }
+  // Replace email "@" with unicode "%40" in the URL.
+  override def assertUrl(additionalEmail: String): Unit = {
+    val addEmailURL: String = baseUrl + pageRelativeAddress + additionalEmail.replace("@", "%40")
+    fluentWait.until(ExpectedConditions.urlContains(addEmailURL))
+    assert(getCurrentUrl == addEmailURL, s"Url was: [$getCurrentUrl], but [$addEmailURL] was expected.")
+  }
 }

@@ -16,4 +16,11 @@
 
 package uk.gov.hmrc.ui.pages
 
-object DET_2_AddNewEmailPage extends BasePage("/add-new-email", "What email address do you want to add?") {}
+import org.openqa.selenium.By
+
+object DET_2_AddNewEmailPage extends BasePage("/add-new-email", "What email address do you want to add?") {
+
+  // Using '-button' instead of '-link' on this page.
+  override def clickLinkToPage(relURL: String = pageRelativeAddress): Unit =
+    click(By.cssSelector(s"a.govuk-button[href*='$relURL']"))
+}
