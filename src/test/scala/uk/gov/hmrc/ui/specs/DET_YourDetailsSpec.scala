@@ -21,14 +21,14 @@ import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
 
-  private val loginPage           = AuthLoginStubPage
-  private val dashboardPage       = ACC_1_DashboardPage
-  private val contactDetailsPage  = DET_1_ContactDetailsPage
-  private val addNewEmailPage     = DET_2_AddNewEmailPage
-  private val checkNewEmailPage   = DET_3_CheckNewEmailPage
-  private val confirmNewEmailPage = DET_4_ConfirmNewEmailPage
-  // private val removeEmailPage         = DET_5_RemoveEmailPage
-  // private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
+  private val loginPage               = AuthLoginStubPage
+  private val dashboardPage           = ACC_1_DashboardPage
+  private val contactDetailsPage      = DET_1_ContactDetailsPage
+  private val addNewEmailPage         = DET_2_AddNewEmailPage
+  private val checkNewEmailPage       = DET_3_CheckNewEmailPage
+  private val confirmNewEmailPage     = DET_4_ConfirmNewEmailPage
+  private val removeEmailPage         = DET_5_RemoveEmailPage
+  private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
 
   private val strNewEmail = "additionalEmail@email.com"
 
@@ -118,7 +118,43 @@ class DET_YourDetailsSpec extends BaseSpec {
     }
   }
 
-  // Feature("[F2] The user can view their account details and remove an additional email") {
-  //   Scenario("[F2] Step-1: x") {}
-  // }
+  Feature("[F2] The user can view their account details and remove an additional email") {
+    Scenario("[F2] Step-1: the user can view and click on the remove button") {
+      Given("the user can click on remove button")
+      removeEmailPage.clickLinkToPage(strNewEmail)
+
+      Then("User is taken to the 'remove email' page")
+      removeEmailPage.assertUrl(strNewEmail)
+      removeEmailPage.assertPageTitle()
+
+    }
+
+    Scenario("[F2] Step-2: the user can click 'no' to remove this email address") {
+      Given("the user selects the 'no' radio button.")
+      removeEmailPage.selectYesNo(false)
+
+      When("the user clicks to continue.")
+      removeEmailPage.continue()
+
+      Then("the user is taken back to the 'contact details' page.")
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
+    }
+
+    Scenario("[F2] Step-3: the user can click 'yes' to remove this email address") {
+      Given("the user returns to the 'remove email' page.")
+      removeEmailPage.clickLinkToPage(strNewEmail)
+
+      And("the user selects the 'yes' radio button.")
+      removeEmailPage.selectYesNo(true)
+
+      When("the user clicks to continue.")
+      removeEmailPage.continue()
+
+      Then("the user is taken to the 'confirm removal email' page.")
+      confirmRemovalEmailPage.assertUrl(strNewEmail)
+      confirmRemovalEmailPage.assertPageTitle()
+    }
+
+  }
 }
