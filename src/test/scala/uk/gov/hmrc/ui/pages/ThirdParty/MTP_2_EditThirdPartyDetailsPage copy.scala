@@ -21,14 +21,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 
 // QA Note: The proper URL is "/third-party-details-<EORI Number>" <-- Account for this when writing tests.
 object MTP_2_EditThirdPartyDetailsPage extends BasePage("/third-party-details-", "Third-party details") {
-    
-    override def clickLinkToPage(eoriNum: String): Unit =
+
+  override def clickLinkToPage(eoriNum: String): Unit =
     click(By.cssSelector(s"a.govuk-link[href*='$pageRelativeAddress + $eoriNum']"))
 
-    override def assertUrl(eoriNum: String): Unit = {
-        val urlToCheck: String = pageFullAddress + eoriNum
-        fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
-        assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
-    }
-    
+  override def assertUrl(eoriNum: String): Unit = {
+    val urlToCheck: String = pageFullAddress + eoriNum
+    fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
+    assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
+  }
+
 }
