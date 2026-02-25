@@ -16,5 +16,18 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ADD_10_DataStartPage
-    extends BasePage("/data-start-date", "When do you want to give access to your data from?") {}
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
+
+object ADD_10_DataStartPage extends BasePage("/data-start-date", "When do you want to give access to your data from?") {
+
+  val editURL = "/edit-data-start-date/"
+
+  def clickEditLinkToPage(eoriNum: String): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$editURL + $eoriNum']"))
+
+  def assertEditUrl(eoriNum: String): Unit =
+    val urlToCheck: String = baseUrl + editURL + eoriNum
+    fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
+    assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
+}

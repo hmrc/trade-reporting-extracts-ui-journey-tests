@@ -16,5 +16,19 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
+
 object ADD_11_DataEndPage
-    extends BasePage("/data-end-date", "When do you want to stop giving access to your data? (optional)") {}
+    extends BasePage("/data-end-date", "When do you want to stop giving access to your data? (optional)") {
+
+  val editURL = "/edit-data-end-date/"
+
+  def clickEditLinkToPage(eoriNum: String): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$editURL + $eoriNum']"))
+
+  def assertEditUrl(eoriNum: String): Unit =
+    val urlToCheck: String = baseUrl + editURL + eoriNum
+    fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
+    assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
+}

@@ -16,6 +16,19 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
+
 // QA Note: The proper URL is "/remove-third-party/<EORI Number>" <-- Account for this when writing tests.
 object MTP_3_RemoveThirdPartyPage
-    extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?")
+    extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?") {
+
+  override def clickLinkToPage(eoriNum: String): Unit =
+    click(By.cssSelector(s"a.govuk-link[href*='$pageRelativeAddress + $eoriNum']"))
+
+  override def assertUrl(eoriNum: String): Unit = {
+    val urlToCheck: String = pageFullAddress + eoriNum
+    fluentWait.until(ExpectedConditions.urlContains(urlToCheck))
+    assert(getCurrentUrl == urlToCheck, s"Url was: [$getCurrentUrl], but [$urlToCheck] was expected.")
+  }
+}
