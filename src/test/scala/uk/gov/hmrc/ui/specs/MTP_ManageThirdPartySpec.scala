@@ -124,7 +124,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
     Scenario(s"[F1] Step-8: The user clicks to change the third-party data view period.") {
       Given("the user clicks the 'change' link.")
-      accessStartPage.clickEditLinkToPage(userThirdPartyEORI)
+      giveAccessToDataPage.clickEditLinkToPage(userThirdPartyEORI)
 
       Then("the user is taken to the 'all data access' decision page")
       giveAccessToDataPage.assertEditUrl(userThirdPartyEORI)

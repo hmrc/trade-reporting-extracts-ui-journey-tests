@@ -23,7 +23,7 @@ object ADD_6_AccessStartPage extends BasePage("/access-start-date", "When do you
   val editURL = "/edit-access-start-date/"
 
   def clickEditLinkToPage(eoriNum: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$editURL + $eoriNum']"))
+    click(By.cssSelector(s"a.govuk-link[href*='" + editURL + eoriNum + "']"))
 
   def assertEditUrl(eoriNum: String): Unit =
     val urlToCheck: String = baseUrl + editURL + eoriNum

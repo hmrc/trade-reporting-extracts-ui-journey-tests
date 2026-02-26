@@ -24,7 +24,7 @@ object MTP_3_RemoveThirdPartyPage
     extends BasePage("/remove-third-party/", "Are you sure you want to remove this third party?") {
 
   override def clickLinkToPage(eoriNum: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$pageRelativeAddress + $eoriNum']"))
+    click(By.cssSelector(s"a.govuk-link[href*='" + pageRelativeAddress + eoriNum + "']"))
 
   override def assertUrl(eoriNum: String): Unit = {
     val urlToCheck: String = pageFullAddress + eoriNum

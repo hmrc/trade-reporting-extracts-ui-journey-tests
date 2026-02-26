@@ -23,7 +23,7 @@ object ADD_8_DataTypesPage extends BasePage("/data-types", "Which types of data 
   val editURL = "/edit-data-types/"
 
   def clickEditLinkToPage(eoriNum: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$editURL + $eoriNum']"))
+    click(By.cssSelector(s"a.govuk-link[href*='" + editURL + eoriNum + "']"))
 
   def assertEditUrl(eoriNum: String): Unit =
     val urlToCheck: String = baseUrl + editURL + eoriNum

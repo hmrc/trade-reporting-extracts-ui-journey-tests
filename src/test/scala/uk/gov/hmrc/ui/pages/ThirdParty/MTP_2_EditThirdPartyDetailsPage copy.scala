@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 object MTP_2_EditThirdPartyDetailsPage extends BasePage("/third-party-details-", "Third-party details") {
 
   override def clickLinkToPage(eoriNum: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$pageRelativeAddress + $eoriNum']"))
+    click(By.cssSelector(s"a.govuk-link[href*='" + pageRelativeAddress + eoriNum + "']"))
 
   override def assertUrl(eoriNum: String): Unit = {
     val urlToCheck: String = pageFullAddress + eoriNum

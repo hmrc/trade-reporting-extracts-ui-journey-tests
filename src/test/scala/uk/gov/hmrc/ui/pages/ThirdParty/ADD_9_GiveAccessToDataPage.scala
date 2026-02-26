@@ -27,7 +27,7 @@ object ADD_9_GiveAccessToDataPage
   val editURL = "/edit-data-access-range/"
 
   def clickEditLinkToPage(eoriNum: String): Unit =
-    click(By.cssSelector(s"a.govuk-link[href*='$editURL + $eoriNum']"))
+    click(By.cssSelector(s"a.govuk-link[href*='" + editURL + eoriNum + "']"))
 
   def assertEditUrl(eoriNum: String): Unit =
     val urlToCheck: String = baseUrl + editURL + eoriNum
