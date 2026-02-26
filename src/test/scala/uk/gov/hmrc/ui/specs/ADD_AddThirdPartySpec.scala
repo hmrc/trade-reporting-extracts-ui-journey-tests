@@ -158,17 +158,17 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-9: The user enters when they want access to start.") {
-      Given("the user enters the current date.")
+      Given("the user can has entered any date in the past.")
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("dd"),
+        "1",
         accessStartPage.inputCustomDay
       )
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("MM"),
+        "1",
         accessStartPage.inputCustomMonth
       )
       accessStartPage.clearAndInputKeys(
-        accessStartPage.getDateMinusYears("yyyy"),
+        "1",
         accessStartPage.inputCustomYear
       )
 
@@ -181,7 +181,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-10: The user enters when they want access to end.") {
-      Given("the user just clicks continue.")
+      Given("the user just clicks continue to give unending access.")
       accessEndPage.continue()
 
       Then("the user is taken to the 'select data types' page")
@@ -215,7 +215,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-13: The user enters the access start date for their data") {
-      Given("the user enters a date up to four years from the current date")
+      Given("the user enters a date up to four years ago from the current date")
       dataStartPage.clearAndInputKeys(
         dataStartPage.getDateMinusYears("dd", 4),
         dataStartPage.inputCustomDay
@@ -238,7 +238,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
     }
 
     Scenario("[F1] Step-14: The user enters the access end date for their data") {
-      Given("the user just clicks continue.")
+      Given("the user just clicks continue to give unending access")
       dataEndPage.continue()
 
       Then("the user is taken to the 'check answers' page")
