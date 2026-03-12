@@ -108,7 +108,7 @@ class TPA_ManageBusinessesSpec extends BaseSpec {
 
       Then("the user is taken to the 'businesses they have access to' page.")
       businessesAccessTo.assertUrl()
-      businessesAccessTo.assertPageTitle(businessesAccessTo.titleNoAccess)
+      businessesAccessTo.assertPageTitle()
     }
   }
 }

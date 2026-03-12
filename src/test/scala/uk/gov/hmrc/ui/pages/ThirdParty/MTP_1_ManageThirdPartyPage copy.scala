@@ -18,5 +18,5 @@ package uk.gov.hmrc.ui.pages
 
 object MTP_1_ManageThirdPartyPage
     extends BasePage("/manage-third-parties", "Manage third parties that can access your data") {
-  val titleNoThirdPartiesAdded = "You have not added any third parties yet"
+  val titleNoThirdPartiesAdded = "You have not added any third parties"
 }
