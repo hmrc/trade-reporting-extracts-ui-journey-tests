@@ -17,6 +17,4 @@
 package uk.gov.hmrc.ui.pages
 
 object TPA_1_BusinessesAccessToPage
-    extends BasePage("/businesses-you-have-access-to", "Businesses you have third-party access to") {
-  val titleNoAccess = "You do not have third-party access to any businesses"
-}
+    extends BasePage("/businesses-you-have-access-to", "Businesses you have third-party access to") {}
