@@ -197,9 +197,9 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       When("the user clicks to continue")
       removeThirdPartyPage.continue()
 
-      Then("the user is taken to the 'dashboard' page")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
+      Then("the user is taken back to the 'manage third parties' page")
+      manageThirdPartyPage.assertUrl()
+      manageThirdPartyPage.assertPageTitle()
     }
 
     Scenario(s"[F2] Step-3: The user clicks 'yes' to removing '$userThirdPartyEORI'.") {
