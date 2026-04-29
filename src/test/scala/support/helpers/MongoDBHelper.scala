@@ -29,7 +29,7 @@ import org.mongodb.scala.result._
 def MongoInsertRecord(doc: MongoDocument): Boolean = {
 
   // Return a bool for scenarios to know the MongoDB insertion has failed/succeeded.
-  var success: Boolean = false
+  var success: Option[Boolean] = None
 
   val mongoClient                           = MongoClient(doc.client)
   val database: MongoDatabase               = mongoClient.getDatabase(doc.database)
@@ -59,17 +59,18 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   // Apply the full document to MongoDB.
   observable.subscribe(new Observer[InsertOneResult] {
     override def onNext(result: InsertOneResult): Unit = {}
-    override def onError(e: Throwable): Unit           =
-      println("\n\nFAILURE: MONGO [InsertOneResult]: " + e.getMessage + "\n\n")
-    override def onComplete(): Unit                    = {
-      println("\n\nSUCCESS: MONGO [InsertOneResult].\n\n")
-      success = true
-    }
+    override def onError(e: Throwable): Unit =
+      println("FAILURE: MONGO [InsertOneResult]: " + e.getMessage + "\n")
+      success = Some(false)
+    override def onComplete(): Unit =
+      println("SUCCESS: MONGO [InsertOneResult].")
+      success = Some(true)
   })
 
-  // Give it a second to perform the above.
-  Thread.sleep(1000)
-  mongoClient.close()
+  // Wait for observable.subscribe to complete
+  while (!success.isDefined) Thread.`yield`()
 
-  return success
+  mongoClient.close()
+  
+  return success.get
 }
