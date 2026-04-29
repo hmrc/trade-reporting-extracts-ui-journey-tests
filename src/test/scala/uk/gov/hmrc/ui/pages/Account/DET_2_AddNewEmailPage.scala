@@ -16,6 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
 object DET_2_AddNewEmailPage extends BasePage("/add-new-email", "What email address do you want to add?") {}
