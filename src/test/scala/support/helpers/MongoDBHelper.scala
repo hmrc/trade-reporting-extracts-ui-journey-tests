@@ -59,10 +59,10 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   // Apply the full document to MongoDB.
   observable.subscribe(new Observer[InsertOneResult] {
     override def onNext(result: InsertOneResult): Unit = {}
-    override def onError(e: Throwable): Unit =
+    override def onError(e: Throwable): Unit           =
       println("FAILURE: MONGO [InsertOneResult]: " + e.getMessage + "\n")
       success = Some(false)
-    override def onComplete(): Unit =
+    override def onComplete(): Unit                    =
       println("SUCCESS: MONGO [InsertOneResult].")
       success = Some(true)
   })
@@ -71,6 +71,6 @@ def MongoInsertRecord(doc: MongoDocument): Boolean = {
   while (!success.isDefined) Thread.`yield`()
 
   mongoClient.close()
-  
+
   return success.get
 }
