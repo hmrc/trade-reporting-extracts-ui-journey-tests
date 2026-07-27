@@ -18,6 +18,6 @@ package uk.gov.hmrc.ui.pages
 
 object REQ_4_ReportOwnerTypePage
     extends BasePage(
-      "/your-role",
-      "What is your role in the report?"
+      "/request-data",
+      "What data do you want to request?"
     )
