@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object DET_2_AddNewEmailPage extends BasePage("/add-new-email", "What email address do you want to add?") {}
+object DET_2_AddNewEmailPage extends BasePage("/add-new-email", "Add new email address") {}
