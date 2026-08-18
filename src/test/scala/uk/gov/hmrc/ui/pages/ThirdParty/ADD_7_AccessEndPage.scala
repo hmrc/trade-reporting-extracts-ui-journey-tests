@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 
-object ADD_7_AccessEndPage extends BasePage("/access-end-date", "When do you want this access to end? (optional)") {
+object ADD_7_AccessEndPage extends BasePage("/access-end-date", "Access end date") {
   val editURL = "/edit-access-end-date/"
 
   def clickEditLinkToPage(eoriNum: String): Unit =
