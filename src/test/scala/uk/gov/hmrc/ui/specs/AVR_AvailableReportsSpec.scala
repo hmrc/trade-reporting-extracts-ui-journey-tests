@@ -44,9 +44,7 @@ class AVR_AvailableReportsSpec extends BaseSpec {
 
       Then("the user is taken to the 'available reports' page")
       availableReportsPage.assertUrl()
-      // availableReportsPage.assertPageTitle()
-
-      // QA Note: Reports will currently not appear available to download without stubs / MongoDB shenanigans.
+      availableReportsPage.assertPageTitle(availableReportsPage.titleNoReportsAvailable)
     }
   }
 }
