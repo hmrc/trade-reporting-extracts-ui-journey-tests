@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages._
 import support.BaseSpec
 
-class REQ_RequestReportSpec() extends BaseSpec {
+class REQ_ImportRequestReportSpec() extends BaseSpec {
 
   private val loginPage                   = AuthLoginStubPage
   private val dashboardPage               = ACC_1_DashboardPage
