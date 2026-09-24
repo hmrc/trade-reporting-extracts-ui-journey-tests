@@ -29,6 +29,10 @@ class DET_YourDetailsSpec extends BaseSpec {
   private val confirmNewEmailPage     = DET_4_ConfirmNewEmailPage
   private val removeEmailPage         = DET_5_RemoveEmailPage
   private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
+  private val emailDisablePage        = DET_7_EmailDisablePage
+  private val emailDisableConfirmPage = DET_8_EmailDisableConfirmPage
+  private val emailEnablePage         = DET_9_EmailEnablePage
+  private val emailEnableConfirmPage  = DET_10_EmailEnableConfirmPage
 
   private val strNewEmail = "additionalEmail@email.com"
 
@@ -156,5 +160,66 @@ class DET_YourDetailsSpec extends BaseSpec {
       confirmRemovalEmailPage.assertPageTitle()
     }
 
+    Scenario("[F2] Step-4: The user returns to the 'Your Contact Details' page via the link.") {
+      Given("the user clicks to return to the contact details page via the link")
+      contactDetailsPage.clickLinkToPage()
+
+      Then("the user is taken to the 'contact details' page")
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
+    }
+  }
+
+  Feature("[F3] The user can disable and enable notifications for their primary email") {
+    Scenario("[F3] Step-1: the user can view and click the 'disable' link") {
+      Given("the user clicks on the 'disable' link")
+      emailDisablePage.clickLinkToPage()
+
+      Then("User is taken to the 'disable email notifications' page")
+      emailDisablePage.assertUrl()
+      emailDisablePage.assertPageTitle()
+    }
+
+    Scenario("[F3] Step-2: the user can select 'yes' and disable email notifications") {
+      Given("the user selects the 'yes' radio button")
+      emailDisablePage.selectYesNo(true)
+
+      When("the user clicks to continue.")
+      emailDisablePage.continue()
+
+      Then("User is taken to the 'disable email notifications confirmation' page")
+      emailDisableConfirmPage.assertUrl()
+      emailDisableConfirmPage.assertPageTitle()
+    }
+
+    Scenario("[F3] Step-3: the user returns to the 'Your Contact Details' page via the link.") {
+      Given("the user clicks to return to the contact details page via the link")
+      contactDetailsPage.clickLinkToPage()
+
+      Then("the user is taken to the 'contact details' page")
+      contactDetailsPage.assertUrl()
+      contactDetailsPage.assertPageTitle()
+    }
+
+    Scenario("[F3] Step-4: the user can view and click the 'enable' link") {
+      Given("the user clicks on the 'enable' link")
+      emailEnablePage.clickLinkToPage()
+
+      Then("User is taken to the 'enable email notifications' page")
+      emailEnablePage.assertUrl()
+      emailEnablePage.assertPageTitle()
+    }
+
+    Scenario("[F3] Step-5: the user can select 'yes' and enable email notifications") {
+      Given("the user selects the 'yes' radio button")
+      emailEnablePage.selectYesNo(true)
+
+      When("the user clicks to continue.")
+      emailEnablePage.continue()
+
+      Then("User is taken to the 'enable email notifications confirmation' page")
+      emailEnableConfirmPage.assertUrl()
+      emailEnableConfirmPage.assertPageTitle()
+    }
   }
 }
