@@ -16,4 +16,5 @@
 
 package uk.gov.hmrc.ui.pages
 
-object DET_8_EmailDisableConfirmPage extends BasePage("/email-notifications-disabled", "Email notifications disabled") {}
+object DET_8_EmailDisableConfirmPage
+    extends BasePage("/email-notifications-disabled", "Email notifications disabled") {}
