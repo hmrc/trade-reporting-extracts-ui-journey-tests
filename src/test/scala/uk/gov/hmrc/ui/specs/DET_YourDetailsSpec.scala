@@ -24,7 +24,7 @@ class DET_YourDetailsSpec extends BaseSpec {
 
   private val strNewEmail = "additionalEmail@email.com"
 
-  Feature("[F1] The user can view their account details and add an additional email") {
+  Feature("[F1] The user can view their account details and add and remove additional email") {
     Scenario(s"The user can view their account details and add an additional email.") {
       Given("the user logs in with EORI $userTraderEori.")
       AuthLoginStubPage.navigateTo()
