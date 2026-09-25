@@ -22,6 +22,7 @@ import support.BaseSpec
 class AVR_AvailableReportsSpec extends BaseSpec {
 
 
+
   Feature("[F1] The user can view their available reports.") {
     Scenario("ACC-1: The user can view their available reports.") {
       Given(s"the user logs in with EORI $userTraderEori.")

@@ -21,7 +21,6 @@ import support.BaseSpec
 
 class ACC_KO_UnauthorisedSpec extends BaseSpec {
 
-
   Feature("The user encounters the unauthorised page.") {
     Scenario("User is not Authenticated.") {
       When("the user attempts to log in without a EORI / not authenticated")
