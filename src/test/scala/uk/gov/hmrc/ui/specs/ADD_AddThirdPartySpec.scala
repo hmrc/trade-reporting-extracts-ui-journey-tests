@@ -21,341 +21,273 @@ import support.BaseSpec
 
 class ADD_AddThirdPartySpec extends BaseSpec {
 
-  private val loginStub               = AuthLoginStubPage
-  private val dashboardPage           = ACC_1_DashboardPage
-  private val addThirdPartyPage       = ADD_1_AddThirdPartyPage
-  private val importerOrExporterPage  = ADD_2_ImporterOrExporterPage
-  private val cannotAddThirdPartyPage = ADD_2_KO_CannotAddThirdPartyPage
-  private val eoriNumberPage          = ADD_3_EORINumberPage
-  private val eoriAlreadyAddedPage    = ADD_3_KO_EORIAlreadyAddedPage
-  private val confirmEORIPage         = ADD_4_ConfirmEORIPage
-  private val referenceNamePage       = ADD_5_ReferenceNamePage
-  private val accessStartPage         = ADD_6_AccessStartPage
-  private val accessEndPage           = ADD_7_AccessEndPage
-  private val dataTypesPage           = ADD_8_DataTypesPage
-  private val giveAccessToDataPage    = ADD_9_GiveAccessToDataPage
-  private val dataStartPage           = ADD_10_DataStartPage
-  private val dataEndPage             = ADD_11_DataEndPage
-  private val checkAnswersPage        = ADD_12_CheckAnswersPage
-  private val confirmationPage        = ADD_13_ConfirmationPage
-
-  Feature("[F1] The user can add a Third Party to their account") {
-    Scenario("[F1] ACC-1: The user is authenticated.") {
+  Feature("The user can add a Third Party to their account") {
+    Scenario(s"The user with EORI $userTraderEori adds the third party $userThirdPartyEORI") {
       When(s"the user logs in with EORI $userTraderEori.")
-      loginStub.navigateTo()
-      loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(userTraderLogin)
-      loginStub.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(userTraderLogin)
+      AuthLoginStubPage.continue()
 
       Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] Dashboard: The user starts the 'Add a Third party' journey.") {
       Given("the user clicks the link on the dashboard")
-      addThirdPartyPage.clickLinkToPage()
+      ADD_1_AddThirdPartyPage.clickLinkToPage()
 
       Then("the user is taken to the 'Add a third party' starting page")
-      addThirdPartyPage.assertUrl()
-      addThirdPartyPage.assertPageTitle()
-    }
+      ADD_1_AddThirdPartyPage.assertUrl()
+      ADD_1_AddThirdPartyPage.assertPageTitle()
 
-    Scenario("[F1] Step-1: The user selects 'Continue' to begin the journey.") {
       When("the user clicks to continue")
-      addThirdPartyPage.continue()
+      ADD_1_AddThirdPartyPage.continue()
 
       Then("the user is taken to the 'Importer or Exporter' page")
-      importerOrExporterPage.assertUrl()
-      importerOrExporterPage.assertPageTitle()
-    }
+      ADD_2_ImporterOrExporterPage.assertUrl()
+      ADD_2_ImporterOrExporterPage.assertPageTitle()
 
-    Scenario("[F1] Step-2: The user selects 'No' to reach a kickout page.") {
       Given("the user selects the 'No' option")
-      importerOrExporterPage.selectOptionByValue("false")
+      ADD_2_ImporterOrExporterPage.selectOptionByValue("false")
 
       When("the user clicks to continue")
-      importerOrExporterPage.continue()
+      ADD_2_ImporterOrExporterPage.continue()
 
       Then("the user is taken to the 'Cannot Add Third Party' kickout page")
-      cannotAddThirdPartyPage.assertUrl()
-      cannotAddThirdPartyPage.assertPageTitle()
-    }
+      ADD_2_KO_CannotAddThirdPartyPage.assertUrl()
+      ADD_2_KO_CannotAddThirdPartyPage.assertPageTitle()
 
-    Scenario("[F1] Step-3: The user selects the link to return to Dashboard.") {
       When("the user clicks 'Go to Homepage'")
-      cannotAddThirdPartyPage.clickGreyButton()
+      ADD_2_KO_CannotAddThirdPartyPage.clickGreyButton()
 
       Then("the user is taken back to the Dashboard")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] Step-4: The user goes back to select 'Yes' to continue instead.") {
       Given("the user returns to the 'Importer or Exporter' page")
-      importerOrExporterPage.navigateTo()
+      ADD_2_ImporterOrExporterPage.navigateTo()
 
       And("the user selects 'yes' instead")
-      importerOrExporterPage.selectOptionByValue("true")
+      ADD_2_ImporterOrExporterPage.selectOptionByValue("true")
 
       When("the user clicks to continue")
-      importerOrExporterPage.continue()
+      ADD_2_ImporterOrExporterPage.continue()
 
       Then("the user is taken to the 'what EORI number' page")
-      eoriNumberPage.assertUrl()
-      eoriNumberPage.assertPageTitle()
-    }
+      ADD_3_EORINumberPage.assertUrl()
+      ADD_3_EORINumberPage.assertPageTitle()
 
-    Scenario("[F1] Step-5: The user enters the EORI of the third party.") {
       Given(s"the user enters '$userThirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(userThirdPartyEORI)
+      ADD_3_EORINumberPage.clearAndInputKeys(userThirdPartyEORI)
 
       And("the user clicks to continue")
-      eoriNumberPage.continue()
+      ADD_3_EORINumberPage.continue()
 
       Then("the user is taken to the 'confirm EORI' page")
-      confirmEORIPage.assertUrl()
-      confirmEORIPage.assertPageTitle()
-    }
+      ADD_4_ConfirmEORIPage.assertUrl()
+      ADD_4_ConfirmEORIPage.assertPageTitle()
 
-    Scenario("[F1] Step-6: The user selects 'No' and is taken back to the previous page.") {
       Given("the user selects 'No' to enter a different EORI number")
-      confirmEORIPage.selectOptionByIndex(1)
+      ADD_4_ConfirmEORIPage.selectOptionByIndex(1)
 
       And("the user clicks to continue")
-      confirmEORIPage.continue()
+      ADD_4_ConfirmEORIPage.continue()
 
       Then("the user is taken back to the 'what EORI number' page")
-      eoriNumberPage.assertUrl()
-      eoriNumberPage.assertPageTitle()
-    }
+      ADD_3_EORINumberPage.assertUrl()
+      ADD_3_EORINumberPage.assertPageTitle()
 
-    Scenario("[F1] Step-7: The user goes back to select 'Yes' to continue instead.") {
       Given("the user returns to the 'confirm EORI' page")
-      confirmEORIPage.navigateTo()
+      ADD_4_ConfirmEORIPage.navigateTo()
 
       And("the user selects 'yes' to continue")
-      confirmEORIPage.selectOptionByIndex(0)
+      ADD_4_ConfirmEORIPage.selectOptionByIndex(0)
 
       When("the user clicks to continue")
-      confirmEORIPage.continue()
+      ADD_4_ConfirmEORIPage.continue()
 
       Then("the user is taken to the 'access start' page")
-      referenceNamePage.assertUrl()
-      referenceNamePage.assertPageTitle()
-    }
+      ADD_5_ReferenceNamePage.assertUrl()
+      ADD_5_ReferenceNamePage.assertPageTitle()
 
-    Scenario("[F1] Step-8: The user enters a reference name for the EORI.") {
-      Given(s"the user enters text into the text box of up to ${referenceNamePage.inputLimit} characters.")
-      referenceNamePage.clearAndInputKeys("a" * referenceNamePage.inputLimit)
+      Given(s"the user enters text into the text box of up to ${ADD_5_ReferenceNamePage.inputLimit} characters.")
+      ADD_5_ReferenceNamePage.clearAndInputKeys("a" * ADD_5_ReferenceNamePage.inputLimit)
 
       When("the user clicks to continue")
-      referenceNamePage.continue()
+      ADD_5_ReferenceNamePage.continue()
 
       Then("the user is taken to the 'access start' page")
-      accessStartPage.assertUrl()
-      accessStartPage.assertPageTitle()
-    }
+      ADD_6_AccessStartPage.assertUrl()
+      ADD_6_AccessStartPage.assertPageTitle()
 
-    Scenario("[F1] Step-9: The user enters when they want access to start.") {
       Given("the user can has entered any date in the past.")
-      accessStartPage.clearAndInputKeys(
+      ADD_6_AccessStartPage.clearAndInputKeys(
         "1",
-        accessStartPage.inputCustomDay
+        ADD_6_AccessStartPage.inputCustomDay
       )
-      accessStartPage.clearAndInputKeys(
+      ADD_6_AccessStartPage.clearAndInputKeys(
         "1",
-        accessStartPage.inputCustomMonth
+        ADD_6_AccessStartPage.inputCustomMonth
       )
-      accessStartPage.clearAndInputKeys(
+      ADD_6_AccessStartPage.clearAndInputKeys(
         "1",
-        accessStartPage.inputCustomYear
+        ADD_6_AccessStartPage.inputCustomYear
       )
 
       And("the user clicks to continue")
-      accessStartPage.continue()
+      ADD_6_AccessStartPage.continue()
 
       Then("the user is taken to the 'access end' page")
-      accessEndPage.assertUrl()
-      accessEndPage.assertPageTitle()
-    }
+      ADD_7_AccessEndPage.assertUrl()
+      ADD_7_AccessEndPage.assertPageTitle()
 
-    Scenario("[F1] Step-10: The user enters when they want access to end.") {
       Given("the user just clicks continue to give unending access.")
-      accessEndPage.continue()
+      ADD_7_AccessEndPage.continue()
 
       Then("the user is taken to the 'select data types' page")
-      dataTypesPage.assertUrl()
-      dataTypesPage.assertPageTitle()
-    }
+      ADD_8_DataTypesPage.assertUrl()
+      ADD_8_DataTypesPage.assertPageTitle()
 
-    Scenario("[F1] Step-11: The user selects what data types the third party can access.") {
       Given("the user selects both 'Import' and 'Export' data types")
-      dataTypesPage.selectOptionByIndex(0)
-      dataTypesPage.selectOptionByIndex(1)
+      ADD_8_DataTypesPage.selectOptionByIndex(0)
+      ADD_8_DataTypesPage.selectOptionByIndex(1)
 
       And("the user clicks to continue")
-      dataTypesPage.continue()
+      ADD_8_DataTypesPage.continue()
 
       Then("the user is taken to the 'give data access' page")
-      giveAccessToDataPage.assertUrl()
-      giveAccessToDataPage.assertPageTitle()
-    }
+      ADD_9_GiveAccessToDataPage.assertUrl()
+      ADD_9_GiveAccessToDataPage.assertPageTitle()
 
-    Scenario("[F1] Step-12: The user selects whether they want to give access to all available data") {
       Given("the user selects 'no' to set a custom date")
-      giveAccessToDataPage.selectOptionByIndex(1)
+      ADD_9_GiveAccessToDataPage.selectOptionByIndex(1)
 
       And("the user clicks to continue")
-      giveAccessToDataPage.continue()
+      ADD_9_GiveAccessToDataPage.continue()
 
       Then("the user is taken to the 'data access start' page")
-      dataStartPage.assertUrl()
-      dataStartPage.assertPageTitle()
-    }
+      ADD_10_DataStartPage.assertUrl()
+      ADD_10_DataStartPage.assertPageTitle()
 
-    Scenario("[F1] Step-13: The user enters the access start date for their data") {
       Given("the user enters a date up to four years ago from the current date")
-      dataStartPage.clearAndInputKeys(
-        dataStartPage.getDateMinusYears("dd", 4),
-        dataStartPage.inputCustomDay
+      ADD_10_DataStartPage.clearAndInputKeys(
+        ADD_10_DataStartPage.getDateMinusYears("dd", 4),
+        ADD_10_DataStartPage.inputCustomDay
       )
-      dataStartPage.clearAndInputKeys(
-        dataStartPage.getDateMinusYears("MM", 4),
-        dataStartPage.inputCustomMonth
+      ADD_10_DataStartPage.clearAndInputKeys(
+        ADD_10_DataStartPage.getDateMinusYears("MM", 4),
+        ADD_10_DataStartPage.inputCustomMonth
       )
-      dataStartPage.clearAndInputKeys(
-        dataStartPage.getDateMinusYears("yyyy", 4),
-        dataStartPage.inputCustomYear
+      ADD_10_DataStartPage.clearAndInputKeys(
+        ADD_10_DataStartPage.getDateMinusYears("yyyy", 4),
+        ADD_10_DataStartPage.inputCustomYear
       )
 
       And("the user clicks to continue")
-      dataStartPage.continue()
+      ADD_10_DataStartPage.continue()
 
       Then("the user is taken to the 'data access end' page")
-      dataEndPage.assertUrl()
-      dataEndPage.assertPageTitle()
-    }
+      ADD_11_DataEndPage.assertUrl()
+      ADD_11_DataEndPage.assertPageTitle()
 
-    Scenario("[F1] Step-14: The user enters the access end date for their data") {
       Given("the user just clicks continue to give unending access")
-      dataEndPage.continue()
+      ADD_11_DataEndPage.continue()
 
       Then("the user is taken to the 'check answers' page")
-      checkAnswersPage.assertUrl()
-      checkAnswersPage.assertPageTitle()
-    }
+      ADD_12_CheckAnswersPage.assertUrl()
+      ADD_12_CheckAnswersPage.assertPageTitle()
 
-    // Confirmation Page - Scenarios
+      // Confirmation Page - Change answers
 
-    Scenario("[F1] Step-15: The user can change if they are importer or exporter.") {
       Given("the user clicks the link to change if they are importer or exporter")
-      importerOrExporterPage.clickLinkToPage()
+      ADD_2_ImporterOrExporterPage.clickLinkToPage()
 
       Then("the user is taken to the 'Importer or Exporter' page")
-      importerOrExporterPage.assertPageTitle()
-    }
+      ADD_2_ImporterOrExporterPage.assertPageTitle()
 
-    Scenario("[F1] Step-16: The user can change the EORI number to add.") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks the link to change the EORI number")
-      eoriNumberPage.clickLinkToPage()
+      ADD_3_EORINumberPage.clickLinkToPage()
 
       Then("the user is taken to the 'enter EORI number' page")
-      eoriNumberPage.assertPageTitle()
-    }
+      ADD_3_EORINumberPage.assertPageTitle()
 
-    Scenario("[F1] Step-17: The user can change the third-party access period") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks the link to change the access start date")
-      accessStartPage.clickLinkToPage()
+      ADD_6_AccessStartPage.clickLinkToPage()
 
       Then("the user is taken to the 'access start date' page")
-      accessStartPage.assertPageTitle()
-    }
+      ADD_6_AccessStartPage.assertPageTitle()
 
-    Scenario("[F1] Step-18: The user can change the type of data the third party can access") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks the link to change the type of data")
-      dataTypesPage.clickLinkToPage()
+      ADD_8_DataTypesPage.clickLinkToPage()
 
       Then("the user is taken to the 'access start date' page")
-      dataTypesPage.assertPageTitle()
-    }
+      ADD_8_DataTypesPage.assertPageTitle()
 
-    Scenario("[F1] Step-19: The user can change whether they want to give access to all available data") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks the link to change if they want to give access to all data")
-      giveAccessToDataPage.clickLinkToPage()
+      ADD_9_GiveAccessToDataPage.clickLinkToPage()
 
       Then("the user is taken to the 'give access to data' page")
-      giveAccessToDataPage.assertPageTitle()
-    }
+      ADD_9_GiveAccessToDataPage.assertPageTitle()
 
-    Scenario("[F1] Step-20: The user can change the period of data the third party can access") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks the link to change the data access date")
-      dataStartPage.clickLinkToPage()
+      ADD_10_DataStartPage.clickLinkToPage()
 
       Then("the user is taken to the 'access start date' page")
-      dataStartPage.assertPageTitle()
-    }
+      ADD_10_DataStartPage.assertPageTitle()
 
-    Scenario("[F1] Step-21: The user can click to continue to add third party.") {
       Given("the user returns to the check answers page")
-      checkAnswersPage.navigateTo()
+      ADD_12_CheckAnswersPage.navigateTo()
 
       And("the user clicks to continue")
-      checkAnswersPage.continue()
+      ADD_12_CheckAnswersPage.continue()
 
       Then("the user is taken to the 'confirmation' page")
-      confirmationPage.assertUrl()
-      confirmationPage.assertPageTitle()
-    }
+      ADD_13_ConfirmationPage.assertUrl()
+      ADD_13_ConfirmationPage.assertPageTitle()
 
-    // Confirmation Page - Scenarios
+      // "Already added" check
 
-    Scenario("[F1] Step-22: The user can continue from the confirmation page") {
       Given("the user clicks the link to return to the dashboard")
-      dashboardPage.clickLinkToPage()
+      ACC_1_DashboardPage.clickLinkToPage()
 
       Then("the user is taken to the 'dashboard' page")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] Step-23: The user cannot add the same EORI again.") {
       Given("the user jumps to the EORI number page.")
-      eoriNumberPage.navigateTo()
+      ADD_3_EORINumberPage.navigateTo()
 
       And(s"the user enters again '$userThirdPartyEORI' as the third party EORI")
-      eoriNumberPage.clearAndInputKeys(userThirdPartyEORI)
+      ADD_3_EORINumberPage.clearAndInputKeys(userThirdPartyEORI)
 
       When("the user clicks to continue")
-      eoriNumberPage.continue()
+      ADD_3_EORINumberPage.continue()
 
       Then("the user is taken to the 'eori already added' page")
-      eoriAlreadyAddedPage.assertUrl()
-      eoriAlreadyAddedPage.assertPageTitle()
-    }
+      ADD_3_KO_EORIAlreadyAddedPage.assertUrl()
+      ADD_3_KO_EORIAlreadyAddedPage.assertPageTitle()
 
-    Scenario("[F1] Step-24: The user can return to the dashboard from the kickout.") {
       Given("the user clicks the link to return to the dashboard")
-      dashboardPage.clickLinkToPage()
+      ACC_1_DashboardPage.clickLinkToPage()
 
       Then("the user is taken to the 'dashboard' page")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
     }
   }
 }
