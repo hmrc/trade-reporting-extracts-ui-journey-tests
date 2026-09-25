@@ -21,19 +21,17 @@ import support.BaseSpec
 
 class ACC_KO_UnauthorisedSpec extends BaseSpec {
 
-  private val loginPage        = AuthLoginStubPage
-  private val unauthorisedPage = ACC_KO_1_UnauthorisedPage
 
   Feature("The user encounters the unauthorised page.") {
-    Scenario("ACC-KO-1: User is not Authenticated.") {
+    Scenario("User is not Authenticated.") {
       When("the user attempts to log in without a EORI / not authenticated")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.continue()
 
       Then("the user encounters the 'unauthorised' page")
-      unauthorisedPage.assertUrl()
-      unauthorisedPage.assertPageTitle()
+      ACC_KO_1_UnauthorisedPage.assertUrl()
+      ACC_KO_1_UnauthorisedPage.assertPageTitle()
     }
   }
 }
