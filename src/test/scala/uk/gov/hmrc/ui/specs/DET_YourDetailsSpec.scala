@@ -21,139 +21,113 @@ import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
 
-  private val loginPage               = AuthLoginStubPage
-  private val dashboardPage           = ACC_1_DashboardPage
-  private val contactDetailsPage      = DET_1_ContactDetailsPage
-  private val addNewEmailPage         = DET_2_AddNewEmailPage
-  private val checkNewEmailPage       = DET_3_CheckNewEmailPage
-  private val confirmNewEmailPage     = DET_4_ConfirmNewEmailPage
-  private val removeEmailPage         = DET_5_RemoveEmailPage
-  private val confirmRemovalEmailPage = DET_6_ConfirmEmailRemovedPage
 
   private val strNewEmail = "additionalEmail@email.com"
 
   Feature("[F1] The user can view their account details and add an additional email") {
-    Scenario("ACC-1: The user is authenticated.") {
-      When(s"the user logs in with EORI $userTraderEori.")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(userTraderLogin)
-      loginPage.continue()
+    Scenario(s"The user can view their account details and add an additional email.") {
+      Given("the user logs in with EORI $userTraderEori.")
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(userTraderLogin)
+      AuthLoginStubPage.continue()
 
-      Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      When("the user is taken to the dashboard.")
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] Step-1: The user starts the 'Your Details' journey.") {
-      Given("the user clicks the link on the dashboard")
-      contactDetailsPage.clickLinkToPage()
+      And("the user clicks the link on the dashboard")
+      DET_1_ContactDetailsPage.clickLinkToPage()
 
       Then("the user is taken to the 'contact details' page")
-      contactDetailsPage.assertUrl()
-      contactDetailsPage.assertPageTitle()
-    }
+      DET_1_ContactDetailsPage.assertUrl()
+      DET_1_ContactDetailsPage.assertPageTitle()
 
-    Scenario("[F1] Step-2: The user clicks to add another email address.") {
-      Given("the user clicks the link to add another email address")
-      addNewEmailPage.clickLinkToPage()
+      When("the user clicks the link to add another email address")
+      DET_2_AddNewEmailPage.clickLinkToPage()
 
       Then("the user is taken to the 'add new additional email' page")
-      addNewEmailPage.assertUrl()
-      addNewEmailPage.assertPageTitle()
-    }
+      DET_2_AddNewEmailPage.assertUrl()
+      DET_2_AddNewEmailPage.assertPageTitle()
 
-    Scenario("[F1] Step-3: The user enters an email address and continues to the check page.") {
-      Given(s"the user enters a new email '$strNewEmail' into the field")
-      addNewEmailPage.clearAndInputKeys(strNewEmail)
+
+      When(s"the user enters a new email '$strNewEmail' into the field")
+      DET_2_AddNewEmailPage.clearAndInputKeys(strNewEmail)
 
       And("the user clicks to continue")
-      addNewEmailPage.continue()
+      DET_2_AddNewEmailPage.continue()
 
       Then("the user is taken to the 'confirm new email' page")
-      checkNewEmailPage.assertUrl()
-      checkNewEmailPage.assertPageTitle()
-    }
+      DET_3_CheckNewEmailPage.assertUrl()
+      DET_3_CheckNewEmailPage.assertPageTitle()
 
-    Scenario("[F1] Step-4: The user checks and selects 'no' to return to the entry page") {
-      Given("the user checks 'no' to the email being correct.")
-      checkNewEmailPage.selectYesNo(false)
+      When("the user checks 'no' to the email being correct.")
+      DET_3_CheckNewEmailPage.selectYesNo(false)
 
       And("the user clicks to continue")
-      checkNewEmailPage.continue()
+      DET_3_CheckNewEmailPage.continue()
 
       Then("the user is taken back to the 'add new additional email' page again")
-      addNewEmailPage.assertUrl()
-      addNewEmailPage.assertPageTitle()
-    }
+      DET_2_AddNewEmailPage.assertUrl()
+      DET_2_AddNewEmailPage.assertPageTitle()
 
-    Scenario("[F1] Step-5: The user enters the same email and continues back to the check page.") {
       Given(s"the user clicks to continue, because '$strNewEmail' should still be present in the text field")
-      addNewEmailPage.continue()
+      DET_2_AddNewEmailPage.continue()
 
       Then("the user is taken back to the 'confirm new email' page")
-      checkNewEmailPage.assertUrl()
-      checkNewEmailPage.assertPageTitle()
-    }
+      DET_3_CheckNewEmailPage.assertUrl()
+      DET_3_CheckNewEmailPage.assertPageTitle()
 
-    Scenario("[F1] Step-6: The user checks the email and continues to the confirmation page.") {
       Given("the user checks 'yes' to the email being correct.")
-      checkNewEmailPage.selectYesNo(true)
+      DET_3_CheckNewEmailPage.selectYesNo(true)
 
       And("the user clicks to continue")
-      checkNewEmailPage.continue()
+      DET_3_CheckNewEmailPage.continue()
 
       Then("the user is taken to the 'confirmation' page")
-      confirmNewEmailPage.assertUrl(strNewEmail)
-      confirmNewEmailPage.assertPageTitle(strNewEmail)
-    }
+      DET_4_ConfirmNewEmailPage.assertUrl(strNewEmail)
+      DET_4_ConfirmNewEmailPage.assertPageTitle(strNewEmail)
 
-    Scenario("[F1] Step-7: The user returns to the 'Your Contact Details' page via the link.") {
       Given("the user clicks to return to the contact details page via the link")
-      contactDetailsPage.clickLinkToPage()
+      DET_1_ContactDetailsPage.clickLinkToPage()
 
       Then("the user is taken to the 'contact details' page")
-      contactDetailsPage.assertUrl()
-      contactDetailsPage.assertPageTitle()
+      DET_1_ContactDetailsPage.assertUrl()
+      DET_1_ContactDetailsPage.assertPageTitle()
     }
-  }
 
-  Feature("[F2] The user can view their account details and remove an additional email") {
-    Scenario("[F2] Step-1: the user can view and click on the remove button") {
+
+    Scenario("The user can view their account details and remove an additional email.") {
       Given("the user can click on remove button")
-      removeEmailPage.clickLinkToPage(strNewEmail)
+      DET_5_RemoveEmailPage.clickLinkToPage(strNewEmail)
 
       Then("User is taken to the 'remove email' page")
-      removeEmailPage.assertUrl(strNewEmail)
-      removeEmailPage.assertPageTitle()
+      DET_5_RemoveEmailPage.assertUrl(strNewEmail)
+      DET_5_RemoveEmailPage.assertPageTitle()
 
-    }
 
-    Scenario("[F2] Step-2: the user can click 'no' to remove this email address") {
-      Given("the user selects the 'no' radio button.")
-      removeEmailPage.selectYesNo(false)
+      When("the user selects the 'no' radio button.")
+      DET_5_RemoveEmailPage.selectYesNo(false)
 
-      When("the user clicks to continue.")
-      removeEmailPage.continue()
+      And("the user clicks to continue.")
+      DET_5_RemoveEmailPage.continue()
 
       Then("the user is taken back to the 'contact details' page.")
-      contactDetailsPage.assertUrl()
-      contactDetailsPage.assertPageTitle()
-    }
+      DET_1_ContactDetailsPage.assertUrl()
+      DET_1_ContactDetailsPage.assertPageTitle()
 
-    Scenario("[F2] Step-3: the user can click 'yes' to remove this email address") {
       Given("the user returns to the 'remove email' page.")
-      removeEmailPage.clickLinkToPage(strNewEmail)
+      DET_5_RemoveEmailPage.clickLinkToPage(strNewEmail)
 
       And("the user selects the 'yes' radio button.")
-      removeEmailPage.selectYesNo(true)
+      DET_5_RemoveEmailPage.selectYesNo(true)
 
       When("the user clicks to continue.")
-      removeEmailPage.continue()
+      DET_5_RemoveEmailPage.continue()
 
       Then("the user is taken to the 'confirm removal email' page.")
-      confirmRemovalEmailPage.assertUrl(strNewEmail)
-      confirmRemovalEmailPage.assertPageTitle()
+      DET_6_ConfirmEmailRemovedPage.assertUrl(strNewEmail)
+      DET_6_ConfirmEmailRemovedPage.assertPageTitle()
     }
 
   }
