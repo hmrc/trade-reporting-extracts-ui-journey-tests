@@ -20,95 +20,74 @@ import support.BaseSpec
 
 class TPA_ManageBusinessesSpec extends BaseSpec {
 
-  private val loginPage              = AuthLoginStubPage
-  private val dashboardPage          = ACC_1_DashboardPage
-  private val businessesAccessTo     = TPA_1_BusinessesAccessToPage
-  private val businessDetails        = TPA_2_BusinessDetailsPage
-  private val businessRemove         = TPA_3_BusinessRemovePage
-  private val businessRemovedConfirm = TPA_4_BusinessRemoveConfirmPage
-
-  Feature("[F1] The user can manage the businesses they have access to.") {
-    Scenario(s"[F1] SETUP: Prepare MongoDB with $userThirdPartyEORI already added to $userTraderEori.") {
+  Feature("The user can manage the businesses they have access to.") {
+    Scenario(s"The user with third-party EORI $userThirdPartyEORI can manage the trader $userTraderEori.") {
       Given("the mongoDB is prepped then a success should be returned.")
       assert(PrepMongoInsertRecord() == true)
-    }
 
-    Scenario("[F1] ACC-1: The user is authenticated.") {
       When(s"the user logs in with the third party EORI $userThirdPartyEORI.")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(userThirdPartyLogin)
-      loginPage.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(userThirdPartyLogin)
+      AuthLoginStubPage.continue()
 
       Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] Step-1: The user can see the businesses they have access to page, which is populated.") {
       When("the user clicks the link on the dashboard")
-      businessesAccessTo.clickLinkToPage()
+      TPA_1_BusinessesAccessToPage.clickLinkToPage()
 
       Then("the user is taken to the 'businesses they have access to' page.")
-      businessesAccessTo.assertUrl()
-      businessesAccessTo.assertPageTitle()
-    }
+      TPA_1_BusinessesAccessToPage.assertUrl()
+      TPA_1_BusinessesAccessToPage.assertPageTitle()
 
-    Scenario(s"[F1] Step-2: The user can click to view business details for $userTraderEori") {
       When(s"the user clicks the link to view $userTraderEori details.")
-      businessDetails.clickLinkToPage(businessDetails.pageRelativeAddress + userTraderEori)
+      TPA_2_BusinessDetailsPage.clickLinkToPage(TPA_2_BusinessDetailsPage.pageRelativeAddress + userTraderEori)
 
       Then("the user is taken to the 'business details' page.")
-      businessDetails.assertUrl(businessDetails.pageFullAddress + userTraderEori)
-      businessDetails.assertPageTitle()
-    }
+      TPA_2_BusinessDetailsPage.assertUrl(TPA_2_BusinessDetailsPage.pageFullAddress + userTraderEori)
+      TPA_2_BusinessDetailsPage.assertPageTitle()
 
-    Scenario(s"[F1] Step-3: The user can click to remove business details for $userTraderEori") {
       Given(s"the user returns to the 'businesses they have access to' page.")
-      businessesAccessTo.navigateTo()
+      TPA_1_BusinessesAccessToPage.navigateTo()
 
       When(s"the user clicks the link to remove $userTraderEori.")
-      businessRemove.clickLinkToPage(businessRemove.pageRelativeAddress + userTraderEori)
+      TPA_3_BusinessRemovePage.clickLinkToPage(TPA_3_BusinessRemovePage.pageRelativeAddress + userTraderEori)
 
       Then("the user is taken to the 'are you sure?' page.")
-      businessRemove.assertUrl(businessRemove.pageFullAddress + userTraderEori)
-      businessRemove.assertPageTitle()
-    }
+      TPA_3_BusinessRemovePage.assertUrl(TPA_3_BusinessRemovePage.pageFullAddress + userTraderEori)
+      TPA_3_BusinessRemovePage.assertPageTitle()
 
-    Scenario(s"[F1] Step-4: The user can click 'no' to removing $userTraderEori") {
       Given(s"the user selects the 'no' radio button.")
-      businessRemove.selectYesNo(false)
+      TPA_3_BusinessRemovePage.selectYesNo(false)
 
       When(s"the user clicks to continue.")
-      businessRemove.continue()
+      TPA_3_BusinessRemovePage.continue()
 
       Then("the user is taken back to the 'business details' page.")
-      businessesAccessTo.assertUrl()
-      businessesAccessTo.assertPageTitle()
-    }
+      TPA_1_BusinessesAccessToPage.assertUrl()
+      TPA_1_BusinessesAccessToPage.assertPageTitle()
 
-    Scenario(s"[F1] Step-5: The user can click 'yes' to removing $userTraderEori") {
       Given(s"the user returns to the 'are you sure?' page.")
-      businessRemove.navigateTo(businessRemove.pageFullAddress + userTraderEori)
+      TPA_3_BusinessRemovePage.navigateTo(TPA_3_BusinessRemovePage.pageFullAddress + userTraderEori)
 
       And("the user selects the 'yes' radio button.")
-      businessRemove.selectYesNo(true)
+      TPA_3_BusinessRemovePage.selectYesNo(true)
 
       When(s"the user clicks to continue.")
-      businessRemove.continue()
+      TPA_3_BusinessRemovePage.continue()
 
       Then("the user is taken to the 'Access Removed Confirmation' page.")
-      businessRemovedConfirm.assertUrl()
-      businessRemovedConfirm.assertPageTitle()
-    }
+      TPA_4_BusinessRemoveConfirmPage.assertUrl()
+      TPA_4_BusinessRemoveConfirmPage.assertPageTitle()
 
-    Scenario("[F1] Step-6: The businesses they have access to page is now empty.") {
       When("the user clicks the link to return.")
-      businessesAccessTo.clickLinkToPage()
+      TPA_1_BusinessesAccessToPage.clickLinkToPage()
 
       Then("the user is taken to the 'businesses they have access to' page.")
-      businessesAccessTo.assertUrl()
-      businessesAccessTo.assertPageTitle()
+      TPA_1_BusinessesAccessToPage.assertUrl()
+      TPA_1_BusinessesAccessToPage.assertPageTitle()
     }
   }
 }
