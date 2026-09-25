@@ -21,30 +21,24 @@ import support.BaseSpec
 
 class RQR_RequestedReportsSpec extends BaseSpec {
 
-  private val loginPage            = AuthLoginStubPage
-  private val dashboardPage        = ACC_1_DashboardPage
-  private val requestedReportsPage = RQR_1_RequestedReportsPage
-
-  Feature("[F1] The user can view their requested reports.") {
-    Scenario("[F1] ACC-1: The user is authenticated.") {
+  Feature("The user can view their requested reports.") {
+    Scenario("The user opens the requested reports page.") {
       When(s"the user logs in with EORI $userTraderEori.")
-      loginPage.navigateTo()
-      loginPage.enterRedirectionUrl()
-      loginPage.enterEnrollment(userTraderLogin)
-      loginPage.continue()
+      AuthLoginStubPage.navigateTo()
+      AuthLoginStubPage.enterRedirectionUrl()
+      AuthLoginStubPage.enterEnrollment(userTraderLogin)
+      AuthLoginStubPage.continue()
 
       Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
+      ACC_1_DashboardPage.assertUrl()
+      ACC_1_DashboardPage.assertPageTitle()
 
-    Scenario("[F1] RQR-1: The user starts the 'View Requested Reports' journey.") {
       Given("the user clicks the link on the dashboard")
-      requestedReportsPage.clickLinkToPage()
+      RQR_1_RequestedReportsPage.clickLinkToPage()
 
       Then("the user is taken to the 'requested reports' page")
-      requestedReportsPage.assertUrl()
-      requestedReportsPage.assertPageTitle()
+      RQR_1_RequestedReportsPage.assertUrl()
+      RQR_1_RequestedReportsPage.assertPageTitle()
     }
   }
 }

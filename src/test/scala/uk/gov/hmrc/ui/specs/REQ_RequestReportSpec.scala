@@ -197,7 +197,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
       ACC_1_DashboardPage.assertUrl()
       ACC_1_DashboardPage.assertPageTitle()
     }
-  
+
     Scenario("The user can request an EXPORT-type report.") {
       When(s"the user logs in with EORI $userTraderEori.")
       AuthLoginStubPage.navigateTo()
@@ -260,7 +260,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
       REQ_7_ReportDateRangeDecisionPage.assertUrl()
       REQ_7_ReportDateRangeDecisionPage.assertPageTitle("What date range do you want the report to cover?")
 
-            Given("the user selects the 'Custom date range' option")
+      Given("the user selects the 'Custom date range' option")
       REQ_7_ReportDateRangeDecisionPage.selectOptionByIndex(1)
 
       When("the user clicks to continue")
