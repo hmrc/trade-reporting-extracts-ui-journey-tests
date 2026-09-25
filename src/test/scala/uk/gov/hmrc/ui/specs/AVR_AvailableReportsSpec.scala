@@ -21,19 +21,10 @@ import support.BaseSpec
 
 class AVR_AvailableReportsSpec extends BaseSpec {
 
-
-
-  Feature("[F1] The user can view their available reports.") {
-    Scenario("ACC-1: The user can view their available reports.") {
+  Feature("The user can view their available reports.") {
+    Scenario("The user can view their available reports.") {
       Given(s"the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      When("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       And("the user clicks the link on the dashboard")
       AVR_1_AvailableReportsPage.clickLinkToPage()

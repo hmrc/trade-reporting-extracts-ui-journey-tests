@@ -22,8 +22,11 @@ import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 
 import support.models.MongoDocument
+import support.models.EnrolmentsData
 import support.helpers.MongoInsertRecord
 import support.builders.EnrolmentsDataBuilder.BuildEnrolment
+
+import uk.gov.hmrc.ui.pages.AuthLoginStubPage
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -39,6 +42,14 @@ trait BaseSpec
   val userTraderEori      = userTraderLogin.identifierValue
   val userThirdPartyLogin = BuildEnrolment()
   val userThirdPartyEORI  = userThirdPartyLogin.identifierValue
+
+  // Perform common setup
+  def setupTest(enrolToUse: EnrolmentsData = userTraderLogin) = {
+    AuthLoginStubPage.navigateTo()
+    AuthLoginStubPage.enterRedirectionUrl()
+    AuthLoginStubPage.enterEnrollment(enrolToUse)
+    AuthLoginStubPage.continue()
+  }
 
   // Populate the MongoDB document and ready for use.
   def PrepMongoInsertRecord(

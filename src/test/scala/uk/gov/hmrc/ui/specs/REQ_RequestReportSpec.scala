@@ -26,14 +26,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
   ) {
     Scenario("The user can request an IMPORT-type report.") {
       When(s"the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       When("the user clicks the link on the dashboard")
       REQ_1_RequestReportPage.clickLinkToPage()

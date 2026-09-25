@@ -22,19 +22,12 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
 
   Feature("The user can EDIT and REMOVE a third party.") {
 
-    Scenario(s"The user with trader EORI $userThirdPartyEORI can EDIT third party $userTraderEori.") {
+    Scenario(s"The user with trader EORI $userTraderEori can EDIT third party $userThirdPartyEORI.") {
       Given("the mongoDB is prepped then a success should be returned.")
       assert(PrepMongoInsertRecord() == true)
 
       When(s"the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       When("the user clicks the link on the dashboard")
       MTP_1_ManageThirdPartyPage.clickLinkToPage()
@@ -137,7 +130,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       MTP_2_EditThirdPartyDetailsPage.assertPageTitle()
     }
 
-    Scenario(s"The user with trader EORI $userThirdPartyEORI can REMOVE third party $userTraderEori.") {
+    Scenario(s"The user with trader EORI $userTraderEori can REMOVE third party $userThirdPartyEORI.") {
       Given("the user is on the third party manage page.")
       MTP_1_ManageThirdPartyPage.navigateTo()
 

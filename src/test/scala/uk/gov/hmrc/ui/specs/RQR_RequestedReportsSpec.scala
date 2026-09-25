@@ -24,14 +24,7 @@ class RQR_RequestedReportsSpec extends BaseSpec {
   Feature("The user can view their requested reports.") {
     Scenario("The user opens the requested reports page.") {
       When(s"the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       Given("the user clicks the link on the dashboard")
       RQR_1_RequestedReportsPage.clickLinkToPage()

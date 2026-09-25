@@ -21,20 +21,12 @@ import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
 
-
   private val strNewEmail = "additionalEmail@email.com"
 
-  Feature("[F1] The user can view their account details and add and remove additional email") {
+  Feature("The user can view their account details and add and remove additional email") {
     Scenario(s"The user can view their account details and add an additional email.") {
       Given("the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      When("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       And("the user clicks the link on the dashboard")
       DET_1_ContactDetailsPage.clickLinkToPage()
@@ -49,7 +41,6 @@ class DET_YourDetailsSpec extends BaseSpec {
       Then("the user is taken to the 'add new additional email' page")
       DET_2_AddNewEmailPage.assertUrl()
       DET_2_AddNewEmailPage.assertPageTitle()
-
 
       When(s"the user enters a new email '$strNewEmail' into the field")
       DET_2_AddNewEmailPage.clearAndInputKeys(strNewEmail)
@@ -96,7 +87,6 @@ class DET_YourDetailsSpec extends BaseSpec {
       DET_1_ContactDetailsPage.assertPageTitle()
     }
 
-
     Scenario("The user can view their account details and remove an additional email.") {
       Given("the user can click on remove button")
       DET_5_RemoveEmailPage.clickLinkToPage(strNewEmail)
@@ -104,7 +94,6 @@ class DET_YourDetailsSpec extends BaseSpec {
       Then("User is taken to the 'remove email' page")
       DET_5_RemoveEmailPage.assertUrl(strNewEmail)
       DET_5_RemoveEmailPage.assertPageTitle()
-
 
       When("the user selects the 'no' radio button.")
       DET_5_RemoveEmailPage.selectYesNo(false)

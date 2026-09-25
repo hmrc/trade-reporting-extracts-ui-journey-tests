@@ -26,14 +26,7 @@ class TPA_ManageBusinessesSpec extends BaseSpec {
       assert(PrepMongoInsertRecord() == true)
 
       When(s"the user logs in with the third party EORI $userThirdPartyEORI.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userThirdPartyLogin)
-      AuthLoginStubPage.continue()
-
-      Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest(userThirdPartyLogin)
 
       When("the user clicks the link on the dashboard")
       TPA_1_BusinessesAccessToPage.clickLinkToPage()

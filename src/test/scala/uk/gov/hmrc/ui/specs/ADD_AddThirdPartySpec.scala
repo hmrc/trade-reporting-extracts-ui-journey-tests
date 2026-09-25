@@ -24,14 +24,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   Feature("The user can add a Third Party to their account") {
     Scenario(s"The user with EORI $userTraderEori adds the third party $userThirdPartyEORI") {
       When(s"the user logs in with EORI $userTraderEori.")
-      AuthLoginStubPage.navigateTo()
-      AuthLoginStubPage.enterRedirectionUrl()
-      AuthLoginStubPage.enterEnrollment(userTraderLogin)
-      AuthLoginStubPage.continue()
-
-      Then("the user is taken to the dashboard.")
-      ACC_1_DashboardPage.assertUrl()
-      ACC_1_DashboardPage.assertPageTitle()
+      setupTest()
 
       Given("the user clicks the link on the dashboard")
       ADD_1_AddThirdPartyPage.clickLinkToPage()
