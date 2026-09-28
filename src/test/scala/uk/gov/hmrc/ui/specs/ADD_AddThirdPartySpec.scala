@@ -24,7 +24,7 @@ class ADD_AddThirdPartySpec extends BaseSpec {
   Feature("The user can add a Third Party to their account") {
     Scenario(s"The user with EORI $userTraderEori adds the third party $userThirdPartyEORI") {
       When(s"the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       Given("the user clicks the link on the dashboard")
       ADD_1_AddThirdPartyPage.clickLinkToPage()

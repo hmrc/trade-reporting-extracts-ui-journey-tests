@@ -26,7 +26,7 @@ class REQ_RequestReportSpec() extends BaseSpec {
   ) {
     Scenario("The user can request an IMPORT-type report.") {
       When(s"the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       When("the user clicks the link on the dashboard")
       REQ_1_RequestReportPage.clickLinkToPage()

@@ -27,7 +27,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       assert(PrepMongoInsertRecord() == true)
 
       When(s"the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       When("the user clicks the link on the dashboard")
       MTP_1_ManageThirdPartyPage.clickLinkToPage()

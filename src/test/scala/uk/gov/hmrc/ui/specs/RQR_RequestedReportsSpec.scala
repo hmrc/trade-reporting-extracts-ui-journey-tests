@@ -24,7 +24,7 @@ class RQR_RequestedReportsSpec extends BaseSpec {
   Feature("The user can view their requested reports.") {
     Scenario("The user opens the requested reports page.") {
       When(s"the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       Given("the user clicks the link on the dashboard")
       RQR_1_RequestedReportsPage.clickLinkToPage()

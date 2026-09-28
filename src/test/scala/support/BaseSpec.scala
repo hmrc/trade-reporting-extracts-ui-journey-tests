@@ -26,7 +26,7 @@ import support.models.EnrolmentsData
 import support.helpers.MongoInsertRecord
 import support.builders.EnrolmentsDataBuilder.BuildEnrolment
 
-import uk.gov.hmrc.ui.pages.AuthLoginStubPage
+import uk.gov.hmrc.ui.pages.{ACC_1_DashboardPage, AuthLoginStubPage}
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -44,11 +44,13 @@ trait BaseSpec
   val userThirdPartyEORI  = userThirdPartyLogin.identifierValue
 
   // Perform common setup
-  def setupTest(enrolToUse: EnrolmentsData = userTraderLogin) = {
+  def setupToDashboard(enrolToUse: EnrolmentsData = userTraderLogin) = {
     AuthLoginStubPage.navigateTo()
     AuthLoginStubPage.enterRedirectionUrl()
     AuthLoginStubPage.enterEnrollment(enrolToUse)
     AuthLoginStubPage.continue()
+    ACC_1_DashboardPage.assertUrl()
+    ACC_1_DashboardPage.assertPageTitle()
   }
 
   // Populate the MongoDB document and ready for use.

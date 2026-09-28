@@ -26,7 +26,7 @@ class DET_YourDetailsSpec extends BaseSpec {
   Feature("The user can view their account details and add and remove additional email") {
     Scenario(s"The user can view their account details and add an additional email.") {
       Given("the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       And("the user clicks the link on the dashboard")
       DET_1_ContactDetailsPage.clickLinkToPage()

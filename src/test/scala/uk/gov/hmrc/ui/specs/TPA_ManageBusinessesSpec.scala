@@ -26,7 +26,7 @@ class TPA_ManageBusinessesSpec extends BaseSpec {
       assert(PrepMongoInsertRecord() == true)
 
       When(s"the user logs in with the third party EORI $userThirdPartyEORI.")
-      setupTest(userThirdPartyLogin)
+      setupToDashboard(userThirdPartyLogin)
 
       When("the user clicks the link on the dashboard")
       TPA_1_BusinessesAccessToPage.clickLinkToPage()

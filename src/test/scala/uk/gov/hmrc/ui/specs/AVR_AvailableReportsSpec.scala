@@ -24,7 +24,7 @@ class AVR_AvailableReportsSpec extends BaseSpec {
   Feature("The user can view their available reports.") {
     Scenario("The user can view their available reports.") {
       Given(s"the user logs in with EORI $userTraderEori.")
-      setupTest()
+      setupToDashboard()
 
       And("the user clicks the link on the dashboard")
       AVR_1_AvailableReportsPage.clickLinkToPage()
