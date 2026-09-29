@@ -16,5 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your reports to end?") { // Note: "report[s]" is dynamic to how many report subtypes were selected.
+object REQ_9_ReportCustomDateRangeEndPage extends BasePage("/end-date", "When do you want your report to end?") {
+  // Note: "report[s]" is dynamic to how many report subtypes were selected.
+  val titleMultipleReports = "When do you want your reports to end?"
 }
