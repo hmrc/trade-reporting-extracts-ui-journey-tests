@@ -21,30 +21,17 @@ import support.BaseSpec
 
 class AVR_AvailableReportsSpec extends BaseSpec {
 
-  private val loginStub            = AuthLoginStubPage
-  private val dashboardPage        = ACC_1_DashboardPage
-  private val availableReportsPage = AVR_1_AvailableReportsPage
+  Feature("The user can view their available reports.") {
+    Scenario("The user can view their available reports.") {
+      Given(s"the user logs in with EORI $userTraderEori.")
+      setupToDashboard()
 
-  Feature("[F1] The user can view their available reports.") {
-    Scenario("ACC-1: The user is authenticated.") {
-      When(s"the user logs in with EORI $userTraderEori.")
-      loginStub.navigateTo()
-      loginStub.enterRedirectionUrl()
-      loginStub.enterEnrollment(userTraderLogin)
-      loginStub.continue()
-
-      Then("the user is taken to the dashboard.")
-      dashboardPage.assertUrl()
-      dashboardPage.assertPageTitle()
-    }
-
-    Scenario("[F1] AVR-1: The user starts the 'Available for download' journey.") {
-      Given("the user clicks the link on the dashboard")
-      availableReportsPage.clickLinkToPage()
+      And("the user clicks the link on the dashboard")
+      AVR_1_AvailableReportsPage.clickLinkToPage()
 
       Then("the user is taken to the 'available reports' page")
-      availableReportsPage.assertUrl()
-      availableReportsPage.assertPageTitle(availableReportsPage.titleNoReportsAvailable)
+      AVR_1_AvailableReportsPage.assertUrl()
+      AVR_1_AvailableReportsPage.assertPageTitle(AVR_1_AvailableReportsPage.titleNoReportsAvailable)
     }
   }
 }
