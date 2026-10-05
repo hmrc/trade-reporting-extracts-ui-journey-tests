@@ -43,7 +43,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       MTP_2_EditThirdPartyDetailsPage.assertUrl(userThirdPartyEORI)
       MTP_2_EditThirdPartyDetailsPage.assertPageTitle()
 
-      // Third Party "Access Period"
+      // EDIT Third Party "Access Period"
 
       Given("the user clicks the 'change' link.")
       ADD_6_AccessStartPage.clickEditLinkToPage(userThirdPartyEORI)
@@ -66,7 +66,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       MTP_2_EditThirdPartyDetailsPage.assertUrl(userThirdPartyEORI)
       MTP_2_EditThirdPartyDetailsPage.assertPageTitle()
 
-      // Third Party "Types of Data"
+      // EDIT Third Party "Types of Data"
 
       Given("the user clicks the 'change' link.")
       ADD_8_DataTypesPage.clickEditLinkToPage(userThirdPartyEORI)
@@ -82,7 +82,7 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       MTP_2_EditThirdPartyDetailsPage.assertUrl(userThirdPartyEORI)
       MTP_2_EditThirdPartyDetailsPage.assertPageTitle()
 
-      // Third Party "Data View Period"
+      // EDIT Third Party "Data View Period"
 
       Given("the user clicks the 'change' link.")
       ADD_9_GiveAccessToDataPage.clickEditLinkToPage(userThirdPartyEORI)
@@ -128,9 +128,9 @@ class MTP_ManageThirdPartySpec extends BaseSpec {
       Then("the user is returned to the 'edit third party details' page")
       MTP_2_EditThirdPartyDetailsPage.assertUrl(userThirdPartyEORI)
       MTP_2_EditThirdPartyDetailsPage.assertPageTitle()
-    }
 
-    Scenario(s"The user with trader EORI $userTraderEori can REMOVE third party $userThirdPartyEORI.") {
+      // REMOVE third party
+
       Given("the user is on the third party manage page.")
       MTP_1_ManageThirdPartyPage.navigateTo()
 
