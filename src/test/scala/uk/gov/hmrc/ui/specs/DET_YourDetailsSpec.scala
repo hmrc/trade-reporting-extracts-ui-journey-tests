@@ -20,11 +20,10 @@ import uk.gov.hmrc.ui.pages._
 import support.BaseSpec
 
 class DET_YourDetailsSpec extends BaseSpec {
-
   private val strNewEmail = "additionalEmail@email.com"
 
-  Feature("The user can view their account details and add and remove additional email") {
-    Scenario(s"The user can view their account details and add an additional email.") {
+  Feature("The user can interact with additional email and disable notifications") {
+    Scenario("The user can add and remove additional email.") {
       Given("the user logs in with EORI $userTraderEori.")
       setupToDashboard()
 
@@ -34,6 +33,8 @@ class DET_YourDetailsSpec extends BaseSpec {
       Then("the user is taken to the 'contact details' page")
       DET_1_ContactDetailsPage.assertUrl()
       DET_1_ContactDetailsPage.assertPageTitle()
+
+      // ADDING additional email
 
       When("the user clicks the link to add another email address")
       DET_2_AddNewEmailPage.clickLinkToPage()
@@ -85,9 +86,9 @@ class DET_YourDetailsSpec extends BaseSpec {
       Then("the user is taken to the 'contact details' page")
       DET_1_ContactDetailsPage.assertUrl()
       DET_1_ContactDetailsPage.assertPageTitle()
-    }
 
-    Scenario("The user can view their account details and remove an additional email.") {
+      // REMOVING additional email
+
       Given("the user can click on remove button")
       DET_5_RemoveEmailPage.clickLinkToPage(strNewEmail)
 
@@ -119,5 +120,57 @@ class DET_YourDetailsSpec extends BaseSpec {
       DET_6_ConfirmEmailRemovedPage.assertPageTitle()
     }
 
+    Scenario("The user can disable and reenable email notifications") {
+      Given("the user logs in with EORI $userTraderEori.")
+      setupToDashboard()
+
+      And("the user clicks the link on the dashboard")
+      DET_1_ContactDetailsPage.clickLinkToPage()
+
+      Then("the user is taken to the 'contact details' page")
+      DET_1_ContactDetailsPage.assertUrl()
+      DET_1_ContactDetailsPage.assertPageTitle()
+
+      Given("the user clicks on the 'disable' link")
+      DET_7_EmailDisablePage.clickLinkToPage()
+
+      Then("User is taken to the 'disable email notifications' page")
+      DET_7_EmailDisablePage.assertUrl()
+      DET_7_EmailDisablePage.assertPageTitle()
+
+      Given("the user selects the 'yes' radio button")
+      DET_7_EmailDisablePage.selectYesNo(true)
+
+      When("the user clicks to continue.")
+      DET_7_EmailDisablePage.continue()
+
+      Then("User is taken to the 'disable email notifications confirmation' page")
+      DET_8_EmailDisableConfirmPage.assertUrl()
+      DET_8_EmailDisableConfirmPage.assertPageTitle()
+
+      Given("the user clicks to return to the contact details page via the link")
+      DET_1_ContactDetailsPage.clickLinkToPage()
+
+      Then("the user is taken to the 'contact details' page")
+      DET_1_ContactDetailsPage.assertUrl()
+      DET_1_ContactDetailsPage.assertPageTitle()
+
+      Given("the user clicks on the 'enable' link")
+      DET_9_EmailEnablePage.clickLinkToPage()
+
+      Then("User is taken to the 'enable email notifications' page")
+      DET_9_EmailEnablePage.assertUrl()
+      DET_9_EmailEnablePage.assertPageTitle()
+
+      Given("the user selects the 'yes' radio button")
+      DET_9_EmailEnablePage.selectYesNo(true)
+
+      When("the user clicks to continue.")
+      DET_9_EmailEnablePage.continue()
+
+      Then("User is taken to the 'enable email notifications confirmation' page")
+      DET_10_EmailEnableConfirmPage.assertUrl()
+      DET_10_EmailEnableConfirmPage.assertPageTitle()
+    }
   }
 }
