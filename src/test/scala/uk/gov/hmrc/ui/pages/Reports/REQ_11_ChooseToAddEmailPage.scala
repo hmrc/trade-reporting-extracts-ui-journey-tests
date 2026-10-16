@@ -19,5 +19,5 @@ package uk.gov.hmrc.ui.pages
 object REQ_11_ChooseToAddEmailPage
     extends BasePage(
       "/add-another-email",
-      "Do you want to add another email for notifications?"
+      "Email notifications"
     ) {}
