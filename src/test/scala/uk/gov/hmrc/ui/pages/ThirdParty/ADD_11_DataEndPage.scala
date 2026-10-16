@@ -19,8 +19,7 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 
-object ADD_11_DataEndPage
-    extends BasePage("/data-end-date", "When do you want to stop giving access to your data? (optional)") {
+object ADD_11_DataEndPage extends BasePage("/data-end-date", "Data end date") {
 
   val editURL = "/edit-data-end-date/"
 
