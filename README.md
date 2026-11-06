@@ -40,12 +40,7 @@ Note that the order of the arguments is not relevant.
 
 By default, the script runs the scenarios using the Chrome browser. To run the script using a different browser, specify the browser as follows:
 ```bash
-./run_tests.sh firefox # chrome, edge or firefox
-```
-
-By default, the script runs against the local environment. To run the script against a specific environment, specify the environment as follows:
-```bash
-./run_tests.sh staging  # local or staging
+./run_tests.sh chrome # chrome or firefox
 ```
 
 ## Post-Merge Testing
